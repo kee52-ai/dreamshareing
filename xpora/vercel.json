@@ -1,6 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "buildCommand": "cd xpora/frontend && npm install && npm run build",
+  "outputDirectory": "xpora/frontend/dist",
   "installCommand": "echo skip"
 }

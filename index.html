@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xpora — Share Your Dreams</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%23F06A25%22/><path d=%22M38 33c2-9 18-13 25-3 7 10 3 27-13 33-16-6-20-21-12-30z%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223.5%22/></svg>">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+  :root {
+    --orange: #F06A25;
+    --orange-light: #FEF0E8;
+    --orange-dark: #C4511A;
+    --orange-grad: linear-gradient(135deg, #F06A25, #E8472B);
+    --cream: #FDFAF7;
+    --bg: #F5F5F5;
+    --card: #FFFFFF;
+    --text: #1A1208;
+    --text2: #5A4E44;
+    --text3: #9A8E84;
+    --border: #E5E5E5;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --serif: 'Georgia', 'Times New Roman', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--sans); background: var(--cream); color: var(--text); min-height: 100vh; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; font-family: var(--sans); border: none; }
+  input, textarea, select { font-family: var(--sans); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+  .hidden { display: none !important; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 40px; font-size: 14px; font-weight: 600; transition: all 0.15s; cursor: pointer; }
+  .btn-primary { background: var(--orange-grad); color: #fff; }
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-ghost { background: transparent; color: var(--text); }
+  .btn-ghost:hover { background: var(--bg); }
+  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+  .btn-danger { background: #FEE2E2; color: #DC2626; }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  nav.topnav { height: 60px; background: #fff; border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 14px; position: sticky; top: 0; z-index: 200; }
+  .logo { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+  .logo-mark { width: 30px; height: 30px; border-radius: 8px; background: var(--orange-grad); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-text { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--text); }
+  .logo-text span { color: var(--orange); }
+  .navsearch { flex: 1; max-width: 420px; display: flex; align-items: center; gap: 8px; background: var(--bg); border-radius: 40px; padding: 8px 16px; border: 1.5px solid transparent; }
+  .navsearch:focus-within { border-color: var(--orange); }
+  .navsearch input { border: none; background: transparent; font-size: 14px; outline: none; width: 100%; }
+  .navright { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--orange-grad); color: #fff; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; flex-shrink: 0; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+  .feedlayout { display: flex; max-width: 1200px; margin: 0 auto; gap: 20px; padding: 20px 16px; align-items: flex-start; }
+  .leftcol { width: 220px; flex-shrink: 0; position: sticky; top: 80px; }
+  .midcol { flex: 1; min-width: 0; max-width: 700px; }
+  .rightcol { width: 260px; flex-shrink: 0; position: sticky; top: 80px; }
+
+  .card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); }
+  .profilecard-head { background: var(--orange-grad); height: 56px; border-radius: var(--radius) var(--radius) 0 0; }
+  .profilecard-body { padding: 0 16px 16px; margin-top: -26px; }
+
+  .navlink { display: flex; align-items: center; gap: 10px; padding: 10px 14px; cursor: pointer; font-size: 14px; color: var(--text2); border-radius: 8px; }
+  .navlink:hover { background: var(--bg); }
+  .navlink.active { background: var(--orange-light); color: var(--orange-dark); font-weight: 600; }
+
+  .tagbadge { display: inline-flex; align-items: center; gap: 4px; background: var(--orange-light); color: var(--orange-dark); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+
+  .postcard { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
+  .postcard-body { padding: 16px; }
+  .postcard-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .postcard-title { font-family: var(--serif); font-size: 19px; font-weight: 700; margin-bottom: 6px; cursor: pointer; line-height: 1.3; }
+  .postcard-title:hover { color: var(--orange); }
+  .postcard-excerpt { font-size: 14px; color: var(--text2); line-height: 1.6; cursor: pointer; }
+  .postcard-actions { display: flex; align-items: center; gap: 4px; padding-top: 10px; margin-top: 12px; border-top: 1px solid #F0F0F0; flex-wrap: wrap; }
+  .actbtn { display: flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 20px; border: 1px solid var(--border); background: #fff; font-size: 13px; color: #555; }
+  .actbtn:hover { background: var(--bg); }
+  .actbtn.active-save { background: var(--orange-light); color: var(--orange-dark); border-color: var(--orange-light); }
+  .actbtn.active-like { background: #FEE2E2; color: #DC2626; border-color: #FEE2E2; }
+  .votegroup { display: flex; align-items: center; gap: 2px; }
+  .votebtn { width: 28px; height: 28px; border-radius: 6px; background: none; border: 1px solid var(--border); color: #999; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .votebtn.up-active { background: var(--orange-light); border-color: var(--orange); color: var(--orange); }
+  .votebtn.down-active { background: #FEE2E2; border-color: #DC2626; color: #DC2626; }
+  .votecount { font-size: 13px; font-weight: 700; min-width: 22px; text-align: center; }
+
+  .form-input { width: 100%; padding: 11px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; outline: none; margin-bottom: 10px; }
+  .form-input:focus { border-color: var(--orange); }
+  textarea.form-input { resize: vertical; min-height: 70px; }
+
+  .authwrap { display: flex; min-height: 100vh; }
+  .authleft { width: 45%; background: linear-gradient(150deg, #F5B99A, #E8472B); display: flex; flex-direction: column; justify-content: flex-end; padding: 44px; color: #fff; position: relative; }
+  .authleft h2 { font-family: var(--serif); font-size: 32px; line-height: 1.25; margin-bottom: 10px; }
+  .authleft p { opacity: 0.85; font-size: 14px; }
+  .authright { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
+  .authform { width: 100%; max-width: 380px; }
+  .authform h2 { font-family: var(--serif); font-size: 28px; margin-bottom: 4px; }
+  .authform .sub { font-size: 14px; color: var(--text3); margin-bottom: 24px; }
+
+  .hero { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 70px 20px 50px; }
+  .hero-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--orange); text-transform: uppercase; margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(34px,5.5vw,60px); line-height: 1.12; max-width: 700px; }
+  .hero h1 em { color: var(--orange); font-style: italic; }
+  .hero-sub { margin: 20px 0 32px; font-size: 16px; color: var(--text2); max-width: 480px; line-height: 1.65; }
+  .typecursor { display: inline-block; width: 2px; height: 1em; background: var(--orange); animation: blink 1s step-end infinite; vertical-align: text-bottom; margin-left: 2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .write-title { width: 100%; border: none; outline: none; font-family: var(--serif); font-size: 30px; font-weight: 700; resize: none; margin-bottom: 16px; background: transparent; }
+  .write-editor { width: 100%; border: none; outline: none; font-size: 16px; line-height: 1.8; resize: none; min-height: 350px; background: transparent; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 11px; color: #888; text-align: left; padding: 10px 14px; text-transform: uppercase; background: #FAFAFA; }
+  td { padding: 10px 14px; font-size: 13px; border-top: 1px solid #F0F0F0; }
+  .pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+  .modal { background: #fff; border-radius: var(--radius); padding: 26px; width: 92%; max-width: 440px; max-height: 85vh; overflow-y: auto; }
+
+  .toast { position: fixed; bottom: 20px; right: 20px; background: var(--text); color: #fff; padding: 12px 18px; border-radius: 8px; font-size: 14px; z-index: 9999; max-width: 300px; }
+
+  .loader { display: flex; align-items: center; justify-content: center; padding: 60px; }
+  .spinner { width: 30px; height: 30px; border: 3px solid #eee; border-top-color: var(--orange); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .admin-layout { display: flex; min-height: 100vh; }
+  .admin-side { width: 200px; background: #1A1208; padding: 20px 12px; flex-shrink: 0; }
+  .admin-item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 8px; font-size: 13px; color: rgba(255,255,255,0.6); cursor: pointer; margin-bottom: 2px; }
+  .admin-item:hover, .admin-item.active { background: rgba(240,106,37,0.18); color: var(--orange); }
+  .admin-main { flex: 1; background: var(--bg); }
+  .admin-top { background: #fff; padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .admin-content { padding: 22px 24px; }
+  .statgrid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 20px; }
+  .statcard { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+
+  .storypage { max-width: 680px; margin: 30px auto; padding: 0 20px 60px; }
+  .storypage h1 { font-family: var(--serif); font-size: clamp(26px,4vw,38px); line-height: 1.2; margin-bottom: 16px; }
+  .storybody { font-size: 17px; line-height: 1.85; color: var(--text2); }
+  .storybody p { margin-bottom: 16px; }
+
+  .comment { display: flex; gap: 10px; margin-bottom: 16px; }
+  .comment-box { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 14px; min-height: 70px; margin-bottom: 8px; resize: vertical; }
+
+  @media (max-width: 900px) {
+    .authleft { display: none; }
+    .rightcol { display: none; }
+    .leftcol { display: none; }
+    .statgrid { grid-template-columns: repeat(2,1fr); }
+    .admin-side { width: 60px; }
+    .admin-item span.label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="toast-container" style="position:fixed;bottom:20px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px"></div>
+<div id="modal-root"></div>
+
+<!-- ============ HOME PAGE ============ -->
+<div class="page active" id="page-home">
+  <nav class="topnav">
+    <div class="logo" onclick="Router.go('home')">
+      <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <span class="logo-text">Xp<span>ora</span></span>
+    </div>
+    <div class="navright">
+      <button class="btn btn-ghost" onclick="Router.go('signin')">Sign in</button>
+      <button class="btn btn-primary" onclick="Router.go('signup')">Get started</button>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-eyebrow">A home for every dream</div>
+    <h1>Every dream you've had<br><em><span id="typing-text"></span><span class="typecursor"></span></em></h1>
+    <p class="hero-sub">Every night you dream. Most people forget by morning. Xpora is where you write it down — and find others dreaming the same things.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <button class="btn btn-primary" style="padding:12px 26px" onclick="Router.go('signup')">Share your story</button>
+      <button class="btn btn-outline" style="padding:12px 26px" onclick="Router.go('signin')">Read stories</button>
+    </div>
+  </div>
+  <div style="max-width:1000px;margin:0 auto;padding:0 20px 60px">
+    <h2 style="font-family:var(--serif);font-size:26px;margin-bottom:18px">Featured stories</h2>
+    <div id="home-featured" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px"></div>
+  </div>
+</div>
+
+<!-- ============ SIGN IN PAGE ============ -->
+<div class="page" id="page-signin">
+  <div class="authwrap">
+    <div class="authleft">
+      <h2>Your story is the one someone needs to read tonight.</h2>
+      <p>Join thousands sharing real dreams and experiences.</p>
+    </div>
+    <div class="authright">
+      <div class="authform">
+        <h2>Welcome back</h2>
+        <p class="sub">Sign in to keep reading and writing.</p>
+        <div id="signin-error" style="color:#DC2626;font-size:13px;margin-bottom:10px"></div>
+        <input class="form-input" type="email" id="signin-email" placeholder="Email">
+        <input class="form-input" type="password" id="signin-pass" placeholder="Password">
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="Auth.signIn()">Sign in</button>
+        <p style="text-align:center;margin-top:16px;font-size:14px;color:var(--text3)">New to Xpora? <a style="color:var(--orange);font-weight:600;cursor:pointer" onclick="Router.go('signup')">Create account</a></p>
+        <p style="text-align:center;margin-top:8px"><a style="color:var(--text3);font-size:13px;cursor:pointer" onclick="Router.go('home')">← Back to home</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SIGN UP PAGE ============ -->
+<div class="page" id="page-signup">
+  <div class="authwrap">
+    <div class="authleft">
+      <h2>Every dream you've had is a story worth telling.</h2>
+      <p>Start your journey as a storyteller on Xpora.</p>
+    </div>
+    <div class="authright">
+      <div class="authform">
+        <h2>Create account</h2>
+        <p class="sub">Start writing your story today.</p>
+        <div id="signup-error" style="color:#DC2626;font-size:13px;margin-bottom:10px"></div>
+        <input class="form-input" type="text" id="signup-name" placeholder="Full name">
+        <input class="form-input" type="text" id="signup-username" placeholder="Username (e.g. dreamwriter)">
+        <input class="form-input" type="email" id="signup-email" placeholder="Email">
+        <input class="form-input" type="password" id="signup-pass" placeholder="Password (min 6 chars)">
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="Auth.signUp()">Create account</button>
+        <p style="text-align:center;margin-top:16px;font-size:14px;color:var(--text3)">Already have an account? <a style="color:var(--orange);font-weight:600;cursor:pointer" onclick="Router.go('signin')">Sign in</a></p>
+        <p style="text-align:center;margin-top:8px"><a style="color:var(--text3);font-size:13px;cursor:pointer" onclick="Router.go('home')">← Back to home</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEED PAGE ============ -->
+<div class="page" id="page-feed">
+  <nav class="topnav">
+    <div class="logo" onclick="Router.go('feed')">
+      <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <span class="logo-text">Xp<span>ora</span></span>
+    </div>
+    <div class="navsearch">
+      <svg width="14" height="14" fill="none" stroke="#999" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="feed-search" placeholder="Search stories..." oninput="Feed.search(this.value)">
+    </div>
+    <div class="navright">
+      <button class="btn btn-primary btn-sm" onclick="Router.go('write')">Write</button>
+      <span id="nav-admin-btn" class="hidden"><button class="btn btn-outline btn-sm" onclick="Router.go('admin')">Admin</button></span>
+      <div class="avatar" id="nav-avatar" onclick="Router.goProfile()">U</div>
+      <button class="btn btn-ghost btn-sm" onclick="Auth.signOut()" title="Sign out">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </nav>
+  <div class="feedlayout">
+    <div class="leftcol">
+      <div class="card" style="margin-bottom:12px">
+        <div class="profilecard-head"></div>
+        <div class="profilecard-body">
+          <div class="avatar" style="width:50px;height:50px;font-size:18px;border:3px solid #fff" id="side-avatar" onclick="Router.goProfile()">U</div>
+          <div style="font-weight:700;font-size:15px;margin-top:6px" id="side-name"></div>
+          <div style="font-size:12px;color:var(--text3);margin-bottom:10px" id="side-handle"></div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="Router.go('write')">Write a story</button>
+        </div>
+      </div>
+      <div class="card" style="padding:8px;margin-bottom:12px">
+        <div class="navlink active" id="navitem-home" onclick="Feed.setNav('home')">Home feed</div>
+        <div class="navlink" id="navitem-bookmarks" onclick="Feed.setNav('bookmarks')">Bookmarks</div>
+        <div class="navlink" onclick="Router.goProfile()">My profile</div>
+        <div class="navlink hidden" id="navitem-admin" onclick="Router.go('admin')">Admin panel</div>
+      </div>
+      <div class="card" style="padding:10px 4px">
+        <div style="font-size:11px;font-weight:700;color:#999;padding:4px 14px;text-transform:uppercase">Categories</div>
+        <div id="cat-list"></div>
+      </div>
+    </div>
+    <div class="midcol">
+      <div class="card" style="padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:8px">
+        <span style="font-size:13px;color:#888">Sort:</span>
+        <button class="btn btn-sm" id="sort-new" style="background:var(--orange);color:#fff" onclick="Feed.setSort('new')">New</button>
+        <button class="btn btn-sm btn-outline" id="sort-top" onclick="Feed.setSort('top')">Top</button>
+        <span style="margin-left:auto;font-size:13px;color:#999" id="feed-count"></span>
+      </div>
+      <div id="feed-list"></div>
+    </div>
+    <div class="rightcol">
+      <div class="card" style="padding:16px;margin-bottom:12px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:10px">Trending tags</div>
+        <div id="trending-tags"></div>
+      </div>
+      <div class="card" style="padding:16px">
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px">About Xpora</div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.6">A platform to share your dreams, travels, ideas, and real life stories.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ WRITE PAGE ============ -->
+<div class="page" id="page-write">
+  <nav class="topnav">
+    <div class="logo" onclick="Router.go('feed')">
+      <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <span class="logo-text">Xp<span>ora</span></span>
+    </div>
+    <div class="navright">
+      <button class="btn btn-ghost" onclick="Router.go('feed')">Cancel</button>
+      <button class="btn btn-primary" id="publish-btn" onclick="Write.publish()">Publish</button>
+    </div>
+  </nav>
+  <div style="max-width:680px;margin:0 auto;padding:40px 20px">
+    <textarea class="write-title" id="write-title" placeholder="Your story title..." rows="1" oninput="Write.autoresize(this)"></textarea>
+    <div style="display:flex;gap:8px;margin-bottom:18px">
+      <select class="form-input" id="write-tag" style="width:auto;margin-bottom:0"></select>
+    </div>
+    <textarea class="write-editor" id="write-body" placeholder="Tell your story... what happened in your dream?" oninput="Write.wordcount(this)"></textarea>
+    <div style="font-size:13px;color:#999;margin-top:10px" id="write-wordcount">0 words</div>
+  </div>
+</div>
+
+<!-- ============ STORY DETAIL PAGE ============ -->
+<div class="page" id="page-story">
+  <nav class="topnav">
+    <div class="logo" onclick="Router.go('feed')">
+      <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <span class="logo-text">Xp<span>ora</span></span>
+    </div>
+    <div class="navright">
+      <button class="btn btn-ghost" onclick="Router.go('feed')">← Back</button>
+    </div>
+  </nav>
+  <div class="storypage" id="story-content"></div>
+</div>
+
+<!-- ============ PROFILE PAGE ============ -->
+<div class="page" id="page-profile">
+  <nav class="topnav">
+    <div class="logo" onclick="Router.go('feed')">
+      <div class="logo-mark"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg></div>
+      <span class="logo-text">Xp<span>ora</span></span>
+    </div>
+    <div class="navright">
+      <button class="btn btn-ghost" onclick="Router.go('feed')">← Feed</button>
+      <button class="btn btn-primary btn-sm" onclick="Router.go('write')">Write</button>
+    </div>
+  </nav>
+  <div style="max-width:700px;margin:0 auto;padding:30px 20px" id="profile-content"></div>
+</div>
+
+<!-- ============ ADMIN PAGE ============ -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <div class="admin-side">
+      <div style="font-family:var(--serif);font-size:17px;color:#fff;margin-bottom:24px;padding:0 4px">Xpora <span style="color:var(--orange)">Admin</span></div>
+      <div class="admin-item active" onclick="Admin.setTab('dashboard',this)"><span class="label">Dashboard</span></div>
+      <div class="admin-item" onclick="Admin.setTab('pending',this)"><span class="label">Pending</span> <span id="admin-pending-badge"></span></div>
+      <div class="admin-item" onclick="Admin.setTab('stories',this)"><span class="label">All stories</span></div>
+      <div class="admin-item" onclick="Admin.setTab('users',this)"><span class="label">Users</span></div>
+      <div class="admin-item" onclick="Admin.setTab('comments',this)"><span class="label">Comments</span></div>
+      <div class="admin-item" onclick="Admin.setTab('reports',this)"><span class="label">Reports</span></div>
+      <div class="admin-item" style="margin-top:30px" onclick="Router.go('feed')"><span class="label">← Back to site</span></div>
+    </div>
+    <div class="admin-main">
+      <div class="admin-top">
+        <h2 style="font-family:var(--serif);font-size:20px" id="admin-title">Dashboard</h2>
+        <span style="font-size:13px;color:#888" id="admin-welcome"></span>
+      </div>
+      <div class="admin-content" id="admin-content"></div>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -814,7 +814,12 @@ async function doSignUp() {
 }
 
 async function signInWithGoogle() {
-  await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
+  await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: 'https://dreamshareing.vercel.app'
+    }
+  });
 }
 
 async function doSignOut() {

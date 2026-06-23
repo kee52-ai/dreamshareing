@@ -683,7 +683,7 @@ async function init() {
       CU = session.user;
       await loadProfile();
       updateNav();
-      if (event === 'SIGNED_IN' && (page === 'signin' || page === 'signup' || page === 'home')) go('feed');
+      if (event === 'SIGNED_IN' && (page === 'signin' || page === 'signup' || page === 'home')) { go('feed'); } else if (event === 'SIGNED_IN') { updateNav(); }
     } else {
       CU = null; CP = null;
       updateNav();
@@ -777,7 +777,7 @@ function go(p) {
   page = p;
   window.scrollTo(0, 0);
   closeMenus();
-  if (p === 'feed') loadFeed();
+  if (p === 'feed') { setTimeout(loadFeed, 100); }
   if (p === 'write') initWrite();
   if (p === 'admin') {
     if (!CP || (CP.role !== 'admin' && CP.role !== 'moderator')) { toast('Admin access only', 'err'); go('feed'); return; }
@@ -849,6 +849,7 @@ async function loadFeed() {
   const container = document.getElementById('feed-posts');
   container.innerHTML = '<div class="loader"><div class="spin"></div></div>';
   updateFeedNav();
+  console.log('loadFeed called, feedMode:', feedMode, 'feedTag:', feedTag, 'feedSort:', feedSort);
 
   if (feedMode === 'bookmarks' && !CU) { feedMode = 'home'; }
 
@@ -878,8 +879,10 @@ async function loadFeed() {
     if (feedSort === 'top') q = q.order('upvotes',{ascending:false});
     else if (feedSort === 'hot') q = q.order('comment_count',{ascending:false});
     else q = q.order('created_at',{ascending:false});
-    const { data, error: feedErr } = await q.limit(40); if(feedErr) console.error('Feed error:',feedErr);
-    posts = data || [];
+    const { data: qData, error: feedErr } = await q.limit(40); 
+    console.log('Feed query result:', qData, 'Error:', feedErr);
+    if(feedErr) console.error('Feed error:',feedErr);
+    posts = qData || [];
     if (CU) {
       const { data: bm } = await sb.from('bookmarks').select('post_id').eq('user_id', CU.id);
       bookmarks = new Set((bm||[]).map(b => b.post_id));

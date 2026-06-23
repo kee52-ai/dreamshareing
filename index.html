@@ -1526,7 +1526,10 @@ async function adminTab(tab) {
         </div>
       </div>`;
   } else if (tab === 'pend') {
-    const { data, error: pendErr } = await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id,profiles(username,full_name,avatar_url)').eq('status','pending').order('created_at',{ascending:false}); console.log('pend',data,pendErr);
+    const { data: pendData, error: pendErr } = await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id').eq('status','pending').order('created_at',{ascending:false});
+    console.log('Pending result:', pendData, 'Error:', pendErr);
+    if (pendErr) { body.innerHTML = '<div class="empty"><div class="ico">❌</div><h3>Error: '+pendErr.message+'</h3></div>'; return; }
+    const data = pendData;
     if (!data?.length) { body.innerHTML = '<div class="empty"><div class="ico">🎉</div><h3>No pending posts!</h3><p>All caught up.</p></div>'; return; }
     body.innerHTML = data.map(p => `
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px">

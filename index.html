@@ -683,7 +683,7 @@ async function init() {
       CU = session.user;
       await loadProfile();
       updateNav();
-      if (event === 'SIGNED_IN') go('feed');
+      if (event === 'SIGNED_IN' && (page === 'signin' || page === 'signup' || page === 'home')) go('feed');
     } else {
       CU = null; CP = null;
       updateNav();
@@ -878,7 +878,7 @@ async function loadFeed() {
     if (feedSort === 'top') q = q.order('upvotes',{ascending:false});
     else if (feedSort === 'hot') q = q.order('comment_count',{ascending:false});
     else q = q.order('created_at',{ascending:false});
-    const { data } = await q.limit(40);
+    const { data, error: feedErr } = await q.limit(40); if(feedErr) console.error('Feed error:',feedErr);
     posts = data || [];
     if (CU) {
       const { data: bm } = await sb.from('bookmarks').select('post_id').eq('user_id', CU.id);
@@ -1526,7 +1526,7 @@ async function adminTab(tab) {
         </div>
       </div>`;
   } else if (tab === 'pend') {
-    const { data } = await sb.from('posts').select('*,profiles(username,full_name,avatar_url)').eq('status','pending').order('created_at',{ascending:false});
+    const { data, error: pendErr } = await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id,profiles(username,full_name,avatar_url)').eq('status','pending').order('created_at',{ascending:false}); console.log('pend',data,pendErr);
     if (!data?.length) { body.innerHTML = '<div class="empty"><div class="ico">🎉</div><h3>No pending posts!</h3><p>All caught up.</p></div>'; return; }
     body.innerHTML = data.map(p => `
       <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px">

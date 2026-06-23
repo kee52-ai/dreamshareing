@@ -677,15 +677,26 @@ async function init() {
   }
   updateNav();
 
+  let authHandled = false;
   sb.auth.onAuthStateChange(async (event, session) => {
     console.log('Auth event:', event);
-    if (session) {
+    if (event === 'SIGNED_OUT') {
+      CU = null; CP = null; authHandled = false;
+      updateNav();
+      return;
+    }
+    if (session && !authHandled) {
+      authHandled = true;
       CU = session.user;
       await loadProfile();
       updateNav();
-      if (event === 'SIGNED_IN' && (page === 'signin' || page === 'signup' || page === 'home')) { go('feed'); } else if (event === 'SIGNED_IN') { updateNav(); }
-    } else {
-      CU = null; CP = null;
+      if (page === 'signin' || page === 'signup' || page === 'home') {
+        go('feed');
+      } else if (page === 'feed') {
+        loadFeed();
+      }
+    } else if (session && authHandled) {
+      CU = session.user;
       updateNav();
     }
   });
@@ -847,9 +858,9 @@ async function doForgot() {
 // ============================================
 async function loadFeed() {
   const container = document.getElementById('feed-posts');
+  if (!container) return;
   container.innerHTML = '<div class="loader"><div class="spin"></div></div>';
   updateFeedNav();
-  console.log('loadFeed called, feedMode:', feedMode, 'feedTag:', feedTag, 'feedSort:', feedSort);
 
   if (feedMode === 'bookmarks' && !CU) { feedMode = 'home'; }
 

@@ -861,129 +861,67 @@ async function loadFeed() {
   if (!container) return;
   container.innerHTML = '<div class="loader"><div class="spin"></div></div>';
   updateFeedNav();
-
-  if (feedMode === 'bookmarks' && !CU) { feedMode = 'home'; }
-
-  let posts = [];
-
-  if (feedMode === 'bookmarks' && CU) {
-    const { data } = await sb.from('bookmarks')
-      .select('post_id, posts(id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,profiles(id,username,full_name,avatar_url))')
-      .eq('user_id', CU.id);
-    posts = (data||[]).map(b => b.posts).filter(Boolean);
-    bookmarks = new Set(posts.map(p => p.id));
-  } else if (feedMode === 'following' && CU) {
-    const { data: follows } = await sb.from('follows').select('following_id').eq('follower_id', CU.id);
-    const ids = (follows||[]).map(f => f.following_id);
-    if (ids.length === 0) {
-      container.innerHTML = '<div class="empty"><div class="ico">👥</div><h3>Follow people first</h3><p>Follow other dreamers to see their stories here.</p><button class="btn btn-primary" onclick="setSort(\'new\');switchFeed(\'home\')">Browse all stories</button></div>';
-      return;
+  
+  // Simple direct query - no complex joins
+  try {
+    let posts = [];
+    
+    if (feedNavMode === 'bookmarks' && CU) {
+      const { data: bmData } = await sb.from('bookmarks').select('post_id').eq('user_id', CU.id);
+      const ids = (bmData||[]).map(b => b.post_id);
+      if (!ids.length) { container.innerHTML = '<div class="empty"><div class="ico">🔖</div><h3>No bookmarks yet</h3><p>Save stories to read later!</p></div>'; return; }
+      const { data } = await sb.from('posts').select('*').in('id', ids).eq('status','approved');
+      posts = data || [];
+    } else if (feedNavMode === 'following' && CU) {
+      const { data: follows } = await sb.from('follows').select('following_id').eq('follower_id', CU.id);
+      const ids = (follows||[]).map(f => f.following_id);
+      if (!ids.length) { container.innerHTML = '<div class="empty"><div class="ico">👥</div><h3>Follow people first</h3><p>Follow others to see their stories!</p><button class="btn btn-primary" onclick="switchFeed('home')">Browse all</button></div>'; return; }
+      const { data } = await sb.from('posts').select('*').eq('status','approved').in('author_id', ids).order('created_at', {ascending:false}).limit(30);
+      posts = data || [];
+    } else {
+      let q = sb.from('posts').select('*').eq('status','approved');
+      if (feedTag !== 'all') q = q.eq('tag', feedTag);
+      if (feedSort === 'top') q = q.order('upvotes', {ascending:false});
+      else if (feedSort === 'hot') q = q.order('comment_count', {ascending:false});
+      else q = q.order('created_at', {ascending:false});
+      const { data, error } = await q.limit(40);
+      if (error) { console.error('Feed error:', error); container.innerHTML = '<div class="empty"><div class="ico">⚠️</div><h3>Error loading feed</h3><p>' + error.message + '</p></div>'; return; }
+      posts = data || [];
     }
-    let q = sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,profiles(id,username,full_name,avatar_url)')
-      .eq('status','approved').in('author_id', ids);
-    q = feedSort === 'top' ? q.order('upvotes',{ascending:false}) : q.order('created_at',{ascending:false});
-    const { data } = await q.limit(30);
-    posts = data || [];
-  } else {
-    let q = sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,profiles(id,username,full_name,avatar_url)').eq('status','approved');
-    if (feedTag !== 'all') q = q.eq('tag', feedTag);
-    if (feedSort === 'top') q = q.order('upvotes',{ascending:false});
-    else if (feedSort === 'hot') q = q.order('comment_count',{ascending:false});
-    else q = q.order('created_at',{ascending:false});
-    const { data: qData, error: feedErr } = await q.limit(40); 
-    console.log('Feed query result:', qData, 'Error:', feedErr);
-    if(feedErr) console.error('Feed error:',feedErr);
-    posts = qData || [];
+
+    // Load profiles separately
+    if (posts.length > 0) {
+      const authorIds = [...new Set(posts.map(p => p.author_id))];
+      const { data: profiles } = await sb.from('profiles').select('id,username,full_name,avatar_url').in('id', authorIds);
+      const profileMap = {};
+      (profiles||[]).forEach(p => profileMap[p.id] = p);
+      posts = posts.map(p => ({...p, profiles: profileMap[p.author_id] || null}));
+    }
+
     if (CU) {
       const { data: bm } = await sb.from('bookmarks').select('post_id').eq('user_id', CU.id);
       bookmarks = new Set((bm||[]).map(b => b.post_id));
       const { data: vt } = await sb.from('votes').select('post_id,vote_type').eq('user_id', CU.id);
       uVotes = {}; (vt||[]).forEach(v => uVotes[v.post_id] = v.vote_type);
     }
-  }
 
-  document.getElementById('feed-count').textContent = posts.length + ' stories';
-  if (!posts.length) {
-    container.innerHTML = '<div class="empty"><div class="ico">🌙</div><h3>No stories yet</h3><p>Be the first to share a story in this category!</p><button class="btn btn-primary" onclick="go(\'write\')">✍️ Write first story</button></div>';
+    document.getElementById('feed-count').textContent = posts.length + ' stories';
+    if (!posts.length) {
+      container.innerHTML = '<div class="empty"><div class="ico">🌙</div><h3>No stories yet</h3><p>Be the first to share!</p><button class="btn btn-primary" onclick="go('write')">✍️ Write first story</button></div>';
+      return;
+    }
+    container.innerHTML = posts.map(p => postCardHTML(p)).join('');
+    updateCatHighlight();
+    return;
+  } catch(e) {
+    console.error('loadFeed error:', e);
+    container.innerHTML = '<div class="empty"><div class="ico">⚠️</div><h3>Error</h3><p>' + e.message + '</p></div>';
     return;
   }
-  container.innerHTML = posts.map(p => postCardHTML(p)).join('');
-  updateCatHighlight();
+
+  // 
 }
 
-function postCardHTML(p) {
-  const bm = bookmarks.has(p.id);
-  const vote = uVotes[p.id];
-  const score = (p.upvotes||0) - (p.downvotes||0);
-  return `
-    <div class="post-card">
-      ${p.cover_url ? `<img class="post-cover" src="${p.cover_url}" onclick="openStory('${p.id}')" loading="lazy"/>` : ''}
-      <div class="post-body">
-        <div class="post-author-row">
-          <div onclick="openProfile('${p.profiles?.username}')">${avHTML(p.profiles, 38, 14)}</div>
-          <div>
-            <div class="post-author-name" onclick="openProfile('${p.profiles?.username}')">${esc(p.profiles?.full_name||'')}</div>
-            <div class="post-meta">@${p.profiles?.username||''} · ${ago(p.created_at)} · ${p.views||0} views</div>
-          </div>
-          <span class="tag-badge">${EMOJ[p.tag]||'📖'} ${p.tag}</span>
-        </div>
-        <div class="post-title" onclick="openStory('${p.id}')">${esc(p.title)}</div>
-        <div class="post-excerpt" onclick="openStory('${p.id}')">${esc(p.excerpt||'')}</div>
-        <div class="action-bar">
-          <div class="vote-grp">
-            <button class="vote-btn ${vote==='up'?'up-on':''}" onclick="vote('${p.id}','up',this)" title="Upvote">▲</button>
-            <span class="vote-count" id="sc-${p.id}">${score}</span>
-            <button class="vote-btn ${vote==='down'?'dn-on':''}" onclick="vote('${p.id}','down',this)" title="Downvote">▼</button>
-          </div>
-          <button class="act-btn" onclick="openStory('${p.id}')">💬 ${p.comment_count||0}</button>
-          <button class="act-btn ${bm?'active':''}" id="bm-${p.id}" onclick="toggleBm('${p.id}',this)">${bm?'🔖 Saved':'🔖 Save'}</button>
-          <button class="act-btn" onclick="share('${p.id}')">↗ Share</button>
-          <button onclick="openReport('${p.id}')" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:13px;color:var(--text3);padding:4px;border-radius:4px" title="Report">⚑</button>
-        </div>
-      </div>
-    </div>`;
-}
-
-function buildCats() {
-  const el = document.getElementById('cat-list');
-  if (!el) return;
-  el.innerHTML = CATS.map(c => `<div class="sb-link" id="cat-${c.v}" onclick="setFeedTag('${c.v}')"><span class="icon">${c.e}</span> ${c.l}</div>`).join('');
-}
-
-function updateCatHighlight() {
-  CATS.forEach(c => { const el = document.getElementById('cat-'+c.v); if (el) el.classList.toggle('active', c.v === feedTag); });
-}
-
-function buildTrending() {
-  const el = document.getElementById('trending-wrap');
-  if (!el) return;
-  const tags = ['#dreams','#nightmares','#travel','#life','#career','#india','#tech','#love'];
-  el.innerHTML = tags.map(t => `<span onclick="setFeedTag('${t.slice(1)}')" style="background:var(--bg);padding:5px 11px;border-radius:20px;font-size:11px;cursor:pointer;color:var(--text2);border:1px solid var(--border);transition:all .2s" onmouseover="this.style.background='var(--orange-light)';this.style.color='var(--orange)'" onmouseout="this.style.background='var(--bg)';this.style.color='var(--text2)'">${t}</span>`).join('');
-}
-
-function buildHeroCats() {
-  const el = document.getElementById('hero-cats');
-  if (!el) return;
-  el.innerHTML = CATS.filter(c => c.v !== 'all').map(c => `<span class="hero-cat" onclick="setFeedTag('${c.v}')">${c.e} ${c.l}</span>`).join('');
-}
-
-function switchFeed(mode) {
-  feedMode = mode;
-  updateFeedNav();
-  loadFeed();
-}
-
-function updateFeedNav() {
-  ['home','following','bookmarks'].forEach(k => {
-    const el = document.getElementById('nav-'+k); if (el) el.classList.toggle('active', feedMode === k);
-  });
-}
-
-function setSort(s) {
-  feedSort = s;
-  ['top','new','hot'].forEach(x => document.getElementById('s-'+x)?.classList.toggle('active', x === s));
-  loadFeed();
-}
 
 async function vote(postId, type, btn) {
   if (!CU) { go('signin'); return; }

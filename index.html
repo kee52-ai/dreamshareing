@@ -170,16 +170,27 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .wt{height:var(--nav);background:rgba(13,15,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 24px;gap:14px;position:sticky;top:0;z-index:100}
 .wbw{flex:1;max-width:740px;margin:0 auto;width:100%;padding:32px 20px 100px}
 .wcprev{width:100%;height:220px;object-fit:cover;border-radius:var(--r);margin-bottom:16px;border:1px solid var(--br)}
-.wttl{width:100%;border:none;outline:none;font-family:var(--fd);font-size:2rem;font-weight:600;color:var(--tx);resize:none;background:transparent;line-height:1.2;margin-bottom:18px}
-.wttl::placeholder{color:var(--mu)}
+.wttl{width:100%;border:none;outline:none;font-family:var(--fd);font-size:2rem;font-weight:600;color:var(--tx);background:transparent;line-height:1.2;margin-bottom:18px;display:block;min-height:2.4rem}
+.wttl:empty::before{content:attr(data-placeholder);color:var(--mu);pointer-events:none}
 .wsel{padding:7px 14px;border:1.5px solid var(--br);border-radius:999px;font-size:.82rem;color:var(--tx);background:var(--s);cursor:pointer;outline:none;font-family:var(--fb)}
 .wsel:focus{border-color:var(--ac)}
 .tbar{display:flex;gap:2px;padding:7px 10px;background:var(--s);border-radius:var(--rsm);border:1px solid var(--br);flex-wrap:wrap;position:sticky;top:calc(var(--nav)+4px);z-index:99;margin-bottom:14px}
 .tbb{min-width:30px;height:30px;padding:0 8px;border-radius:6px;background:transparent;border:none;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--mu);display:inline-flex;align-items:center;justify-content:center;transition:all .15s;gap:3px;font-family:var(--fb)}
 .tbb:hover{background:var(--s2);color:var(--ac2)}
 .tbsep{width:1px;height:20px;background:var(--br);margin:0 3px}
-.wbody{width:100%;border:none;outline:none;font-size:1.05rem;line-height:1.85;color:var(--tx);resize:none;background:transparent;min-height:400px}
-.wbody::placeholder{color:var(--mu)}
+.wbody{width:100%;border:none;outline:none;font-size:1.05rem;line-height:1.85;color:var(--tx);background:transparent;min-height:420px;display:block}
+.wbody:empty::before{content:attr(data-placeholder);color:var(--mu);pointer-events:none;display:block}
+.wbody:focus{outline:none}
+.wbody h2{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin:24px 0 10px;color:var(--tx)}
+.wbody h3{font-family:var(--fd);font-size:1.25rem;font-weight:600;margin:18px 0 8px;color:var(--tx)}
+.wbody blockquote{border-left:3px solid var(--ac);padding:8px 0 8px 18px;color:var(--mu);font-style:italic;margin:16px 0;background:rgba(124,92,252,.06);border-radius:0 6px 6px 0}
+.wbody pre{background:var(--s);border:1px solid var(--br);padding:14px;border-radius:var(--rsm);overflow-x:auto;margin:14px 0;font-size:.9rem;font-family:monospace;color:var(--ac2)}
+.wbody code{background:var(--s2);padding:2px 6px;border-radius:4px;font-size:.875rem;font-family:monospace;color:var(--ac2)}
+.wbody a{color:var(--ac2);text-decoration:underline}
+.wbody img{max-width:100%;border-radius:var(--rsm);margin:12px 0;display:block}
+.wbody ul,.wbody ol{padding-left:22px;margin:8px 0}
+.wbody li{margin:4px 0}
+.wbody hr{border:none;border-top:1px solid var(--br);margin:22px 0}
 .pp{max-width:800px;margin:0 auto;padding:28px 20px}
 .phdr{background:var(--s);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:18px}
 .pban{height:140px;background:linear-gradient(135deg,var(--s2),#0E0C22,#1A0B2E);display:flex;align-items:center;justify-content:center;font-size:2rem}
@@ -403,13 +414,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       </div>
     </div>
     <div class="wbw">
+      <!-- Cover image -->
       <div id="cover-wrap"></div>
       <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
         <input type="file" id="cover-input" accept="image/*" style="display:none" onchange="uploadCover(this)">
         <button class="btn btn-o btn-sm" id="cover-add-btn" onclick="document.getElementById('cover-input').click()">🖼 Add cover</button>
         <button class="btn btn-g btn-sm" id="cover-rm-btn" style="display:none" onclick="rmCover()">Remove cover</button>
       </div>
-      <textarea class="wttl" id="w-title" placeholder="Your dream title..." rows="1" oninput="autoH(this)" maxlength="200"></textarea>
+      <!-- Title -->
+      <div id="w-title" class="wttl" contenteditable="true" data-placeholder="Your dream title..." oninput="updateWC()" onkeydown="titleKeyDown(event)"></div>
+      <!-- Tag -->
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
         <select class="wsel" id="w-tag">
           <option value="Dreams">🌙 Dreams</option><option value="Nightmares">😰 Nightmares</option>
@@ -419,26 +433,30 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="Love">❤️ Love</option><option value="Culture">🎭 Culture</option>
         </select>
       </div>
-      <div class="tbar">
-        <button class="tbb" onclick="fmt('**','**')"><b>B</b></button>
-        <button class="tbb" onclick="fmt('_','_')"><i>I</i></button>
-        <button class="tbb" onclick="fmt('<u>','</u>')"><u>U</u></button>
+      <!-- Toolbar -->
+      <div class="tbar" id="editor-toolbar">
+        <button class="tbb" title="Bold" onmousedown="event.preventDefault();execFmt('bold')"><b>B</b></button>
+        <button class="tbb" title="Italic" onmousedown="event.preventDefault();execFmt('italic')"><i>I</i></button>
+        <button class="tbb" title="Underline" onmousedown="event.preventDefault();execFmt('underline')"><u>U</u></button>
         <div class="tbsep"></div>
-        <button class="tbb" onclick="fmt('\n## ','')">H2</button>
-        <button class="tbb" onclick="fmt('\n### ','')">H3</button>
+        <button class="tbb" title="Heading 2" onmousedown="event.preventDefault();execBlock('h2')">H2</button>
+        <button class="tbb" title="Heading 3" onmousedown="event.preventDefault();execBlock('h3')">H3</button>
         <div class="tbsep"></div>
-        <button class="tbb" onclick="fmt('\n> ','')">❝ Quote</button>
-        <button class="tbb" onclick="fmt('`','`')">&grave; Code</button>
-        <button class="tbb" onclick="fmt('\n```\n','\n```')">{ }</button>
+        <button class="tbb" title="Blockquote" onmousedown="event.preventDefault();execBlock('blockquote')">❝ Quote</button>
+        <button class="tbb" title="Code" onmousedown="event.preventDefault();execFmt('code')">` Code</button>
+        <button class="tbb" title="Code block" onmousedown="event.preventDefault();execBlock('pre')">{ }</button>
         <div class="tbsep"></div>
-        <button class="tbb" onclick="fmt('\n• ','')">• List</button>
-        <button class="tbb" onclick="fmt('\n1. ','')">1. List</button>
-        <button class="tbb" onclick="fmt('\n---\n','')">—</button>
+        <button class="tbb" title="Bullet list" onmousedown="event.preventDefault();execFmt('insertUnorderedList')">• List</button>
+        <button class="tbb" title="Numbered list" onmousedown="event.preventDefault();execFmt('insertOrderedList')">1. List</button>
+        <button class="tbb" title="Horizontal rule" onmousedown="event.preventDefault();execFmt('insertHorizontalRule')">—</button>
         <div class="tbsep"></div>
-        <button class="tbb" onclick="insertImage()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Image</button>
-        <button class="tbb" onclick="insertLink()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Link</button>
+        <button class="tbb" title="Insert image" onmousedown="event.preventDefault();triggerInlineImg()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Image</button>
+        <button class="tbb" title="Insert link" onmousedown="event.preventDefault();execInsertLink()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Link</button>
       </div>
-      <textarea class="wbody" id="w-body" placeholder="Start writing your dream... what did you see? How did it feel?" oninput="updateWC()"></textarea>
+      <!-- Hidden inline image input -->
+      <input type="file" id="inline-img-input" accept="image/*" style="display:none" onchange="handleInlineImg(this)">
+      <!-- WYSIWYG Body -->
+      <div id="w-body" class="wbody" contenteditable="true" data-placeholder="Start writing your dream... what did you see? How did it feel?" oninput="updateWC()" onkeydown="bodyKeyDown(event)"></div>
     </div>
   </div>
 </div>
@@ -748,7 +766,13 @@ async function storyBm(postId,btn){
   if(BM.has(postId)){await sb.from('bookmarks').delete().match({user_id:CU.id,post_id:postId});BM.delete(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Save';btn.classList.remove('bm');toast('Removed');}
   else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved! 🔖','ok');}
 }
-function renderBody(text){if(!text)return'<p style="color:var(--mu)">No content yet.</p>';return text.replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/_(.+?)_/g,'<em>$1</em>').replace(/<u>(.+?)<\/u>/g,'<u>$1</u>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/```([\s\S]+?)```/g,'<pre>$1</pre>').replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>').replace(/^---$/gm,'<hr>').replace(/^• (.+)$/gm,'<li>$1</li>').replace(/^\d+\. (.+)$/gm,'<li>$1</li>').replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/!\[(.+?)\]\((.+?)\)/g,'<img src="$2" alt="$1">').split('\n\n').map(p=>{if(/^<(h[23]|blockquote|hr|pre|li)/.test(p.trim()))return p;return`<p>${p.replace(/\n/g,'<br>')}</p>`;}).join('');}
+function renderBody(text){
+  if(!text)return'<p style="color:var(--mu)">No content yet.</p>';
+  // If it's already HTML (new WYSIWYG posts), return as-is
+  if(/<(p|h[1-6]|ul|ol|li|blockquote|pre|img|strong|em|a|div)\b/i.test(text)){return text;}
+  // Legacy markdown fallback
+  return text.replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/_(.+?)_/g,'<em>$1</em>').replace(/<u>(.+?)<\/u>/g,'<u>$1</u>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/```([\s\S]+?)```/g,'<pre>$1</pre>').replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>').replace(/^---$/gm,'<hr>').replace(/^• (.+)$/gm,'<li>$1</li>').replace(/^\d+\. (.+)$/gm,'<li>$1</li>').replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/!\[(.+?)\]\((.+?)\)/g,'<img src="$2" alt="$1">').split('\n\n').map(p=>{if(/^<(h[23]|blockquote|hr|pre|li)/.test(p.trim()))return p;return`<p>${p.replace(/\n/g,'<br>')}</p>`;}).join('');
+}
 async function loadComments(postId){
   try{
     const{data:cmts}=await sb.from('comments').select('*').eq('post_id',postId).is('parent_id',null).eq('status','approved').order('created_at');
@@ -764,27 +788,49 @@ function cmtH(c,pid){const prof=c.profiles||{};return`<div class="ci" id="cmt-${
 function toggleRep(cId){const b=document.getElementById('rep-box-'+cId);b.style.display=b.style.display==='none'?'block':'none';}
 async function postComment(pid){const inp=document.getElementById('cmt-inp');if(!inp?.value.trim())return;await sb.from('comments').insert({post_id:pid,author_id:CU.id,body:inp.value.trim()});const{data:post}=await sb.from('posts').select('author_id,title').eq('id',pid).single();if(post&&post.author_id!==CU.id)await sendNotif(post.author_id,'comment','💬 New comment!',`${CP?.full_name||'Someone'} commented on "${post.title?.slice(0,50)}"`,`#story/${pid}`);inp.value='';toast('Comment posted!','ok');loadComments(pid);}
 async function postReply(parentId,pid){const inp=document.getElementById('ri-'+parentId);if(!inp?.value.trim())return;await sb.from('comments').insert({post_id:pid,author_id:CU.id,parent_id:parentId,body:inp.value.trim()});inp.value='';document.getElementById('rep-box-'+parentId).style.display='none';toast('Reply posted!','ok');loadComments(pid);}
-function initWrite(){if(!CU){go('signin');return;}if(editId)return;editId=null;coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';const pb=document.getElementById('pub-btn');if(pb)pb.textContent='Publish →';try{const d=JSON.parse(localStorage.getItem('xp_draft')||'{}');if(d.t)document.getElementById('w-title').value=d.t;if(d.b)document.getElementById('w-body').value=d.b;if(d.tag)document.getElementById('w-tag').value=d.tag;if(d.coverUrl){coverUrl=d.coverUrl;showCoverPrev(coverUrl);}}catch(e){}updateWC();}
-async function editPost(id){editId=id;const{data}=await sb.from('posts').select('*').eq('id',id).single();if(data){document.getElementById('w-title').value=data.title||'';document.getElementById('w-body').value=data.body||'';document.getElementById('w-tag').value=data.tag||'Dreams';if(data.cover_url){coverUrl=data.cover_url;showCoverPrev(coverUrl);}const pb=document.getElementById('pub-btn');if(pb)pb.textContent='✅ Update';}}
+function initWrite(){if(!CU){go('signin');return;}if(editId)return;editId=null;coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';const pb=document.getElementById('pub-btn');if(pb)pb.textContent='Publish →';const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML='';if(wb)wb.innerHTML='';try{const d=JSON.parse(localStorage.getItem('xp_draft')||'{}');if(d.t&&wt)wt.innerHTML=d.t;if(d.b&&wb)wb.innerHTML=d.b;if(d.tag)document.getElementById('w-tag').value=d.tag;if(d.coverUrl){coverUrl=d.coverUrl;showCoverPrev(coverUrl);}}catch(e){}updateWC();}
+
+async function editPost(id){editId=id;const{data}=await sb.from('posts').select('*').eq('id',id).single();if(data){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML=data.title||'';if(wb)wb.innerHTML=data.body||'';document.getElementById('w-tag').value=data.tag||'Dreams';if(data.cover_url){coverUrl=data.cover_url;showCoverPrev(coverUrl);}const pb=document.getElementById('pub-btn');if(pb)pb.textContent='✅ Update';}}
+
 function showCoverPrev(url){const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML=`<img src="${esc(url)}" class="wcprev"/>`;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Change cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='inline-flex';}
 function rmCover(){coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';}
-async function uploadCover(input){const file=input.files[0];if(!file)return;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Uploading...';const path=`covers/${CU.id}/${Date.now()}.${file.name.split('.').pop()}`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true});if(error){toast('Upload failed: '+error.message,'err');if(ca)ca.textContent='🖼 Add cover';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);coverUrl=data.publicUrl;showCoverPrev(coverUrl);toast('Cover uploaded! 🖼','ok');}
-function autoH(el){el.style.height='auto';el.style.height=el.scrollHeight+'px';}
-function updateWC(){const b=document.getElementById('w-body')?.value||'';const wc=b.trim().split(/\s+/).filter(Boolean).length;const el=document.getElementById('wc-disp');if(el)el.textContent=wc+' words';}
-function fmt(pre,post){const ta=document.getElementById('w-body');const s=ta.selectionStart,e=ta.selectionEnd,sel=ta.value.slice(s,e);ta.value=ta.value.slice(0,s)+pre+sel+post+ta.value.slice(e);ta.focus();ta.selectionStart=s+pre.length;ta.selectionEnd=s+pre.length+sel.length;updateWC();}
-function insertImage(){const url=prompt('Image URL:');if(!url)return;const alt=prompt('Description:','image')||'image';fmt(`![${alt}](${url})`,'');}
-function insertLink(){const url=prompt('Link URL:');if(!url)return;const ta=document.getElementById('w-body');const sel=ta.value.slice(ta.selectionStart,ta.selectionEnd)||'link text';fmt(`[${sel}](${url})`, '');}
-function saveDraft(){localStorage.setItem('xp_draft',JSON.stringify({t:document.getElementById('w-title')?.value,b:document.getElementById('w-body')?.value,tag:document.getElementById('w-tag')?.value,coverUrl}));toast('Draft saved! 💾','ok');}
-function cancelWrite(){if((document.getElementById('w-title')?.value||document.getElementById('w-body')?.value)&&!editId&&confirm('Save as draft?'))saveDraft();editId=null;go('feed');}
+
+// Compress image before upload (fixes "exceeded maximum size" error)
+async function compressImage(file,maxW=1200,quality=0.82){return new Promise(resolve=>{const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{const scale=Math.min(1,maxW/Math.max(img.width,img.height));const w=Math.round(img.width*scale),h=Math.round(img.height*scale);const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(url);canvas.toBlob(blob=>resolve(new File([blob],file.name,{type:'image/jpeg'})),'image/jpeg',quality);};img.src=url;});}
+
+async function uploadCover(input){const rawFile=input.files[0];if(!rawFile)return;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Compressing...';const file=await compressImage(rawFile,1400,0.85);if(ca)ca.textContent='Uploading...';const path=`covers/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');if(ca)ca.textContent='🖼 Add cover';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);coverUrl=data.publicUrl;showCoverPrev(coverUrl);toast('Cover uploaded! 🖼','ok');}
+
+// WYSIWYG toolbar actions
+function execFmt(cmd){const wb=document.getElementById('w-body');wb.focus();if(cmd==='code'){const sel=window.getSelection();if(sel.rangeCount){const range=sel.getRangeAt(0);const code=document.createElement('code');code.textContent=range.toString()||'code';range.deleteContents();range.insertNode(code);}}else{document.execCommand(cmd,false,null);}updateWC();}
+
+function execBlock(tag){const wb=document.getElementById('w-body');wb.focus();const sel=window.getSelection();if(!sel.rangeCount)return;const range=sel.getRangeAt(0);let node=range.startContainer;while(node&&node.parentNode!==wb)node=node.parentNode;if(node&&node.tagName&&node.tagName.toLowerCase()===tag){document.execCommand('formatBlock',false,'p');}else{document.execCommand('formatBlock',false,tag);}updateWC();}
+
+function execInsertLink(){const wb=document.getElementById('w-body');wb.focus();const sel=window.getSelection();const selectedText=sel.toString().trim();const url=prompt('Enter link URL:','https://');if(!url||url==='https://')return;const text=selectedText||prompt('Link text:','link')||'link';if(selectedText&&sel.rangeCount){document.execCommand('createLink',false,url);}else{const a=document.createElement('a');a.href=url;a.textContent=text;a.target='_blank';a.rel='noopener';const range=sel.getRangeAt(0);range.insertNode(a);}updateWC();}
+
+// Inline image with compression
+function triggerInlineImg(){document.getElementById('inline-img-input').click();}
+async function handleInlineImg(input){const rawFile=input.files[0];if(!rawFile)return;toast('Compressing image...');const file=await compressImage(rawFile,1200,0.82);toast('Uploading...');const path=`inline/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');input.value='';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);const wb=document.getElementById('w-body');wb.focus();const img=document.createElement('img');img.src=data.publicUrl;img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';document.execCommand('insertHTML',false,img.outerHTML);input.value='';toast('Image inserted! 🖼','ok');updateWC();}
+
+function titleKeyDown(e){if(e.key==='Enter'){e.preventDefault();document.getElementById('w-body').focus();}}
+function bodyKeyDown(e){if(e.key==='Enter'&&!e.shiftKey){setTimeout(()=>{const sel=window.getSelection();if(sel.rangeCount){let node=sel.getRangeAt(0).startContainer;if(node.nodeType===3)node=node.parentNode;if(node&&['BLOCKQUOTE','PRE','H2','H3'].includes(node.tagName)){document.execCommand('formatBlock',false,'p');}}},0);}}
+
+function updateWC(){const wb=document.getElementById('w-body');const txt=(wb?.innerText||'').trim();const wc=txt?txt.split(/\s+/).filter(Boolean).length:0;const el=document.getElementById('wc-disp');if(el)el.textContent=wc+' words';}
+
+function saveDraft(){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');localStorage.setItem('xp_draft',JSON.stringify({t:wt?.innerHTML||'',b:wb?.innerHTML||'',tag:document.getElementById('w-tag')?.value,coverUrl}));toast('Draft saved! 💾','ok');}
+
+function cancelWrite(){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if((wt?.innerText?.trim()||wb?.innerText?.trim())&&!editId&&confirm('Save as draft?'))saveDraft();editId=null;go('feed');}
+
 async function publishPost(){
-  const title=document.getElementById('w-title').value.trim(),body=document.getElementById('w-body').value.trim(),tag=document.getElementById('w-tag').value;
-  if(!title){toast('Please add a title','err');return;}if(body.length<50){toast('Write at least 50 characters','err');return;}
+  const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');
+  const title=(wt?.innerText||'').trim();const bodyHTML=wb?.innerHTML||'';const bodyText=(wb?.innerText||'').trim();
+  const tag=document.getElementById('w-tag').value;
+  if(!title){toast('Please add a title','err');return;}if(bodyText.length<30){toast('Write at least 30 characters','err');return;}
   const btn=document.getElementById('pub-btn');btn.textContent='Publishing...';btn.disabled=true;
-  const excerpt=body.replace(/[#*_>`\-!\[\]]/g,'').replace(/\s+/g,' ').trim().slice(0,180)+'...';
+  const excerpt=bodyText.replace(/\s+/g,' ').trim().slice(0,180)+(bodyText.length>180?'...':'');
   const isAdmin=CP?.role==='admin'||CP?.role==='moderator';
   try{
-    if(editId){const{error}=await sb.from('posts').update({title,body,excerpt,tag,cover_url:coverUrl||null}).eq('id',editId);btn.textContent='✅ Update';btn.disabled=false;if(error){toast('Update failed: '+error.message,'err');return;}toast('Story updated! ✅','ok');const id=editId;editId=null;openStory(id);}
-    else{const{data,error}=await sb.from('posts').insert({author_id:CU.id,title,body,excerpt,tag,cover_url:coverUrl||null,status:isAdmin?'approved':'pending',published_at:new Date().toISOString()}).select('id').single();btn.textContent='Publish →';btn.disabled=false;if(error){toast('Failed: '+error.message,'err');return;}localStorage.removeItem('xp_draft');if(isAdmin){toast('Story published! 🎉','ok');openStory(data.id);}else{toast("Submitted for review! You'll be notified when approved 👍",'ok');go('feed');}}
+    if(editId){const{error}=await sb.from('posts').update({title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null}).eq('id',editId);btn.textContent='✅ Update';btn.disabled=false;if(error){toast('Update failed: '+error.message,'err');return;}toast('Story updated! ✅','ok');const id=editId;editId=null;openStory(id);}
+    else{const{data,error}=await sb.from('posts').insert({author_id:CU.id,title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null,status:isAdmin?'approved':'pending',published_at:new Date().toISOString()}).select('id').single();btn.textContent='Publish →';btn.disabled=false;if(error){toast('Failed: '+error.message,'err');return;}localStorage.removeItem('xp_draft');if(isAdmin){toast('Story published! 🎉','ok');openStory(data.id);}else{toast("Submitted for review! You'll be notified when approved 👍",'ok');go('feed');}}
   }catch(e){btn.textContent=editId?'✅ Update':'Publish →';btn.disabled=false;toast('Error: '+e.message,'err');}
 }
 async function openProfile(username){

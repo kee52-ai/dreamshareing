@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Xpora – Night Dreams Sharing</title>
+<title>Nidrno – Night Dreams Sharing</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -283,7 +284,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <body>
 <div id="app">
 <nav id="topnav">
-  <div class="nav-logo" onclick="go('home')"><span>🌙</span><span class="gr">Xpora</span></div>
+  <div class="nav-logo" onclick="go('home')"><img src="assets/logo.png" alt="Nidrno" style="width:26px;height:26px;border-radius:7px"><span class="gr">Nidrno</span></div>
   <div class="nav-mid" id="ns-wrap" style="display:none">
     <svg width="14" height="14" fill="none" stroke="var(--mu)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input id="ns-inp" placeholder="Search dreams..." oninput="onSearch(this.value)">
@@ -301,7 +302,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <div class="hero-ey">🌙 Night Dreams Sharing Platform</div>
     <h1>Share the dreams<br><em>only you</em> have seen</h1>
     <div class="typing-row"><span class="tpfx">Tonight someone is dreaming of</span><span id="typed"></span><span class="tcur"></span></div>
-    <p class="hero-desc">Xpora is where night dreamers, travellers and storytellers share the vivid worlds that visit them while the world sleeps. Every dream is a story worth telling.</p>
+    <p class="hero-desc">Nidrno is where night dreamers, travellers and storytellers share the vivid worlds that visit them while the world sleeps. Every dream is a story worth telling.</p>
     <div class="hero-cta">
       <button class="btn btn-p" onclick="go('signup')">✍️ Start writing free</button>
       <button class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)" onclick="go('feed')">📖 Read dreams</button>
@@ -312,7 +313,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="page" id="page-signin">
   <div class="auth-pg">
-    <div class="auth-l"><div class="auth-logo">🌙 Xpora</div><h2>Your story is the one someone needs to read tonight.</h2><p>Join thousands of dreamers and storytellers on Xpora.</p></div>
+    <div class="auth-l"><div class="auth-logo" style="display:flex;align-items:center;gap:8px"><img src="assets/logo.png" alt="Nidrno" style="width:24px;height:24px;border-radius:6px">Nidrno</div><h2>Your story is the one someone needs to read tonight.</h2><p>Join thousands of dreamers and storytellers on Nidrno.</p></div>
     <div class="auth-r"><div class="auth-card">
       <h2>Welcome back</h2><p class="asub">Sign in to read and share dreams.</p>
       <button class="gbtn" onclick="doGoogleAuth()"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continue with Google</button>
@@ -330,7 +331,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="page" id="page-signup">
   <div class="auth-pg">
-    <div class="auth-l"><div class="auth-logo">🌙 Xpora</div><h2>Every dream you've had is a story worth telling.</h2><p>Start your journey as a dream storyteller today.</p></div>
+    <div class="auth-l"><div class="auth-logo" style="display:flex;align-items:center;gap:8px"><img src="assets/logo.png" alt="Nidrno" style="width:24px;height:24px;border-radius:6px">Nidrno</div><h2>Every dream you've had is a story worth telling.</h2><p>Start your journey as a dream storyteller today.</p></div>
     <div class="auth-r"><div class="auth-card">
       <h2>Create account</h2><p class="asub">Join and start sharing your dreams.</p>
       <button class="gbtn" onclick="doGoogleAuth()"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Sign up with Google</button>
@@ -348,7 +349,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <div class="page" id="page-forgot">
   <div class="auth-pg">
-    <div class="auth-l"><div class="auth-logo">🌙 Xpora</div><h2>Everyone forgets sometimes.</h2><p>We'll send a reset link right away.</p></div>
+    <div class="auth-l"><div class="auth-logo" style="display:flex;align-items:center;gap:8px"><img src="assets/logo.png" alt="Nidrno" style="width:24px;height:24px;border-radius:6px">Nidrno</div><h2>Everyone forgets sometimes.</h2><p>We'll send a reset link right away.</p></div>
     <div class="auth-r"><div class="auth-card">
       <h2>Reset password</h2><p class="asub">Enter your email for a reset link.</p>
       <div id="forgot-ok" class="aok" style="display:none">✓ Check your email for the reset link.</div>
@@ -363,7 +364,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="feed-lay">
     <aside class="lsb">
       <div class="sw"><div class="sbprof">
-        <div class="sbcov">🌙</div>
+        <div class="sbcov"><img src="assets/logo.png" alt="Nidrno" style="width:28px;height:28px;border-radius:7px"></div>
         <div class="sbav" id="sb-av" onclick="myProfile()"></div>
         <div style="font-weight:700;font-size:.9rem;margin-top:8px" id="sb-name">Guest</div>
         <div style="font-size:.75rem;color:var(--mu);margin-bottom:12px" id="sb-handle">@guest</div>
@@ -396,7 +397,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="btn btn-p btn-sm" style="width:100%" onclick="go('write')">Write a dream</button>
       </div>
       <div class="rc"><h4>🔥 Trending</h4><div id="trending-wrap"></div></div>
-      <div class="rc"><h4>🌙 About Xpora</h4><p style="font-size:.82rem;color:var(--mu);line-height:1.65;margin-bottom:14px">A platform to share night dreams, travels, and real life stories. Join dreamers from across India.</p><button class="btn btn-p btn-sm" style="width:100%" onclick="go('signup')">Join free ✨</button></div>
+      <div class="rc"><h4 style="display:flex;align-items:center;gap:6px"><img src="assets/logo.png" alt="Nidrno" style="width:14px;height:14px;border-radius:3px">About Nidrno</h4><p style="font-size:.82rem;color:var(--mu);line-height:1.65;margin-bottom:14px">A platform to share night dreams, travels, and real life stories. Join dreamers from across India.</p><button class="btn btn-p btn-sm" style="width:100%" onclick="go('signup')">Join free ✨</button></div>
     </aside>
   </div>
 </div>
@@ -466,7 +467,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="page" id="page-admin">
   <div class="adwrap">
     <div class="adsb">
-      <div class="adlogo">Xpora <span>Admin</span></div>
+      <div class="adlogo" style="display:flex;align-items:center;gap:8px"><img src="assets/logo.png" alt="Nidrno" style="width:22px;height:22px;border-radius:6px">Nidrno <span>Admin</span></div>
       <div class="adlnk active" id="atab-dash" onclick="adminTab('dash')">📊 Dashboard</div>
       <div class="adlnk" id="atab-pend" onclick="adminTab('pend')">⏳ Pending <span id="pend-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
       <div class="adlnk" id="atab-posts" onclick="adminTab('posts')">📝 Stories</div>
@@ -486,7 +487,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="mbg" id="report-modal">
   <div class="modal">
     <button class="mcl" onclick="closeModal('report-modal')">✕</button>
-    <div class="mtit">Report content</div><div class="msub">Help us keep Xpora safe.</div>
+    <div class="mtit">Report content</div><div class="msub">Help us keep Nidrno safe.</div>
     <input type="hidden" id="rpt-pid">
     <label class="ro"><input type="radio" name="rpt-r" value="spam"> Spam</label>
     <label class="ro"><input type="radio" name="rpt-r" value="harassment"> Harassment</label>
@@ -705,7 +706,7 @@ async function toggleBm(postId,btn){
   if(BM.has(postId)){await sb.from('bookmarks').delete().match({user_id:CU.id,post_id:postId});BM.delete(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Save';btn.classList.remove('bm');toast('Removed');}
   else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved! 🔖','ok');}
 }
-function sharePost(id){const url=location.origin+location.pathname+'#story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Xpora'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied! 🔗','ok'));else toast('Copied: '+url);}
+function sharePost(id){const url=location.origin+location.pathname+'#story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Nidrno'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied! 🔗','ok'));else toast('Copied: '+url);}
 async function openStory(id){
   go('story');location.hash='story/'+id;
   document.getElementById('story-hero').innerHTML='';
@@ -922,7 +923,7 @@ async function adminSuspend(id,u){const r=prompt(`Reason for suspending @${u}:`,
 async function adminUnsuspend(id,u){await sb.from('profiles').update({is_suspended:false,suspension_reason:null}).eq('id',id);await sendNotif(id,'system','✅ Account restored','Your suspension has been lifted. Welcome back!','');await adminLog('unsuspend_user','user',id,'Unsuspended');toast('Restored','ok');adminTab(curAT);}
 async function adminBan(id,u){if(!confirm(`Permanently ban @${u}?`))return;await sb.from('profiles').update({is_banned:true}).eq('id',id);await adminLog('ban_user','user',id,'Banned');toast(`@${u} banned`);adminTab(curAT);}
 async function adminUnban(id){await sb.from('profiles').update({is_banned:false}).eq('id',id);toast('Unbanned','ok');adminTab(curAT);}
-async function adminMakeAdmin(id,u){if(!confirm(`Promote @${u} to admin?`))return;await sb.from('profiles').update({role:'admin'}).eq('id',id);await sendNotif(id,'system','⚙️ You are now an admin!','You have been promoted to admin on Xpora.','');toast('Promoted ✅','ok');adminTab(curAT);}
+async function adminMakeAdmin(id,u){if(!confirm(`Promote @${u} to admin?`))return;await sb.from('profiles').update({role:'admin'}).eq('id',id);await sendNotif(id,'system','⚙️ You are now an admin!','You have been promoted to admin on Nidrno.','');toast('Promoted ✅','ok');adminTab(curAT);}
 async function adminRemCmt(id,aId){await sb.from('comments').update({status:'removed'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','💬 Comment removed','Your comment was removed by a moderator.','');await adminLog('remove_comment','comment',id,'Removed');toast('Removed');adminTab(curAT);}
 async function adminDismissRpt(id){await sb.from('reports').update({status:'dismissed'}).eq('id',id);toast('Dismissed');adminTab(curAT);}
 async function adminLog(action,tt,tid,reason){if(!CP)return;await sb.from('moderation_logs').insert({admin_id:CP.id,action,target_type:tt,target_id:tid,reason}).catch(()=>{});}

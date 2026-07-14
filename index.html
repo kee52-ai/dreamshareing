@@ -79,6 +79,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 #topnav{height:var(--nav);background:rgba(13,15,26,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--br);display:flex;align-items:center;padding:0 20px;gap:12px;position:sticky;top:0;z-index:500}
 .nav-logo{display:flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--fd);font-size:1.35rem;font-weight:700}
 .nav-logo .gr{background:linear-gradient(135deg,var(--ac2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nlcur{display:inline-block;width:2px;height:1.1em;background:var(--ac2);margin-left:2px;vertical-align:middle;animation:bl .7s step-end infinite}
 .nav-mid{flex:1;max-width:360px;display:flex;align-items:center;gap:8px;background:var(--s);border:1.5px solid var(--br);border-radius:999px;padding:8px 14px;transition:border-color .2s;margin:0 auto;position:relative}
 .nav-mid:focus-within{border-color:var(--ac)}
 .nav-mid input{border:none;background:transparent;font-size:.85rem;color:var(--tx);outline:none;width:100%}
@@ -129,6 +130,21 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .hero-cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .hcat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 15px;font-size:.8rem;color:rgba(255,255,255,.75);cursor:pointer;transition:all .2s}
 .hcat:hover{background:rgba(124,92,252,.2);border-color:var(--ac);color:#fff}
+.fstories-wrap{max-width:1100px;margin:0 auto;padding:20px 20px 80px;text-align:center}
+.fstories-h{font-family:var(--fd);font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:700;color:var(--tx);margin-bottom:8px}
+.fstories-sub{color:var(--mu);font-size:.9rem;margin-bottom:32px}
+.fstories-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;text-align:left}
+.fs-card{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;cursor:pointer;transition:all .25s ease;opacity:0;animation:fsin .5s ease forwards}
+.fs-card:hover{border-color:rgba(124,92,252,.4);box-shadow:0 4px 24px rgba(124,92,252,.1);transform:translateY(-2px)}
+@keyframes fsin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.fs-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.fs-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0}
+.fs-name{font-weight:600;font-size:.82rem;color:var(--tx)}
+.fs-loc{font-size:.72rem;color:var(--mu)}
+.fs-tag{margin-left:auto;font-size:.7rem;font-weight:600;color:var(--ac2);background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.25);padding:2px 9px;border-radius:999px;flex-shrink:0}
+.fs-title{font-family:var(--fd);font-size:1.02rem;font-weight:600;color:var(--tx);margin-bottom:6px;line-height:1.35}
+.fs-excerpt{font-size:.82rem;color:var(--mu);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media(max-width:600px){.fstories-grid{grid-template-columns:1fr}}
 .auth-pg{min-height:100vh;display:flex}
 .auth-l{width:42%;background:linear-gradient(150deg,var(--s) 0%,#0E0C22 50%,#1A0B2E 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:48px;position:relative;overflow:hidden}
 .auth-l::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(124,92,252,.08)}
@@ -334,7 +350,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <body>
 <div id="app">
 <nav id="topnav">
-  <div class="nav-logo" onclick="go('home')"><img src="logo.png" alt="Nidrno" style="width:26px;height:26px;border-radius:7px"><span class="gr">Nidrno</span></div>
+  <div class="nav-logo" onclick="go('home')"><img src="logo.png" alt="Nidrno" style="width:26px;height:26px;border-radius:7px"><span class="gr" id="nav-brand-text"></span><span class="nlcur" id="nav-brand-cur"></span></div>
   <div class="nav-mid" id="ns-wrap" style="display:none">
     <svg width="14" height="14" fill="none" stroke="var(--mu)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input id="ns-inp" placeholder="Search dreams..." oninput="onSearch(this.value)">
@@ -358,6 +374,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="btn" style="background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)" onclick="go('feed')">📖 Read dreams</button>
     </div>
     <div class="hero-cats" id="hero-cats"></div>
+  </div>
+  <div class="fstories-wrap">
+    <h2 class="fstories-h">Dreams shared tonight</h2>
+    <p class="fstories-sub">A glimpse into what people are dreaming, right now.</p>
+    <div class="fstories-grid" id="fstories-grid"></div>
   </div>
 </div>
 
@@ -477,11 +498,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <!-- Tag -->
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
         <select class="wsel" id="w-tag">
-          <option value="Dreams">🌙 Dreams</option><option value="Nightmares">😰 Nightmares</option>
-          <option value="Travel">✈️ Travel</option><option value="Life">🌱 Life</option>
-          <option value="Ideas">💡 Ideas</option><option value="Career">💼 Career</option>
-          <option value="Food">🍛 Food</option><option value="Tech">💻 Tech</option>
-          <option value="Love">❤️ Love</option><option value="Culture">🎭 Culture</option>
+          <option value="Dreams">Dreams</option><option value="Nightmares">Nightmares</option>
+          <option value="Travel">Travel</option><option value="Life">Life</option>
+          <option value="Ideas">Ideas</option><option value="Career">Career</option>
+          <option value="Food">Food</option><option value="Tech">Tech</option>
+          <option value="Love">Love</option><option value="Culture">Culture</option>
         </select>
       </div>
       <!-- Toolbar -->
@@ -583,12 +604,23 @@ const{createClient}=window.supabase;
 const sb=createClient('https://tbcmtwljgpxgemqttubx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRiY210d2xqZ3B4Z2VtcXR0dWJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODUwMTEsImV4cCI6MjA5Nzc2MTAxMX0.hhuUQfhDWziv2gpp_dS0FU_b7flQKlV5EH4K19wSZZ0',{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
 let CU=null,CP=null,page='home',feedMode='home',feedTag='all',feedSort='new';
 let BM=new Set(),UV={},editId=null,coverUrl='',viewingUser=null,curAT='dash';
-const CATS=[{l:'All',v:'all'},{l:'🌙 Dreams',v:'Dreams'},{l:'😰 Nightmares',v:'Nightmares'},{l:'✈️ Travel',v:'Travel'},{l:'🌱 Life',v:'Life'},{l:'💡 Ideas',v:'Ideas'},{l:'💼 Career',v:'Career'},{l:'🍛 Food',v:'Food'},{l:'💻 Tech',v:'Tech'},{l:'❤️ Love',v:'Love'},{l:'🎭 Culture',v:'Culture'}];
+const CATS=[{l:'All',v:'all'},{l:'Dreams',v:'Dreams'},{l:'Nightmares',v:'Nightmares'},{l:'Travel',v:'Travel'},{l:'Life',v:'Life'},{l:'Ideas',v:'Ideas'},{l:'Career',v:'Career'},{l:'Food',v:'Food'},{l:'Tech',v:'Tech'},{l:'Love',v:'Love'},{l:'Culture',v:'Culture'}];
 const DP=['flying over moonlit clouds','a forgotten city underwater','someone they once loved','a door to nowhere','colours with no name','a voice calling from the dark','the house from childhood','falling through stars','a train with no destination','an ocean made of light'];
 let ti=0,ci=0,del=false;
 function typeLoop(){const el=document.getElementById('typed');if(!el)return;const ph=DP[ti];if(!del){el.textContent=ph.slice(0,++ci);if(ci===ph.length){del=true;setTimeout(typeLoop,1800);return;}}else{el.textContent=ph.slice(0,--ci);if(ci===0){del=false;ti=(ti+1)%DP.length;}}setTimeout(typeLoop,del?45:75);}
+function typeBrand(){
+  const el=document.getElementById('nav-brand-text'),cur=document.getElementById('nav-brand-cur');
+  if(!el)return;
+  const name='Nidrno';let i=0;
+  el.textContent='';
+  const iv=setInterval(()=>{
+    i++;el.textContent=name.slice(0,i);
+    if(i>=name.length){clearInterval(iv);setTimeout(()=>{if(cur)cur.style.display='none';},1200);}
+  },130);
+}
 async function init(){
-  buildCats();buildHeroCats();buildTrending();
+  buildCats();buildHeroCats();buildTrending();renderFeaturedStories();
+  setInterval(rotateFeaturedStories,60000);
   try{const{data:{session}}=await sb.auth.getSession();if(session){CU=session.user;await loadCP();}}catch(e){}
   updateNav();
   sb.auth.onAuthStateChange(async(ev,sess)=>{
@@ -606,6 +638,7 @@ async function init(){
     if(!e.target.closest('#user-menu')&&!e.target.closest('.av-t'))closeUserMenu();
   });
   typeLoop();
+  typeBrand();
 }
 async function loadCP(){
   if(!CU)return;
@@ -674,6 +707,38 @@ async function doSignOut(){await sb.auth.signOut();CU=null;CP=null;updateNav();g
 async function doForgot(){const email=document.getElementById('forgot-email').value.trim();await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin});document.getElementById('forgot-ok').style.display='block';}
 function buildCats(){const el=document.getElementById('cat-list');if(!el)return;el.innerHTML=CATS.map(c=>`<span class="tag ${c.v===feedTag?'active':''}" id="cat-${c.v}" onclick="setFeedTag('${c.v}')">${c.l}</span>`).join('');}
 function buildHeroCats(){const el=document.getElementById('hero-cats');if(!el)return;el.innerHTML=CATS.filter(c=>c.v!=='all').map(c=>`<span class="hcat" onclick="setFeedTag('${c.v}');go('feed')">${c.l}</span>`).join('');}
+const FS_AV_COLORS=['#7C5CFC','#0E9C8C','#E05C6A','#3B82F6','#F59E0B','#EC4899','#22C55E','#8B5CF6'];
+const FEATURED_STORIES=[
+  {name:'Amara Okafor',loc:'Lagos, Nigeria',tag:'Dreams',title:'The market that sold memories',excerpt:'I walked through stalls where vendors traded old birthdays for new ones, and I kept looking for mine.'},
+  {name:'Sofia Martins',loc:'Lisbon, Portugal',tag:'Travel',title:'A train that only stops at night',excerpt:'Every window showed a different country I had never been to, and the conductor knew my grandmother\u2019s name.'},
+  {name:'Kenji Watanabe',loc:'Kyoto, Japan',tag:'Nightmares',title:'The hallway that kept extending',excerpt:'Every door I opened led to the same room, except the photographs on the wall got older each time.'},
+  {name:'Elena Petrova',loc:'Prague, Czechia',tag:'Ideas',title:'A library built from unfinished thoughts',excerpt:'The librarian only let me borrow ideas I had abandoned halfway, and each one finished itself as I read.'},
+  {name:'Diego Fernandez',loc:'Buenos Aires, Argentina',tag:'Life',title:'My father\u2019s hands, twenty years younger',excerpt:'He was fixing a radio that played our whole conversation from that morning, word for word.'},
+  {name:'Priya Nair',loc:'Kochi, India',tag:'Love',title:'The letter that wrote itself back',excerpt:'Every line I sent returned changed, as if someone on the other side was gently correcting my memory.'},
+  {name:'Marcus Chen',loc:'Vancouver, Canada',tag:'Tech',title:'A city run by clocks with no hands',excerpt:'Nobody could tell time, yet every train, every meeting, every heartbeat stayed perfectly in sync.'},
+  {name:'Fatima Al-Sayed',loc:'Cairo, Egypt',tag:'Culture',title:'The wedding where guests wore centuries',excerpt:'Grandmother\u2019s generation stood beside mine, all dressed in the fabric of different decades, dancing the same dance.'},
+  {name:'Liam O\u2019Brien',loc:'Dublin, Ireland',tag:'Food',title:'A kitchen that cooked forgotten recipes',excerpt:'The stove lit itself and made dishes my mother never wrote down, tasting exactly like Sunday afternoons.'},
+  {name:'Isabella Rossi',loc:'Florence, Italy',tag:'Career',title:'The office on the other side of the mirror',excerpt:'I worked my actual job, but every decision I made there quietly rearranged my desk in the waking world.'}
+];
+let fsIndex=0;
+function fsAvatar(name){
+  const initials=name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const color=FS_AV_COLORS[name.length%FS_AV_COLORS.length];
+  return`<div class="fs-av" style="background:${color}">${initials}</div>`;
+}
+function renderFeaturedStories(){
+  const el=document.getElementById('fstories-grid');if(!el)return;
+  const n=FEATURED_STORIES.length;
+  const shown=[0,1,2,3].map(i=>FEATURED_STORIES[(fsIndex+i)%n]);
+  el.innerHTML=shown.map((s,i)=>`
+    <div class="fs-card" style="animation-delay:${i*0.08}s" onclick="fsClick()">
+      <div class="fs-top">${fsAvatar(s.name)}<div><div class="fs-name">${esc(s.name)}</div><div class="fs-loc">${esc(s.loc)}</div></div><span class="fs-tag">${esc(s.tag)}</span></div>
+      <div class="fs-title">${esc(s.title)}</div>
+      <div class="fs-excerpt">${esc(s.excerpt)}</div>
+    </div>`).join('');
+}
+function fsClick(){go('signin');}
+function rotateFeaturedStories(){fsIndex=(fsIndex+4)%FEATURED_STORIES.length;renderFeaturedStories();}
 function buildTrending(){const el=document.getElementById('trending-wrap');if(!el)return;sb.from('posts').select('id,title,tag,upvotes').eq('status','approved').order('upvotes',{ascending:false}).limit(5).then(({data})=>{if(!data?.length){el.innerHTML='<div style="font-size:.8rem;color:var(--mu)">No trending yet</div>';return;}el.innerHTML=data.map((p,i)=>`<div class="tri" onclick="openStory('${p.id}')"><span class="trn">0${i+1}</span><div><div class="trtt">${esc(p.title?.slice(0,55)||'Untitled')}</div><div class="trs">${esc(p.tag)} · ▲ ${p.upvotes||0}</div></div></div>`).join('');});}
 function setFeedTag(tag){feedTag=tag;feedMode='home';document.querySelectorAll('#cat-list .tag').forEach(t=>t.classList.remove('active'));const el=document.getElementById('cat-'+tag);if(el)el.classList.add('active');go('feed');}
 function switchFeed(mode){feedMode=mode;['home','following','bookmarks'].forEach(k=>{const el=document.getElementById('nav-'+k);if(el)el.classList.toggle('active',k===mode);});loadFeed();}

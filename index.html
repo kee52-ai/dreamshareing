@@ -316,6 +316,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .mtit{font-family:var(--fd);font-size:1.3rem;font-weight:600;margin-bottom:4px;color:var(--tx)}
 .msub{font-size:.85rem;color:var(--mu);margin-bottom:18px}
 .twrap{position:fixed;bottom:20px;right:16px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.supp-btn{position:fixed;bottom:20px;left:16px;z-index:900;display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:999px;background:var(--s2);border:1px solid var(--br);color:var(--tx);font-size:.82rem;font-weight:600;cursor:pointer;box-shadow:var(--sh);transition:all .2s}
+.supp-btn:hover{border-color:var(--ac);color:var(--ac2);transform:translateY(-2px)}
+.supp-btn svg{width:16px;height:16px;flex-shrink:0}
+@media(max-width:740px){.supp-btn{bottom:76px;left:12px;padding:9px 13px;font-size:.78rem}}
+.supp-sel{width:100%;padding:11px 14px;border:1.5px solid var(--br);border-radius:var(--rsm);font-size:.875rem;color:var(--tx);background:var(--s);outline:none;margin-bottom:10px;font-family:var(--fb)}
+.supp-sel:focus{border-color:var(--ac)}
 .toast{padding:11px 16px;border-radius:var(--rsm);font-size:.85rem;font-weight:500;background:var(--s2);border:1px solid var(--br);color:var(--tx);box-shadow:var(--sh);animation:tin .22s ease;display:flex;align-items:center;gap:8px;min-width:220px}
 .toast.ok{background:rgba(34,197,94,.12);border-color:var(--grn);color:var(--grn)}
 .toast.err{background:rgba(224,92,106,.12);border-color:var(--red);color:var(--red)}
@@ -545,6 +551,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <div class="adlnk" id="atab-users" onclick="adminTab('users')">👥 Users</div>
       <div class="adlnk" id="atab-comments" onclick="adminTab('comments')">💬 Comments</div>
       <div class="adlnk" id="atab-reports" onclick="adminTab('reports')">⚑ Reports</div>
+      <div class="adlnk" id="atab-support" onclick="adminTab('support')">🛟 Support <span id="supp-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
       <div class="adlnk" id="atab-logs" onclick="adminTab('logs')">📋 Logs</div>
       <div style="margin-top:24px"><div class="adlnk" onclick="go('feed')">← Back to site</div></div>
     </div>
@@ -598,6 +605,28 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <button class="mni" id="mn-notif" onclick="toggleNotif(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>Alerts</button>
   <button class="mni" id="mn-profile" onclick="myProfile();setMN('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile</button>
 </nav>
+<button class="supp-btn" onclick="openSupport()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Help & Support</button>
+
+<div class="mbg" id="support-modal">
+  <div class="modal">
+    <button class="mcl" onclick="closeModal('support-modal')">✕</button>
+    <div class="mtit">Need help?</div><div class="msub">Tell us what's going on and we'll get back to you.</div>
+    <div id="supp-err" class="aerr"></div>
+    <input class="inp" type="text" id="supp-name" placeholder="Your name">
+    <input class="inp" type="email" id="supp-email" placeholder="Email address">
+    <select class="supp-sel" id="supp-category">
+      <option value="Bug">🐞 Something's broken</option>
+      <option value="Account">👤 Account / login issue</option>
+      <option value="Content">📝 Question about a post or comment</option>
+      <option value="Feedback">💡 Feedback / suggestion</option>
+      <option value="Other">❓ Something else</option>
+    </select>
+    <textarea class="cbox" id="supp-msg" placeholder="Describe the problem..." style="min-height:100px"></textarea>
+    <button class="btn btn-p" style="width:100%;margin-top:8px" id="supp-btn" onclick="submitSupport()">Send message</button>
+    <div class="alink" style="margin-top:12px">Or email us directly at <a href="mailto:support@nidrno.com">support@nidrno.com</a></div>
+  </div>
+</div>
+
 <div class="twrap" id="toasts"></div>
 <script>
 const{createClient}=window.supabase;
@@ -789,7 +818,7 @@ function postCard(p){
     <div class="pb">
       <div class="par">
         <div onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${avH(prof,36,13)}</div>
-        <div style="min-width:0"><div class="pan" onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${esc(prof.full_name||'Anonymous')}</div><div class="pmt">@${esc(prof.username||'user')} · ${ago(p.created_at)}</div></div>
+        <div style="min-width:0"><div class="pan" onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${esc(prof.full_name||'Anonymous')}</div><div class="pmt">@${esc(prof.username||'user')} · ${ago(p.created_at)} · ${(p.views||0).toLocaleString()} views</div></div>
         <span class="tbadge">${esc(p.tag||'Dream')}</span>
       </div>
       <div class="pt">${esc(p.title||'Untitled')}</div>
@@ -841,7 +870,7 @@ async function openStory(id){
       <span class="tbadge" style="margin-bottom:12px;display:inline-flex">${esc(post.tag||'Dream')}</span>
       <h1 class="sh1">${esc(post.title||'Untitled')}</h1>
       <div class="smt">
-        <div onclick="openProfile('${esc(prof.username||'')}')" style="cursor:pointer;display:flex;align-items:center;gap:10px">${avH(prof,40,15)}<div><div style="font-weight:600;font-size:.9rem;color:var(--tx)">${esc(prof.full_name||'Anonymous')}</div><div style="font-size:.75rem;color:var(--mu)">@${esc(prof.username||'')} · ${ago(post.created_at)} · ${post.views||0} views</div></div></div>
+        <div onclick="openProfile('${esc(prof.username||'')}')" style="cursor:pointer;display:flex;align-items:center;gap:10px">${avH(prof,40,15)}<div><div style="font-weight:600;font-size:.9rem;color:var(--tx)">${esc(prof.full_name||'Anonymous')}</div><div style="font-size:.75rem;color:var(--mu)">@${esc(prof.username||'')} · ${ago(post.created_at)} · ${(post.views||0).toLocaleString()} views</div></div></div>
         <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           ${(CP?.id===post.author_id||CP?.role==='admin'||CP?.role==='moderator')?`<button class="ab" onclick="go('write');editPost('${id}')">✏️ Edit</button>`:''}
           ${CU&&prof.id&&prof.id!==CU.id?`<button class="flwb" id="sflw" onclick="toggleFollow('${prof.id}','${esc(prof.username||'')}')">+ Follow</button>`:''}
@@ -994,15 +1023,16 @@ async function toggleFollow(profileId,username){
 }
 async function delMyPost(postId,username){if(!confirm('Delete this dream?'))return;await sb.from('posts').update({status:'deleted'}).eq('id',postId);toast('Dream deleted');openProfile(username);}
 async function adminTab(tab){
-  curAT=tab;['dash','pend','posts','users','comments','reports','logs'].forEach(k=>{const el=document.getElementById('atab-'+k);if(el)el.classList.toggle('active',k===tab);});
-  const titles={dash:'📊 Dashboard',pend:'⏳ Pending',posts:'📝 All Stories',users:'👥 Users',comments:'💬 Comments',reports:'⚑ Reports',logs:'📋 Logs'};
+  curAT=tab;['dash','pend','posts','users','comments','reports','support','logs'].forEach(k=>{const el=document.getElementById('atab-'+k);if(el)el.classList.toggle('active',k===tab);});
+  const titles={dash:'📊 Dashboard',pend:'⏳ Pending',posts:'📝 All Stories',users:'👥 Users',comments:'💬 Comments',reports:'⚑ Reports',support:'🛟 Support',logs:'📋 Logs'};
   const tel=document.getElementById('ad-title');if(tel)tel.textContent=titles[tab]||tab;
   const body=document.getElementById('ad-body');body.innerHTML='<div class="ldr"><div class="spin"></div></div>';
   if(tab==='dash'){
-    const[p1,p2,p3,p4,p5]=await Promise.all([sb.from('posts').select('id',{count:'exact',head:true}),sb.from('profiles').select('id',{count:'exact',head:true}),sb.from('comments').select('id',{count:'exact',head:true}),sb.from('reports').select('id',{count:'exact',head:true}).eq('status','pending'),sb.from('posts').select('id',{count:'exact',head:true}).eq('status','pending')]);
-    const s={posts:p1.count||0,users:p2.count||0,cmts:p3.count||0,rpts:p4.count||0,pend:p5.count||0};
+    const[p1,p2,p3,p4,p5,p6]=await Promise.all([sb.from('posts').select('id',{count:'exact',head:true}),sb.from('profiles').select('id',{count:'exact',head:true}),sb.from('comments').select('id',{count:'exact',head:true}),sb.from('reports').select('id',{count:'exact',head:true}).eq('status','pending'),sb.from('posts').select('id',{count:'exact',head:true}).eq('status','pending'),sb.from('support_tickets').select('id',{count:'exact',head:true}).eq('status','open')]);
+    const s={posts:p1.count||0,users:p2.count||0,cmts:p3.count||0,rpts:p4.count||0,pend:p5.count||0,supp:p6.count||0};
     if(s.pend>0){const pb=document.getElementById('pend-badge');if(pb){pb.textContent=s.pend;pb.style.display='inline';}}
-    body.innerHTML=`<div class="sgrid">${[{l:'Total Dreams',v:s.posts,c:'var(--grn)'},{l:'Users',v:s.users,c:'#60A5FA'},{l:'Comments',v:s.cmts,c:'var(--ac2)'},{l:'Pending',v:s.pend,c:'#F97316'},{l:'Reports',v:s.rpts,c:'var(--red)'}].map(x=>`<div class="sc"><div class="sv" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div>`).join('')}</div><div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px"><h3 style="font-size:.95rem;font-weight:600;margin-bottom:12px;color:var(--tx)">Quick Actions</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="adminTab('pend')">⏳ Review Pending (${s.pend})</button><button class="btn btn-o btn-sm" onclick="adminTab('reports')">⚑ Reports (${s.rpts})</button><button class="btn btn-o btn-sm" onclick="adminTab('users')">👥 Users</button></div></div>`;
+    if(s.supp>0){const sb2=document.getElementById('supp-badge');if(sb2){sb2.textContent=s.supp;sb2.style.display='inline';}}
+    body.innerHTML=`<div class="sgrid">${[{l:'Total Dreams',v:s.posts,c:'var(--grn)'},{l:'Users',v:s.users,c:'#60A5FA'},{l:'Comments',v:s.cmts,c:'var(--ac2)'},{l:'Pending',v:s.pend,c:'#F97316'},{l:'Reports',v:s.rpts,c:'var(--red)'},{l:'Open Tickets',v:s.supp,c:'#EAB308'}].map(x=>`<div class="sc"><div class="sv" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div>`).join('')}</div><div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px"><h3 style="font-size:.95rem;font-weight:600;margin-bottom:12px;color:var(--tx)">Quick Actions</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="adminTab('pend')">⏳ Review Pending (${s.pend})</button><button class="btn btn-o btn-sm" onclick="adminTab('reports')">⚑ Reports (${s.rpts})</button><button class="btn btn-o btn-sm" onclick="adminTab('support')">🛟 Support (${s.supp})</button><button class="btn btn-o btn-sm" onclick="adminTab('users')">👥 Users</button></div></div>`;
   }else if(tab==='pend'){
     const{data}=await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id').eq('status','pending').order('created_at',{ascending:false});
     if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">🎉</div><h3>No pending posts!</h3><p>All caught up.</p></div>';return;}
@@ -1024,6 +1054,10 @@ async function adminTab(tab){
     if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">✅</div><h3>No reports!</h3></div>';return;}
     const rIds=[...new Set((data||[]).map(r=>r.reporter_id))];const{data:profs}=await sb.from('profiles').select('id,username').in('id',rIds);const pm={};(profs||[]).forEach(p=>{pm[p.id]=p;});
     body.innerHTML=`<div class="dt"><table><thead><tr><th>Reason</th><th>Reporter</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>${data.map(r=>`<tr><td><span class="badge br2">${esc(r.reason||'')}</span></td><td>@${esc(pm[r.reporter_id]?.username||'')}</td><td><span class="badge ${r.status==='pending'?'by':r.status==='reviewed'?'bg':'bgr'}">${r.status}</span></td><td style="font-size:.75rem">${new Date(r.created_at).toLocaleDateString()}</td><td style="display:flex;gap:4px">${r.status==='pending'?`<button class="btn btn-g btn-sm" onclick="adminDismissRpt('${r.id}')">Dismiss</button>`:''}${r.post_id?`<button class="btn btn-g btn-sm" onclick="openStory('${r.post_id}')">View</button><button class="btn btn-d btn-sm" onclick="adminDeletePostByReport('${r.post_id}','${r.id}')">Delete</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
+  }else if(tab==='support'){
+    const{data}=await sb.from('support_tickets').select('*').order('created_at',{ascending:false}).limit(100);
+    if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">🛟</div><h3>No support messages</h3><p>Nothing here yet.</p></div>';return;}
+    body.innerHTML=data.map(t=>`<div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap"><span class="badge bb">${esc(t.category||'Other')}</span><span style="font-size:.85rem;font-weight:600;color:var(--tx)">${esc(t.name||'Anonymous')}</span><span style="font-size:.78rem;color:var(--mu)">${esc(t.email||'')}</span><span class="badge ${t.status==='open'?'by':'bg'}" style="margin-left:auto">${t.status==='open'?'⏳ Open':'✅ Resolved'}</span><span style="font-size:.72rem;color:var(--mu)">${new Date(t.created_at).toLocaleString()}</span></div><div style="font-size:.88rem;color:var(--tx);line-height:1.6;margin-bottom:12px">${esc(t.message||'')}</div><div style="display:flex;gap:8px"><a class="btn btn-o btn-sm" href="mailto:${esc(t.email||'')}?subject=Re: your Nidrno support request">✉️ Reply by email</a>${t.status==='open'?`<button class="btn btn-ok btn-sm" onclick="adminResolveTicket('${t.id}')">Mark resolved</button>`:''}</div></div>`).join('');
   }else if(tab==='logs'){
     const{data}=await sb.from('moderation_logs').select('*,profiles(username)').order('created_at',{ascending:false}).limit(60);
     if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">📋</div><h3>No logs yet</h3></div>';return;}
@@ -1041,6 +1075,7 @@ async function adminUnban(id){await sb.from('profiles').update({is_banned:false}
 async function adminMakeAdmin(id,u){if(!confirm(`Promote @${u} to admin?`))return;await sb.from('profiles').update({role:'admin'}).eq('id',id);await sendNotif(id,'system','⚙️ You are now an admin!','You have been promoted to admin on Nidrno.','');toast('Promoted ✅','ok');adminTab(curAT);}
 async function adminRemCmt(id,aId){await sb.from('comments').update({status:'removed'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','💬 Comment removed','Your comment was removed by a moderator.','');await adminLog('remove_comment','comment',id,'Removed');toast('Removed');adminTab(curAT);}
 async function adminDismissRpt(id){await sb.from('reports').update({status:'dismissed'}).eq('id',id);toast('Dismissed');adminTab(curAT);}
+async function adminResolveTicket(id){await sb.from('support_tickets').update({status:'resolved'}).eq('id',id);toast('Marked resolved ✅','ok');adminTab(curAT);}
 async function adminLog(action,tt,tid,reason){if(!CP)return;await sb.from('moderation_logs').insert({admin_id:CP.id,action,target_type:tt,target_id:tid,reason}).catch(()=>{});}
 async function sendNotif(uid,type,title,message,link){try{await sb.from('notifications').insert({user_id:uid,type,title,message,link:link||''});}catch(e){}}
 async function fetchNotifs(){if(!CU)return;try{const{data}=await sb.from('notifications').select('*').eq('user_id',CU.id).order('created_at',{ascending:false}).limit(15);const notifs=data||[];const dot=document.getElementById('ndot');if(dot)dot.style.display=notifs.filter(n=>!n.is_read).length>0?'block':'none';const list=document.getElementById('notif-list');if(list)list.innerHTML=!notifs.length?'<div style="padding:24px;text-align:center;font-size:.85rem;color:var(--mu)">No notifications yet</div>':notifs.map(n=>`<div class="nitem ${n.is_read?'':'unread'}" onclick="${n.link?`location.hash='${n.link.replace('#','')}';closeNotif()`:''}" style="${n.link?'cursor:pointer':''}"><div><div class="nmsg">${esc(n.message||n.title||'')}</div><div class="nwhen">${ago(n.created_at)}</div></div></div>`).join('');}catch(e){}}
@@ -1050,6 +1085,32 @@ let sT;
 async function onSearch(q){clearTimeout(sT);const container=document.querySelector('.nav-mid');if(q.length<2){document.getElementById('ns-dd')?.remove();return;}sT=setTimeout(async()=>{const{data}=await sb.from('posts').select('id,title,tag').ilike('title',`%${q}%`).eq('status','approved').limit(6);document.getElementById('ns-dd')?.remove();if(!data?.length)return;const dd=document.createElement('div');dd.id='ns-dd';dd.style.cssText='position:absolute;top:100%;left:0;right:0;background:var(--s2);border:1px solid var(--br);border-radius:var(--rsm);box-shadow:var(--shl);z-index:700;margin-top:4px;overflow:hidden';dd.innerHTML=data.map(r=>`<div onclick="document.getElementById('ns-inp').value='';document.getElementById('ns-dd')?.remove();openStory('${r.id}')" style="display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-size:.85rem;color:var(--tx);transition:background .1s;border-bottom:1px solid var(--br)" onmouseover="this.style.background='var(--s)'" onmouseout="this.style.background=''"><span class="tbadge">${esc(r.tag)}</span><span>${esc(r.title.slice(0,55))}</span></div>`).join('');container.appendChild(dd);},300);}
 function openReport(pid){if(!CU){go('signin');return;}document.getElementById('rpt-pid').value=pid;document.querySelectorAll('input[name="rpt-r"]').forEach(r=>r.checked=false);document.getElementById('rpt-details').value='';openModal('report-modal');}
 async function submitReport(){if(!CU)return;const pid=document.getElementById('rpt-pid').value,reason=document.querySelector('input[name="rpt-r"]:checked')?.value;if(!reason){toast('Please select a reason','err');return;}await sb.from('reports').insert({reporter_id:CU.id,post_id:pid,reason,details:document.getElementById('rpt-details').value});closeModal('report-modal');toast('Report submitted. Thank you! 🙏','ok');}
+function openSupport(){
+  const err=document.getElementById('supp-err');if(err)err.style.display='none';
+  document.getElementById('supp-name').value=CP?.full_name||'';
+  document.getElementById('supp-email').value=CU?.email||'';
+  document.getElementById('supp-category').value='Bug';
+  document.getElementById('supp-msg').value='';
+  openModal('support-modal');
+}
+async function submitSupport(){
+  const name=document.getElementById('supp-name').value.trim();
+  const email=document.getElementById('supp-email').value.trim();
+  const category=document.getElementById('supp-category').value;
+  const message=document.getElementById('supp-msg').value.trim();
+  const err=document.getElementById('supp-err');
+  err.style.display='none';
+  if(!email){err.textContent='Please add an email so we can reply to you';err.style.display='block';return;}
+  if(message.length<10){err.textContent='Please describe the issue in a bit more detail';err.style.display='block';return;}
+  const btn=document.getElementById('supp-btn');btn.textContent='Sending...';btn.disabled=true;
+  try{
+    const{error}=await sb.from('support_tickets').insert({user_id:CU?.id||null,name:name||null,email,category,message,status:'open'});
+    btn.textContent='Send message';btn.disabled=false;
+    if(error){err.textContent='Could not send: '+error.message;err.style.display='block';return;}
+    closeModal('support-modal');
+    toast("Message sent! We'll get back to you soon 🙏",'ok');
+  }catch(e){btn.textContent='Send message';btn.disabled=false;err.textContent='Something went wrong. Please try emailing support@nidrno.com directly.';err.style.display='block';}
+}
 function openModal(id){document.getElementById(id)?.classList.add('open');}
 function closeModal(id){document.getElementById(id)?.classList.remove('open');}
 document.addEventListener('click',e=>{if(e.target.classList.contains('mbg'))e.target.classList.remove('open');if(!e.target.closest('.nav-mid'))document.getElementById('ns-dd')?.remove();});

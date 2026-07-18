@@ -75,11 +75,6 @@ html[data-theme="light"]{
 html[data-theme="light"] body::before{opacity:.4}
 html[data-theme="light"] .hcat{background:rgba(20,20,40,.05);border-color:rgba(20,20,40,.1);color:rgba(20,20,40,.7)}
 body,.pc,.sw,.rc,.s2,.modal{transition:background-color .25s ease,color .25s ease,border-color .25s ease}
-.gt-wrap{display:flex;align-items:center;margin-right:2px}
-.gt-wrap .goog-te-gadget{font-family:var(--fb)!important;font-size:0!important}
-.gt-wrap select.goog-te-combo{padding:6px 8px;border-radius:var(--rsm);border:1px solid var(--br);background:var(--s);color:var(--tx);font-size:.78rem;font-family:var(--fb);cursor:pointer}
-.goog-te-banner-frame{box-shadow:var(--shl)!important}
-body{top:0!important}
 html{scroll-behavior:smooth}
 body{font-family:var(--fb);background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -391,7 +386,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <svg width="14" height="14" fill="none" stroke="var(--mu)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input id="ns-inp" placeholder="Search dreams..." oninput="onSearch(this.value)">
   </div>
-  <div id="google_translate_element" class="gt-wrap"></div>
   <button class="nbtn" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
   <div class="nav-right" id="nav-right">
     <button class="btn btn-g btn-sm" onclick="go('signin')">Sign in</button>
@@ -1253,11 +1247,5 @@ function esc(str){if(!str)return'';return String(str).replace(/&/g,'&amp;').repl
 function toast(msg,type=''){const el=document.createElement('div');el.className='toast '+(type==='ok'?'ok':type==='err'?'err':'');el.innerHTML=(type==='ok'?'✓ ':type==='err'?'✕ ':'ℹ ')+msg;document.getElementById('toasts').appendChild(el);setTimeout(()=>el.remove(),3200);}
 init();
 </script>
-<script type="text/javascript">
-function googleTranslateElementInit(){
-  new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:true},'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

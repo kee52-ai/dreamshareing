@@ -9,27 +9,18 @@
 <meta name="author" content="Nidrno">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://nidrno.com/">
-
-<!-- Open Graph / Facebook / LinkedIn -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nidrno.com/">
 <meta property="og:title" content="Nidrno – Share Your Night Dreams">
 <meta property="og:description" content="A community for night dreamers, travellers and storytellers. Share the vivid worlds that visit you while the world sleeps.">
 <meta property="og:image" content="https://nidrno.com/logo.png">
 <meta property="og:site_name" content="Nidrno">
-
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nidrno – Share Your Night Dreams">
 <meta name="twitter:description" content="A community for night dreamers, travellers and storytellers. Share the vivid worlds that visit you while the world sleeps.">
 <meta name="twitter:image" content="https://nidrno.com/logo.png">
-
-<!-- Google Search Console verification: replace CONTENT with the code GSC gives you -->
 <meta name="google-site-verification" content="PASTE_YOUR_GSC_CODE_HERE">
-<!-- Bing Webmaster Tools verification: replace CONTENT with the code Bing gives you -->
 <meta name="msvalidate.01" content="PASTE_YOUR_BING_CODE_HERE">
-
-<!-- Google Analytics 4 : replace G-ZGN9ZCDB31 with your Measurement ID -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGN9ZCDB31"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -37,8 +28,6 @@
   gtag('js', new Date());
   gtag('config', 'G-ZGN9ZCDB31');
 </script>
-
-<!-- Structured data for search engines -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,7 +42,6 @@
   }
 }
 </script>
-
 <link rel="icon" type="image/png" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -126,6 +114,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.2;animation:drift linear infinite;pointer-events:none}
 @keyframes drift{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.05)}100%{transform:translateY(0) scale(1)}}
 .hero-ey{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;background:rgba(124,92,252,.12);border:1px solid rgba(124,92,252,.3);font-size:.78rem;font-weight:600;color:var(--ac2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
+.hero-ey svg{width:14px;height:14px}
 .hero h1{font-family:var(--fd);font-size:clamp(2.2rem,5.5vw,4rem);line-height:1.12;font-weight:700;color:var(--tx);margin-bottom:20px;max-width:720px}
 .hero h1 em{font-style:italic;background:linear-gradient(135deg,var(--ac2),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .typing-row{font-size:1.1rem;color:var(--mu);margin-bottom:14px;min-height:1.7em;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap}
@@ -136,6 +125,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .hero-desc{color:var(--mu);font-size:1rem;max-width:500px;line-height:1.7;margin-bottom:30px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:28px}
 .hero-cta .btn{padding:12px 26px;font-size:.95rem}
+.hero-cta .btn svg{width:16px;height:16px}
 .hero-cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .hcat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 15px;font-size:.8rem;color:rgba(255,255,255,.75);cursor:pointer;transition:all .2s}
 .hcat:hover{background:rgba(124,92,252,.2);border-color:var(--ac);color:#fff}
@@ -155,7 +145,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .fs-excerpt{font-size:.82rem;color:var(--mu);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 @media(max-width:600px){.fstories-grid{grid-template-columns:1fr}}
 .auth-pg{min-height:100vh;display:flex}
-.auth-l{width:42%;background:linear-gradient(150deg,var(--s) 0%,#0E0C22 50%,#1A0B2E 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:48px;position:relative;overflow:hidden}
+.auth-l{width:42%;background:linear-gradient(150deg,var(--s) 0%,#0E0C22 50%,#1A0B2E 100%);display:flex;flex-direction:column;justify-content:center;padding:48px;position:relative;overflow:hidden}
 .auth-l::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(124,92,252,.08)}
 .auth-logo{position:absolute;top:36px;left:48px;font-family:var(--fd);font-size:1.2rem;font-weight:700;color:#fff;z-index:1}
 .auth-l h2{font-family:var(--fd);font-size:2rem;font-weight:400;font-style:italic;color:#fff;line-height:1.2;margin-bottom:12px;position:relative;z-index:1}
@@ -203,6 +193,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .pan{font-weight:600;font-size:.85rem;cursor:pointer;color:var(--tx)}.pan:hover{color:var(--ac2)}
 .pmt{font-size:.75rem;color:var(--mu);margin-top:1px}
 .tbadge{display:inline-flex;align-items:center;background:rgba(124,92,252,.12);color:var(--ac2);font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid rgba(124,92,252,.25);margin-left:auto;flex-shrink:0}
+.vbadge{display:inline-flex;align-items:center;gap:3px;background:var(--s2);color:var(--mu);font-size:.68rem;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid var(--br)}
+.vbadge svg{width:11px;height:11px}
 .pt{font-family:var(--fd);font-size:1.15rem;font-weight:600;line-height:1.3;margin-bottom:8px;color:var(--tx)}
 .pe{font-size:.85rem;color:var(--mu);line-height:1.65;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
 .abar{display:flex;align-items:center;gap:4px;padding:10px 18px;border-top:1px solid var(--br);flex-wrap:wrap}
@@ -219,7 +211,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .asp{flex:1}
 .rrail{position:sticky;top:calc(var(--nav)+14px);height:fit-content}
 .rc{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:16px;margin-bottom:12px}
-.rc h4{font-size:.72rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.rc h4{font-size:.72rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.rc h4 svg{width:13px;height:13px}
 .tri{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--br);cursor:pointer}
 .tri:last-child{border:none}.tri:hover .trtt{color:var(--ac2)}
 .trn{font-size:.72rem;font-weight:700;color:var(--ac2);min-width:18px;padding-top:2px}
@@ -250,9 +243,12 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .wttl:empty::before{content:attr(data-placeholder);color:var(--mu);pointer-events:none}
 .wsel{padding:7px 14px;border:1.5px solid var(--br);border-radius:999px;font-size:.82rem;color:var(--tx);background:var(--s);cursor:pointer;outline:none;font-family:var(--fb)}
 .wsel:focus{border-color:var(--ac)}
+.wopt{display:flex;align-items:center;gap:8px;padding:7px 14px;border:1.5px solid var(--br);border-radius:999px;font-size:.82rem;color:var(--tx);background:var(--s);cursor:pointer;font-family:var(--fb)}
+.wopt input{accent-color:var(--ac)}
 .tbar{display:flex;gap:2px;padding:7px 10px;background:var(--s);border-radius:var(--rsm);border:1px solid var(--br);flex-wrap:wrap;position:sticky;top:calc(var(--nav)+4px);z-index:99;margin-bottom:14px}
 .tbb{min-width:30px;height:30px;padding:0 8px;border-radius:6px;background:transparent;border:none;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--mu);display:inline-flex;align-items:center;justify-content:center;transition:all .15s;gap:3px;font-family:var(--fb)}
 .tbb:hover{background:var(--s2);color:var(--ac2)}
+.tbb svg{width:13px;height:13px}
 .tbsep{width:1px;height:20px;background:var(--br);margin:0 3px}
 .wbody{width:100%;border:none;outline:none;font-size:1.05rem;line-height:1.85;color:var(--tx);background:transparent;min-height:420px;display:block}
 .wbody:empty::before{content:attr(data-placeholder);color:var(--mu);pointer-events:none;display:block}
@@ -269,13 +265,15 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .wbody hr{border:none;border-top:1px solid var(--br);margin:22px 0}
 .pp{max-width:800px;margin:0 auto;padding:28px 20px}
 .phdr{background:var(--s);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:18px}
-.pban{height:140px;background:linear-gradient(135deg,var(--s2),#0E0C22,#1A0B2E);display:flex;align-items:center;justify-content:center;font-size:2rem}
+.pban{height:140px;background:linear-gradient(135deg,var(--s2),#0E0C22,#1A0B2E)}
 .pinfo{padding:0 22px 22px}
 .pav{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--teal));color:#fff;font-size:2rem;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden;border:4px solid var(--s);margin-top:-40px;cursor:pointer;position:relative}
 .pav img{width:100%;height:100%;object-fit:cover}
 .pname{font-family:var(--fd);font-size:1.6rem;font-weight:700;margin:12px 0 2px;color:var(--tx)}
 .phandle{font-size:.875rem;color:var(--mu);margin-bottom:8px}
 .pbio{font-size:.9rem;color:var(--tx);line-height:1.6;margin-bottom:12px}
+.plink{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--ac2);margin-bottom:12px}
+.plink svg{width:13px;height:13px}
 .pstats{display:flex;gap:20px;font-size:.85rem;color:var(--mu)}
 .pstats strong{color:var(--tx);font-weight:700}
 .tabs{display:flex;background:var(--s);border:1px solid var(--br);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
@@ -299,6 +297,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .adlnk{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:var(--rsm);font-size:.82rem;color:var(--mu);cursor:pointer;margin-bottom:2px;transition:all .15s}
 .adlnk:hover,.adlnk.active{background:rgba(124,92,252,.12);color:var(--ac2)}
 .adlnk.active{font-weight:600}
+.adlnk svg{width:15px;height:15px;flex-shrink:0}
 .adm{flex:1;background:var(--bg);overflow:auto}
 .adtop{background:var(--s);padding:16px 22px;border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between}
 .adb{padding:20px 22px}
@@ -355,7 +354,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .spin{width:32px;height:32px;border:3px solid var(--br);border-top-color:var(--ac);border-radius:50%;animation:sp .7s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .empty{background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:52px 24px;text-align:center}
-.empty .ico{font-size:2.5rem;margin-bottom:12px}
+.empty .ico{width:40px;height:40px;margin:0 auto 12px;color:var(--mu)}
 .empty h3{font-family:var(--fd);font-size:1.3rem;margin-bottom:8px;color:var(--tx)}
 .empty p{color:var(--mu);font-size:.875rem;margin-bottom:18px;line-height:1.6}
 .flwb{padding:7px 18px;border-radius:999px;font-size:.82rem;font-weight:500;cursor:pointer;transition:all .15s;border:1.5px solid var(--br);background:transparent;color:var(--tx);font-family:var(--fb)}
@@ -365,6 +364,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .mni{flex:1;display:flex;flex-direction:column;align-items:center;padding:10px 4px 12px;gap:3px;cursor:pointer;color:var(--mu);font-size:.62rem;font-weight:500;border:none;background:transparent;transition:color .15s;font-family:var(--fb)}
 .mni.active,.mni:hover{color:var(--ac2)}
 .mni svg{width:22px;height:22px}
+.anon-note{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--mu);background:var(--s);border:1px dashed var(--br);padding:6px 10px;border-radius:var(--rsm);margin-top:8px}
+.anon-note svg{width:13px;height:13px;flex-shrink:0}
 @media(max-width:740px){
   .mbnav{display:flex}
   body{padding-bottom:64px}
@@ -393,7 +394,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <svg width="14" height="14" fill="none" stroke="var(--mu)" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     <input id="ns-inp" placeholder="Search dreams..." oninput="onSearch(this.value)">
   </div>
-  <button class="nbtn" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+  <button class="nbtn" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme"></button>
   <div class="nav-right" id="nav-right">
     <button class="btn btn-g btn-sm" onclick="go('signin')">Sign in</button>
     <button class="btn btn-p btn-sm" onclick="go('signup')">Join free</button>
@@ -404,13 +405,13 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="hero">
     <div class="orb" style="width:500px;height:500px;top:-150px;left:-150px;background:var(--ac);animation-duration:9s"></div>
     <div class="orb" style="width:400px;height:400px;bottom:-100px;right:-100px;background:var(--teal);animation-duration:12s;animation-delay:-5s"></div>
-    <div class="hero-ey">🌙 Night Dreams Sharing Platform</div>
+    <div class="hero-ey"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>Night Dreams Sharing Platform</div>
     <h1>Share the dreams<br><em>only you</em> have seen</h1>
     <div class="typing-row"><span class="tpfx">Tonight someone is dreaming of</span><span id="typed"></span><span class="tcur"></span></div>
     <p class="hero-desc">Nidrno is where night dreamers, travellers and storytellers share the vivid worlds that visit them while the world sleeps. Every dream is a story worth telling.</p>
     <div class="hero-cta">
-      <button class="btn btn-p" onclick="go('signup')">✍️ Start writing free</button>
-      <button class="btn btn-o" onclick="go('feed')">📖 Read dreams</button>
+      <button class="btn btn-p" onclick="go('signup')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Start writing free</button>
+      <button class="btn btn-o" onclick="go('feed')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>Read dreams</button>
     </div>
     <div class="hero-cats" id="hero-cats"></div>
   </div>
@@ -478,7 +479,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <div class="sbav" id="sb-av" onclick="myProfile()"></div>
         <div style="font-weight:700;font-size:.9rem;margin-top:8px" id="sb-name">Guest</div>
         <div style="font-size:.75rem;color:var(--mu);margin-bottom:12px" id="sb-handle">@guest</div>
-        <button class="btn btn-p btn-sm" style="width:100%" onclick="go('write')">✍️ Write dream</button>
+        <button class="btn btn-p btn-sm" style="width:100%" onclick="go('write')">Write dream</button>
       </div></div>
       <div class="sw">
         <div class="sblink active" id="nav-home" onclick="switchFeed('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home Feed</div>
@@ -493,22 +494,21 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <main>
       <div class="sbar">
         <span style="font-size:.78rem;color:var(--mu)">Sort:</span>
-        <button class="sbtn" id="s-top" onclick="setSort('top')">🔥 Top</button>
-        <button class="sbtn active" id="s-new" onclick="setSort('new')">🆕 New</button>
-        <button class="sbtn" id="s-hot" onclick="setSort('hot')">⚡ Hot</button>
+        <button class="sbtn" id="s-top" onclick="setSort('top')">Top</button>
+        <button class="sbtn active" id="s-new" onclick="setSort('new')">New</button>
+        <button class="sbtn" id="s-hot" onclick="setSort('hot')">Hot</button>
         <span class="fcnt" id="feed-count"></span>
       </div>
       <div id="feed-posts"></div>
     </main>
     <aside class="rrail">
       <div class="rc" style="background:linear-gradient(135deg,rgba(124,92,252,.1),rgba(14,156,140,.07));border-color:rgba(124,92,252,.25)">
-        <div style="font-size:1.6rem;margin-bottom:8px">🌙</div>
         <div style="font-size:.9rem;font-weight:600;margin-bottom:6px;color:var(--tx)">What did you dream last night?</div>
         <div style="font-size:.8rem;color:var(--mu);margin-bottom:14px">Share your night vision with the community.</div>
         <button class="btn btn-p btn-sm" style="width:100%" onclick="go('write')">Write a dream</button>
       </div>
-      <div class="rc"><h4>🔥 Trending</h4><div id="trending-wrap"></div></div>
-      <div class="rc"><h4 style="display:flex;align-items:center;gap:6px"><img src="logo.png" alt="Nidrno" style="width:14px;height:14px;border-radius:3px">About Nidrno</h4><p style="font-size:.82rem;color:var(--mu);line-height:1.65;margin-bottom:14px">A platform to share night dreams, travels, and real life stories. Join dreamers from across India.</p><button class="btn btn-p btn-sm" style="width:100%" onclick="go('signup')">Join free ✨</button></div>
+      <div class="rc"><h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>Trending</h4><div id="trending-wrap"></div></div>
+      <div class="rc"><h4><img src="logo.png" alt="Nidrno" style="width:14px;height:14px;border-radius:3px">About Nidrno</h4><p style="font-size:.82rem;color:var(--mu);line-height:1.65;margin-bottom:14px">A platform to share night dreams, travels, and real life stories. Join dreamers from across India.</p><button class="btn btn-p btn-sm" style="width:100%" onclick="go('signup')">Join free</button></div>
     </aside>
   </div>
 </div>
@@ -521,22 +521,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
       <button class="btn btn-g btn-sm" onclick="cancelWrite()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Cancel</button>
       <span style="font-size:.8rem;color:var(--mu)" id="wc-disp">0 words</span>
       <div style="margin-left:auto;display:flex;gap:8px">
-        <button class="btn btn-o btn-sm" onclick="saveDraft()">💾 Draft</button>
+        <button class="btn btn-o btn-sm" onclick="saveDraft()">Draft</button>
         <button class="btn btn-p btn-sm" id="pub-btn" onclick="publishPost()">Publish →</button>
       </div>
     </div>
     <div class="wbw">
-      <!-- Cover image -->
       <div id="cover-wrap"></div>
       <div style="display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
         <input type="file" id="cover-input" accept="image/*" style="display:none" onchange="uploadCover(this)">
-        <button class="btn btn-o btn-sm" id="cover-add-btn" onclick="document.getElementById('cover-input').click()">🖼 Add cover</button>
+        <button class="btn btn-o btn-sm" id="cover-add-btn" onclick="document.getElementById('cover-input').click()">Add cover</button>
         <button class="btn btn-g btn-sm" id="cover-rm-btn" style="display:none" onclick="rmCover()">Remove cover</button>
       </div>
-      <!-- Title -->
       <div id="w-title" class="wttl" contenteditable="true" data-placeholder="Your dream title..." oninput="updateWC()" onkeydown="titleKeyDown(event)"></div>
-      <!-- Tag -->
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
         <select class="wsel" id="w-tag">
           <option value="Dreams">Dreams</option><option value="Nightmares">Nightmares</option>
           <option value="Travel">Travel</option><option value="Life">Life</option>
@@ -544,8 +541,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
           <option value="Food">Food</option><option value="Tech">Tech</option>
           <option value="Love">Love</option><option value="Culture">Culture</option>
         </select>
+        <select class="wsel" id="w-vis">
+          <option value="public">Publish to everyone</option>
+          <option value="followers">Only my followers</option>
+        </select>
+        <label class="wopt"><input type="checkbox" id="w-anon" onchange="updateAnonNote()"> Post anonymously</label>
       </div>
-      <!-- Toolbar -->
+      <div class="anon-note" id="anon-note" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4"/></svg>
+        Your name and profile won't be shown on this dream. Only admins can see who posted it, for safety.
+      </div>
       <div class="tbar" id="editor-toolbar">
         <button class="tbb" title="Bold" onmousedown="event.preventDefault();execFmt('bold')"><b>B</b></button>
         <button class="tbb" title="Italic" onmousedown="event.preventDefault();execFmt('italic')"><i>I</i></button>
@@ -554,8 +559,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="tbb" title="Heading 2" onmousedown="event.preventDefault();execBlock('h2')">H2</button>
         <button class="tbb" title="Heading 3" onmousedown="event.preventDefault();execBlock('h3')">H3</button>
         <div class="tbsep"></div>
-        <button class="tbb" title="Blockquote" onmousedown="event.preventDefault();execBlock('blockquote')">❝ Quote</button>
-        <button class="tbb" title="Code" onmousedown="event.preventDefault();execFmt('code')">` Code</button>
+        <button class="tbb" title="Blockquote" onmousedown="event.preventDefault();execBlock('blockquote')">Quote</button>
+        <button class="tbb" title="Code" onmousedown="event.preventDefault();execFmt('code')">Code</button>
         <button class="tbb" title="Code block" onmousedown="event.preventDefault();execBlock('pre')">{ }</button>
         <div class="tbsep"></div>
         <button class="tbb" title="Bullet list" onmousedown="event.preventDefault();execFmt('insertUnorderedList')">• List</button>
@@ -565,9 +570,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <button class="tbb" title="Insert image" onmousedown="event.preventDefault();triggerInlineImg()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Image</button>
         <button class="tbb" title="Insert link" onmousedown="event.preventDefault();execInsertLink()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Link</button>
       </div>
-      <!-- Hidden inline image input -->
       <input type="file" id="inline-img-input" accept="image/*" style="display:none" onchange="handleInlineImg(this)">
-      <!-- WYSIWYG Body -->
       <div id="w-body" class="wbody" contenteditable="true" data-placeholder="Start writing your dream... what did you see? How did it feel?" oninput="updateWC()" onkeydown="bodyKeyDown(event)"></div>
     </div>
   </div>
@@ -579,14 +582,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div class="adwrap">
     <div class="adsb">
       <div class="adlogo" style="display:flex;align-items:center;gap:8px"><img src="logo.png" alt="Nidrno" style="width:22px;height:22px;border-radius:6px">Nidrno <span>Admin</span></div>
-      <div class="adlnk active" id="atab-dash" onclick="adminTab('dash')">📊 Dashboard</div>
-      <div class="adlnk" id="atab-pend" onclick="adminTab('pend')">⏳ Pending <span id="pend-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
-      <div class="adlnk" id="atab-posts" onclick="adminTab('posts')">📝 Stories</div>
-      <div class="adlnk" id="atab-users" onclick="adminTab('users')">👥 Users</div>
-      <div class="adlnk" id="atab-comments" onclick="adminTab('comments')">💬 Comments</div>
-      <div class="adlnk" id="atab-reports" onclick="adminTab('reports')">⚑ Reports</div>
-      <div class="adlnk" id="atab-support" onclick="adminTab('support')">🛟 Support <span id="supp-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
-      <div class="adlnk" id="atab-logs" onclick="adminTab('logs')">📋 Logs</div>
+      <div class="adlnk active" id="atab-dash" onclick="adminTab('dash')">Dashboard</div>
+      <div class="adlnk" id="atab-pend" onclick="adminTab('pend')">Pending <span id="pend-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
+      <div class="adlnk" id="atab-posts" onclick="adminTab('posts')">Stories</div>
+      <div class="adlnk" id="atab-users" onclick="adminTab('users')">Users</div>
+      <div class="adlnk" id="atab-comments" onclick="adminTab('comments')">Comments</div>
+      <div class="adlnk" id="atab-reports" onclick="adminTab('reports')">Reports</div>
+      <div class="adlnk" id="atab-support" onclick="adminTab('support')">Support <span id="supp-badge" style="display:none;background:var(--ac);color:#fff;font-size:.65rem;padding:1px 5px;border-radius:8px;margin-left:4px"></span></div>
+      <div class="adlnk" id="atab-logs" onclick="adminTab('logs')">Logs</div>
       <div style="margin-top:24px"><div class="adlnk" onclick="go('feed')">← Back to site</div></div>
     </div>
     <div class="adm">
@@ -599,7 +602,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="page" id="page-community">
   <div class="comm-wrap">
     <div class="comm-head">
-      <h2 class="comm-h">💬 Community</h2>
+      <h2 class="comm-h">Community</h2>
       <p class="comm-sub">A shared space for dreamers and the Nidrno team to talk.</p>
     </div>
     <div class="comm-msgs" id="comm-msgs"><div class="ldr"><div class="spin"></div></div></div>
@@ -629,7 +632,10 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <button class="mcl" onclick="closeModal('edit-profile-modal')">✕</button>
     <div class="mtit">Edit profile</div><div class="msub">Update your public information.</div>
     <input class="inp" type="text" id="ep-name" placeholder="Full name">
+    <input class="inp" type="text" id="ep-user" placeholder="Username (letters, numbers, underscore)">
+    <div id="ep-user-err" class="aerr"></div>
     <textarea class="inp" id="ep-bio" placeholder="Bio..." style="min-height:80px;resize:vertical"></textarea>
+    <input class="inp" type="url" id="ep-link" placeholder="Your link (Instagram, website, etc.) - optional">
     <button class="btn btn-p" style="width:100%;margin-top:8px" onclick="saveProfile()">Save changes</button>
   </div>
 </div>
@@ -663,11 +669,11 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     <input class="inp" type="text" id="supp-name" placeholder="Your name">
     <input class="inp" type="email" id="supp-email" placeholder="Email address">
     <select class="supp-sel" id="supp-category">
-      <option value="Bug">🐞 Something's broken</option>
-      <option value="Account">👤 Account / login issue</option>
-      <option value="Content">📝 Question about a post or comment</option>
-      <option value="Feedback">💡 Feedback / suggestion</option>
-      <option value="Other">❓ Something else</option>
+      <option value="Bug">Something's broken</option>
+      <option value="Account">Account / login issue</option>
+      <option value="Content">Question about a post or comment</option>
+      <option value="Feedback">Feedback / suggestion</option>
+      <option value="Other">Something else</option>
     </select>
     <textarea class="cbox" id="supp-msg" placeholder="Describe the problem..." style="min-height:100px"></textarea>
     <button class="btn btn-p" style="width:100%;margin-top:8px" id="supp-btn" onclick="submitSupport()">Send message</button>
@@ -681,6 +687,7 @@ const{createClient}=window.supabase;
 const sb=createClient('https://tbcmtwljgpxgemqttubx.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRiY210d2xqZ3B4Z2VtcXR0dWJ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxODUwMTEsImV4cCI6MjA5Nzc2MTAxMX0.hhuUQfhDWziv2gpp_dS0FU_b7flQKlV5EH4K19wSZZ0',{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}});
 let CU=null,CP=null,page='home',feedMode='home',feedTag='all',feedSort='new';
 let BM=new Set(),UV={},editId=null,coverUrl='',viewingUser=null,curAT='dash';
+const ANON_NAME='Anonymous Dreamer';
 const CATS=[{l:'All',v:'all'},{l:'Dreams',v:'Dreams'},{l:'Nightmares',v:'Nightmares'},{l:'Travel',v:'Travel'},{l:'Life',v:'Life'},{l:'Ideas',v:'Ideas'},{l:'Career',v:'Career'},{l:'Food',v:'Food'},{l:'Tech',v:'Tech'},{l:'Love',v:'Love'},{l:'Culture',v:'Culture'}];
 const DP=['flying over moonlit clouds','a forgotten city underwater','someone they once loved','a door to nowhere','colours with no name','a voice calling from the dark','the house from childhood','falling through stars','a train with no destination','an ocean made of light'];
 let ti=0,ci=0,del=false;
@@ -695,10 +702,12 @@ function typeBrand(){
     if(i>=name.length){clearInterval(iv);setTimeout(()=>{if(cur)cur.style.display='none';},1200);}
   },130);
 }
+const ICON_MOON='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>';
+const ICON_SUN='<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
 function applyTheme(t){
   document.documentElement.setAttribute('data-theme',t);
   const btn=document.getElementById('theme-toggle');
-  if(btn)btn.textContent=t==='light'?'☀️':'🌙';
+  if(btn)btn.innerHTML=t==='light'?ICON_SUN:ICON_MOON;
 }
 function toggleTheme(){
   const cur=document.documentElement.getAttribute('data-theme')||'dark';
@@ -729,13 +738,21 @@ async function init(){
   typeLoop();
   typeBrand();
 }
+function randUsername(){
+  const adjs=['quiet','misty','lunar','hidden','gentle','drifting','silent','velvet','amber','soft'];
+  const nouns=['dreamer','wanderer','sleeper','voyager','stargazer','nightowl','sailor','echo','muse','wisp'];
+  const a=adjs[Math.floor(Math.random()*adjs.length)],n=nouns[Math.floor(Math.random()*nouns.length)];
+  return`${a}_${n}${Math.floor(Math.random()*9000+1000)}`;
+}
 async function loadCP(){
   if(!CU)return;
   try{
     let{data}=await sb.from('profiles').select('*').eq('id',CU.id).single();
     if(!data){
       const fn=CU.user_metadata?.full_name||CU.user_metadata?.name||'';
-      const un=(CU.user_metadata?.username||CU.email?.split('@')[0]||'user').toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,20)||'u'+Date.now().toString(36);
+      // Default usernames never derive from the user's email address, to protect their privacy.
+      const rawUn=CU.user_metadata?.username||randUsername();
+      const un=rawUn.toLowerCase().replace(/[^a-z0-9_]/g,'').slice(0,20)||'u'+Date.now().toString(36);
       const av=CU.user_metadata?.avatar_url||CU.user_metadata?.picture||'';
       const{data:np}=await sb.from('profiles').insert({id:CU.id,full_name:fn,username:un,avatar_url:av}).select().single();
       data=np;
@@ -747,10 +764,13 @@ function avH(p,sz=36,fs=13){
   if(!p)return`<div class="av" style="width:${sz}px;height:${sz}px;font-size:${fs}px">U</div>`;
   return p.avatar_url?`<div class="av" style="width:${sz}px;height:${sz}px"><img src="${esc(p.avatar_url)}"/></div>`:`<div class="av" style="width:${sz}px;height:${sz}px;font-size:${fs}px">${(p.full_name?.[0]||'U').toUpperCase()}</div>`;
 }
+function anonAvH(sz=36,fs=13){
+  return`<div class="av" style="width:${sz}px;height:${sz}px;font-size:${fs}px;background:linear-gradient(135deg,#4B4B63,#2B2B42)">?</div>`;
+}
 function updateNav(){
   const nr=document.getElementById('nav-right'),nsw=document.getElementById('ns-wrap');
   if(CU&&CP){
-    nr.innerHTML=`<button class="btn btn-p btn-sm" onclick="go('write')">✍️ Write</button>
+    nr.innerHTML=`<button class="btn btn-p btn-sm" onclick="go('write')">Write</button>
       <div style="position:relative"><button class="nbtn" onclick="toggleNotif(event)"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg><span class="ndot" id="ndot"></span></button></div>
       <div class="av av-t" onclick="toggleUserMenu(event)">${CP.avatar_url?`<img src="${esc(CP.avatar_url)}"/>`:(CP.full_name?.[0]||'U').toUpperCase()}</div>`;
     nsw.style.display='flex';
@@ -791,7 +811,7 @@ async function doSignUp(){
   btn.textContent='Creating...';btn.disabled=true;
   const{error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:name,username:uname}}});
   btn.textContent='Create account';btn.disabled=false;
-  if(error){err.textContent=error.message;err.style.display='block';}else toast('Check your email to confirm! 📧','ok');
+  if(error){err.textContent=error.message;err.style.display='block';}else toast('Check your email to confirm!','ok');
 }
 async function doSignOut(){await sb.auth.signOut();CU=null;CP=null;updateNav();go('home');}
 async function doForgot(){const email=document.getElementById('forgot-email').value.trim();await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin});document.getElementById('forgot-ok').style.display='block';}
@@ -829,7 +849,7 @@ function renderFeaturedStories(){
 }
 function fsClick(){go('signin');}
 function rotateFeaturedStories(){fsIndex=(fsIndex+4)%FEATURED_STORIES.length;renderFeaturedStories();}
-function buildTrending(){const el=document.getElementById('trending-wrap');if(!el)return;sb.from('posts').select('id,title,tag,upvotes').eq('status','approved').order('upvotes',{ascending:false}).limit(5).then(({data})=>{if(!data?.length){el.innerHTML='<div style="font-size:.8rem;color:var(--mu)">No trending yet</div>';return;}el.innerHTML=data.map((p,i)=>`<div class="tri" onclick="openStory('${p.id}')"><span class="trn">0${i+1}</span><div><div class="trtt">${esc(p.title?.slice(0,55)||'Untitled')}</div><div class="trs">${esc(p.tag)} · ▲ ${p.upvotes||0}</div></div></div>`).join('');});}
+function buildTrending(){const el=document.getElementById('trending-wrap');if(!el)return;sb.from('posts').select('id,title,tag,upvotes').eq('status','approved').eq('is_anonymous',false).order('upvotes',{ascending:false}).limit(5).then(({data})=>{if(!data?.length){el.innerHTML='<div style="font-size:.8rem;color:var(--mu)">No trending yet</div>';return;}el.innerHTML=data.map((p,i)=>`<div class="tri" onclick="openStory('${p.id}')"><span class="trn">0${i+1}</span><div><div class="trtt">${esc(p.title?.slice(0,55)||'Untitled')}</div><div class="trs">${esc(p.tag)} · ▲ ${p.upvotes||0}</div></div></div>`).join('');});}
 function setFeedTag(tag){feedTag=tag;feedMode='home';document.querySelectorAll('#cat-list .tag').forEach(t=>t.classList.remove('active'));const el=document.getElementById('cat-'+tag);if(el)el.classList.add('active');go('feed');}
 function switchFeed(mode){feedMode=mode;['home','following','bookmarks'].forEach(k=>{const el=document.getElementById('nav-'+k);if(el)el.classList.toggle('active',k===mode);});loadFeed();}
 function setSort(s){feedSort=s;['top','new','hot'].forEach(x=>{const el=document.getElementById('s-'+x);if(el)el.classList.toggle('active',x===s);});loadFeed();}
@@ -842,23 +862,23 @@ async function loadFeed(){
     if(feedMode==='bookmarks'&&CU){
       const{data:bm}=await sb.from('bookmarks').select('post_id').eq('user_id',CU.id);
       const ids=(bm||[]).map(b=>b.post_id);
-      if(!ids.length){container.innerHTML='<div class="empty"><div class="ico">🔖</div><h3>No bookmarks yet</h3><p>Save stories you love!</p></div>';return;}
-      const{data:pd}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id').eq('status','approved').in('id',ids);
+      if(!ids.length){container.innerHTML='<div class="empty"><h3>No bookmarks yet</h3><p>Save stories you love!</p></div>';return;}
+      const{data:pd}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id,is_anonymous,visibility').eq('status','approved').in('id',ids);
       posts=pd||[];BM=new Set(ids);
     }else if(feedMode==='following'&&CU){
       const{data:follows}=await sb.from('follows').select('following_id').eq('follower_id',CU.id);
       const ids=(follows||[]).map(f=>f.following_id);
-      if(!ids.length){container.innerHTML='<div class="empty"><div class="ico">👥</div><h3>Follow people first</h3><p>Follow dreamers to see their stories!</p><button class="btn btn-p" onclick="switchFeed(\'home\')">Browse all</button></div>';return;}
-      const{data:pd}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id').eq('status','approved').in('author_id',ids).order('created_at',{ascending:false}).limit(30);
+      if(!ids.length){container.innerHTML='<div class="empty"><h3>Follow people first</h3><p>Follow dreamers to see their stories!</p><button class="btn btn-p" onclick="switchFeed(\'home\')">Browse all</button></div>';return;}
+      const{data:pd}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id,is_anonymous,visibility').eq('status','approved').in('author_id',ids).order('created_at',{ascending:false}).limit(30);
       posts=pd||[];
     }else{
-      let q=sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id').eq('status','approved');
+      let q=sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,downvotes,comment_count,cover_url,views,author_id,is_anonymous,visibility').eq('status','approved').or('visibility.is.null,visibility.eq.public');
       if(feedTag!=='all')q=q.eq('tag',feedTag);
       if(feedSort==='top')q=q.order('upvotes',{ascending:false});
       else if(feedSort==='hot')q=q.order('comment_count',{ascending:false});
       else q=q.order('created_at',{ascending:false});
       const{data:pd,error:pe}=await q.limit(40);
-      if(pe){container.innerHTML=`<div class="empty"><div class="ico">⚠️</div><h3>Error</h3><p>${esc(pe.message)}</p><button class="btn btn-p" onclick="loadFeed()">Retry</button></div>`;return;}
+      if(pe){container.innerHTML=`<div class="empty"><h3>Error</h3><p>${esc(pe.message)}</p><button class="btn btn-p" onclick="loadFeed()">Retry</button></div>`;return;}
       posts=pd||[];
     }
     if(posts.length){
@@ -868,18 +888,22 @@ async function loadFeed(){
     if(CU&&feedMode!=='bookmarks'){const{data:bm}=await sb.from('bookmarks').select('post_id').eq('user_id',CU.id);BM=new Set((bm||[]).map(b=>b.post_id));}
     if(CU){const{data:vt}=await sb.from('votes').select('post_id,vote_type').eq('user_id',CU.id);UV={};(vt||[]).forEach(v=>{UV[v.post_id]=v.vote_type;});}
     const fc=document.getElementById('feed-count');if(fc)fc.textContent=posts.length+' stories';
-    if(!posts.length){container.innerHTML='<div class="empty"><div class="ico">🌙</div><h3>No dreams yet</h3><p>Be the first to share!</p><button class="btn btn-p" onclick="go(\'write\')">✍️ Write first dream</button></div>';return;}
+    if(!posts.length){container.innerHTML='<div class="empty"><h3>No dreams yet</h3><p>Be the first to share!</p><button class="btn btn-p" onclick="go(\'write\')">Write first dream</button></div>';return;}
     container.innerHTML=posts.map(p=>postCard(p)).join('');
-  }catch(e){console.error(e);container.innerHTML=`<div class="empty"><div class="ico">⚠️</div><h3>Something went wrong</h3><p>${esc(e.message||'')}</p><button class="btn btn-p" onclick="loadFeed()">Retry</button></div>`;}
+  }catch(e){console.error(e);container.innerHTML=`<div class="empty"><h3>Something went wrong</h3><p>${esc(e.message||'')}</p><button class="btn btn-p" onclick="loadFeed()">Retry</button></div>`;}
 }
 function postCard(p){
-  const bm=BM.has(p.id),vote=UV[p.id],score=(p.upvotes||0)-(p.downvotes||0),prof=p.profiles||{};
+  const bm=BM.has(p.id),vote=UV[p.id],score=(p.upvotes||0)-(p.downvotes||0);
+  const isAnon=!!p.is_anonymous;
+  const prof=isAnon?{}:(p.profiles||{});
+  const authorBlock=isAnon
+    ? `${anonAvH(36,13)}<div style="min-width:0"><div class="pan" style="cursor:default">${ANON_NAME}</div><div class="pmt">${ago(p.created_at)} · ${(p.views||0).toLocaleString()} views</div></div>`
+    : `<div onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${avH(prof,36,13)}</div><div style="min-width:0"><div class="pan" onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${esc(prof.full_name||'Anonymous')}</div><div class="pmt">@${esc(prof.username||'user')} · ${ago(p.created_at)} · ${(p.views||0).toLocaleString()} views</div></div>`;
   return`<div class="pc" onclick="openStory('${p.id}')">
     ${p.cover_url?`<img class="pc-img" src="${esc(p.cover_url)}" loading="lazy" onerror="this.style.display='none'"/>`:''}
     <div class="pb">
       <div class="par">
-        <div onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${avH(prof,36,13)}</div>
-        <div style="min-width:0"><div class="pan" onclick="event.stopPropagation();openProfile('${esc(prof.username||'')}')">${esc(prof.full_name||'Anonymous')}</div><div class="pmt">@${esc(prof.username||'user')} · ${ago(p.created_at)} · ${(p.views||0).toLocaleString()} views</div></div>
+        ${authorBlock}
         <span class="tbadge">${esc(p.tag||'Dream')}</span>
       </div>
       <div class="pt">${esc(p.title||'Untitled')}</div>
@@ -902,16 +926,16 @@ async function castVote(postId,type,btn){
   if(!CU){go('signin');return;}
   const grp=btn.closest('.vg'),upBtn=grp.querySelector('.vb:first-child'),dnBtn=grp.querySelector('.vb:last-child'),sc=document.getElementById('sc-'+postId),cur=UV[postId];
   if(cur===type){await sb.from('votes').delete().match({user_id:CU.id,post_id:postId});delete UV[postId];upBtn.classList.remove('up-on');dnBtn.classList.remove('dn-on');}
-  else{await sb.from('votes').upsert({user_id:CU.id,post_id:postId,vote_type:type});UV[postId]=type;upBtn.classList.toggle('up-on',type==='up');dnBtn.classList.toggle('dn-on',type==='down');const{data:post}=await sb.from('posts').select('author_id,title').eq('id',postId).single();if(post&&post.author_id!==CU.id&&type==='up')await sendNotif(post.author_id,'vote','❤️ Someone liked your dream!',`${CP?.full_name||'Someone'} upvoted "${post.title?.slice(0,50)}"`,`#story/${postId}`);}
+  else{await sb.from('votes').upsert({user_id:CU.id,post_id:postId,vote_type:type});UV[postId]=type;upBtn.classList.toggle('up-on',type==='up');dnBtn.classList.toggle('dn-on',type==='down');const{data:post}=await sb.from('posts').select('author_id,title,is_anonymous').eq('id',postId).single();if(post&&post.author_id!==CU.id&&type==='up')await sendNotif(post.author_id,'vote','Someone liked your dream',`${CP?.full_name||'Someone'} upvoted "${post.title?.slice(0,50)}"`,`#story/${postId}`);}
   const{data}=await sb.from('posts').select('upvotes,downvotes').eq('id',postId).single();
   if(sc&&data)sc.textContent=(data.upvotes||0)-(data.downvotes||0);
 }
 async function toggleBm(postId,btn){
   if(!CU){go('signin');return;}
   if(BM.has(postId)){await sb.from('bookmarks').delete().match({user_id:CU.id,post_id:postId});BM.delete(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Save';btn.classList.remove('bm');toast('Removed');}
-  else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved! 🔖','ok');}
+  else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved!','ok');}
 }
-function sharePost(id){const url=location.origin+location.pathname+'#story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Nidrno'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied! 🔗','ok'));else toast('Copied: '+url);}
+function sharePost(id){const url=location.origin+location.pathname+'#story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Nidrno'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied!','ok'));else toast('Copied: '+url);}
 async function openStory(id){
   go('story');location.hash='story/'+id;
   document.getElementById('story-hero').innerHTML='';
@@ -919,26 +943,31 @@ async function openStory(id){
   main.innerHTML='<div class="ldr"><div class="spin"></div></div>';
   try{
     const{data:post,error:pe}=await sb.from('posts').select('*').eq('id',id).single();
-    if(pe||!post){main.innerHTML='<div class="empty" style="margin:40px auto;max-width:640px"><div class="ico">😕</div><h3>Dream not found</h3><button class="btn btn-p" onclick="go(\'feed\')">Back to feed</button></div>';return;}
-    const{data:profile}=await sb.from('profiles').select('id,username,full_name,avatar_url').eq('id',post.author_id).single();
+    if(pe||!post){main.innerHTML='<div class="empty" style="margin:40px auto;max-width:640px"><h3>Dream not found</h3><button class="btn btn-p" onclick="go(\'feed\')">Back to feed</button></div>';return;}
+    const isAnon=!!post.is_anonymous;
+    let profile=null;
+    if(!isAnon){const{data:pr}=await sb.from('profiles').select('id,username,full_name,avatar_url,profile_link').eq('id',post.author_id).single();profile=pr;}
     sb.from('posts').update({views:(post.views||0)+1}).eq('id',id).then(()=>{});
     let myVote=null,bm=false;
     if(CU){const{data:v}=await sb.from('votes').select('vote_type').match({user_id:CU.id,post_id:id}).single();myVote=v?.vote_type||null;const{data:bmr}=await sb.from('bookmarks').select('user_id').match({user_id:CU.id,post_id:id}).single();if(bmr){BM.add(id);bm=true;}else BM.delete(id);}
     const score=(post.upvotes||0)-(post.downvotes||0),prof=profile||{};
     if(post.cover_url)document.getElementById('story-hero').innerHTML=`<div style="width:100%;max-height:420px;overflow:hidden"><img src="${esc(post.cover_url)}" style="width:100%;object-fit:cover;display:block"/></div>`;
+    const authorMeta=isAnon
+      ? `${anonAvH(40,15)}<div><div style="font-weight:600;font-size:.9rem;color:var(--tx)">${ANON_NAME}</div><div style="font-size:.75rem;color:var(--mu)">${ago(post.created_at)} · ${(post.views||0).toLocaleString()} views</div></div>`
+      : `<div onclick="openProfile('${esc(prof.username||'')}')" style="cursor:pointer;display:flex;align-items:center;gap:10px">${avH(prof,40,15)}<div><div style="font-weight:600;font-size:.9rem;color:var(--tx)">${esc(prof.full_name||'Anonymous')}</div><div style="font-size:.75rem;color:var(--mu)">@${esc(prof.username||'')} · ${ago(post.created_at)} · ${(post.views||0).toLocaleString()} views</div></div>`;
     main.innerHTML=`<div class="sw-wrap">
       <button class="btn btn-g btn-sm" onclick="go('feed')" style="margin-bottom:20px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back to feed</button>
       <span class="tbadge" style="margin-bottom:12px;display:inline-flex">${esc(post.tag||'Dream')}</span>
       <h1 class="sh1">${esc(post.title||'Untitled')}</h1>
       <div class="smt">
-        <div onclick="openProfile('${esc(prof.username||'')}')" style="cursor:pointer;display:flex;align-items:center;gap:10px">${avH(prof,40,15)}<div><div style="font-weight:600;font-size:.9rem;color:var(--tx)">${esc(prof.full_name||'Anonymous')}</div><div style="font-size:.75rem;color:var(--mu)">@${esc(prof.username||'')} · ${ago(post.created_at)} · ${(post.views||0).toLocaleString()} views</div></div></div>
+        ${authorMeta}
         <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          ${CP?.id===post.author_id?`<button class="ab" onclick="go('write');editPost('${id}')">✏️ Edit</button>`:''}
-          ${CU&&prof.id&&prof.id!==CU.id?`<button class="flwb" id="sflw" onclick="toggleFollow('${prof.id}','${esc(prof.username||'')}')">+ Follow</button>`:''}
+          ${CP?.id===post.author_id?`<button class="ab" onclick="go('write');editPost('${id}')">Edit</button>`:''}
+          ${!isAnon&&CU&&prof.id&&prof.id!==CU.id?`<button class="flwb" id="sflw" onclick="toggleFollow('${prof.id}','${esc(prof.username||'')}')">+ Follow</button>`:''}
         </div>
       </div>
       <div class="sbody">${renderBody(post.body||'')}</div>
-      ${!CU?`<div class="scta"><h3>🌙 Join the dream community</h3><p>Sign up to like, comment, save stories and share your own dreams.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-p" onclick="go('signup')">✨ Join free</button><button class="btn btn-o" onclick="go('signin')">Sign in</button></div></div>`:''}
+      ${!CU?`<div class="scta"><h3>Join the dream community</h3><p>Sign up to like, comment, save stories and share your own dreams.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-p" onclick="go('signup')">Join free</button><button class="btn btn-o" onclick="go('signin')">Sign in</button></div></div>`:''}
       <div style="display:flex;align-items:center;gap:8px;padding:14px 0;border-top:1px solid var(--br);border-bottom:1px solid var(--br);margin:28px 0;flex-wrap:wrap">
         <div class="vg">
           <button class="vb ${myVote==='up'?'up-on':''}" onclick="${CU?`voteStory('${id}','up',this)`:`go('signin')`}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
@@ -956,7 +985,7 @@ async function openStory(id){
       </div>
     </div>`;
     loadComments(id);
-    if(CU&&prof.id&&prof.id!==CU.id){const{data:f}=await sb.from('follows').select('follower_id').match({follower_id:CU.id,following_id:prof.id}).single();const fb=document.getElementById('sflw');if(fb){fb.textContent=f?'✓ Following':'+ Follow';if(f)fb.classList.add('following');}}
+    if(!isAnon&&CU&&prof.id&&prof.id!==CU.id){const{data:f}=await sb.from('follows').select('follower_id').match({follower_id:CU.id,following_id:prof.id}).single();const fb=document.getElementById('sflw');if(fb){fb.textContent=f?'✓ Following':'+ Follow';if(f)fb.classList.add('following');}}
   }catch(e){main.innerHTML=`<div class="empty" style="margin:40px auto;max-width:640px"><h3>Error loading</h3><p>${esc(e.message)}</p></div>`;}
 }
 async function voteStory(postId,type,btn){
@@ -970,13 +999,11 @@ async function voteStory(postId,type,btn){
 async function storyBm(postId,btn){
   if(!CU){go('signin');return;}
   if(BM.has(postId)){await sb.from('bookmarks').delete().match({user_id:CU.id,post_id:postId});BM.delete(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Save';btn.classList.remove('bm');toast('Removed');}
-  else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved! 🔖','ok');}
+  else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved!','ok');}
 }
 function renderBody(text){
   if(!text)return'<p style="color:var(--mu)">No content yet.</p>';
-  // If it's already HTML (new WYSIWYG posts), return as-is
   if(/<(p|h[1-6]|ul|ol|li|blockquote|pre|img|strong|em|a|div)\b/i.test(text)){return text;}
-  // Legacy markdown fallback
   return text.replace(/^### (.+)$/gm,'<h3>$1</h3>').replace(/^## (.+)$/gm,'<h2>$1</h2>').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/_(.+?)_/g,'<em>$1</em>').replace(/<u>(.+?)<\/u>/g,'<u>$1</u>').replace(/`([^`]+)`/g,'<code>$1</code>').replace(/```([\s\S]+?)```/g,'<pre>$1</pre>').replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>').replace(/^---$/gm,'<hr>').replace(/^• (.+)$/gm,'<li>$1</li>').replace(/^\d+\. (.+)$/gm,'<li>$1</li>').replace(/\[(.+?)\]\((.+?)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/!\[(.+?)\]\((.+?)\)/g,'<img src="$2" alt="$1">').split('\n\n').map(p=>{if(/^<(h[23]|blockquote|hr|pre|li)/.test(p.trim()))return p;return`<p>${p.replace(/\n/g,'<br>')}</p>`;}).join('');
 }
 async function loadComments(postId){
@@ -992,37 +1019,35 @@ async function loadComments(postId){
 }
 function cmtH(c,pid){const prof=c.profiles||{};return`<div class="ci" id="cmt-${c.id}"><div onclick="openProfile('${esc(prof.username||'')}')" style="cursor:pointer;flex-shrink:0">${avH(prof,34,12)}</div><div class="cm"><span class="cn" onclick="openProfile('${esc(prof.username||'')}')">${esc(prof.full_name||'Anonymous')}</span><span class="ct">${ago(c.created_at)}</span><div class="ctxt">${esc(c.body||c.content||'')}</div>${CU?`<button class="rbtn" onclick="toggleRep('${c.id}')">↩ Reply</button>`:''}<div id="rep-box-${c.id}" style="display:none;margin-top:10px"><textarea class="cbox" id="ri-${c.id}" placeholder="Write a reply..." style="min-height:60px"></textarea><div style="display:flex;gap:6px;margin-top:4px"><button class="btn btn-p btn-sm" onclick="postReply('${c.id}','${pid}')">Reply</button><button class="btn btn-g btn-sm" onclick="toggleRep('${c.id}')">Cancel</button></div></div><div class="reps" id="reps-${c.id}"></div></div></div>`;}
 function toggleRep(cId){const b=document.getElementById('rep-box-'+cId);b.style.display=b.style.display==='none'?'block':'none';}
-async function postComment(pid){const inp=document.getElementById('cmt-inp');if(!inp?.value.trim())return;await sb.from('comments').insert({post_id:pid,author_id:CU.id,body:inp.value.trim()});const{data:post}=await sb.from('posts').select('author_id,title').eq('id',pid).single();if(post&&post.author_id!==CU.id)await sendNotif(post.author_id,'comment','💬 New comment!',`${CP?.full_name||'Someone'} commented on "${post.title?.slice(0,50)}"`,`#story/${pid}`);inp.value='';toast('Comment posted!','ok');loadComments(pid);}
+async function postComment(pid){const inp=document.getElementById('cmt-inp');if(!inp?.value.trim())return;await sb.from('comments').insert({post_id:pid,author_id:CU.id,body:inp.value.trim()});const{data:post}=await sb.from('posts').select('author_id,title').eq('id',pid).single();if(post&&post.author_id!==CU.id)await sendNotif(post.author_id,'comment','New comment!',`${CP?.full_name||'Someone'} commented on "${post.title?.slice(0,50)}"`,`#story/${pid}`);inp.value='';toast('Comment posted!','ok');loadComments(pid);}
 async function postReply(parentId,pid){const inp=document.getElementById('ri-'+parentId);if(!inp?.value.trim())return;await sb.from('comments').insert({post_id:pid,author_id:CU.id,parent_id:parentId,body:inp.value.trim()});inp.value='';document.getElementById('rep-box-'+parentId).style.display='none';toast('Reply posted!','ok');loadComments(pid);}
-function initWrite(){if(!CU){go('signin');return;}if(editId)return;editId=null;coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';const pb=document.getElementById('pub-btn');if(pb)pb.textContent='Publish →';const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML='';if(wb)wb.innerHTML='';try{const d=JSON.parse(localStorage.getItem('xp_draft')||'{}');if(d.t&&wt)wt.innerHTML=d.t;if(d.b&&wb)wb.innerHTML=d.b;if(d.tag)document.getElementById('w-tag').value=d.tag;if(d.coverUrl){coverUrl=d.coverUrl;showCoverPrev(coverUrl);}}catch(e){}updateWC();}
+function initWrite(){if(!CU){go('signin');return;}if(editId)return;editId=null;coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';const pb=document.getElementById('pub-btn');if(pb)pb.textContent='Publish →';const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML='';if(wb)wb.innerHTML='';const wa=document.getElementById('w-anon');if(wa)wa.checked=false;const wv=document.getElementById('w-vis');if(wv)wv.value='public';updateAnonNote();try{const d=JSON.parse(localStorage.getItem('xp_draft')||'{}');if(d.t&&wt)wt.innerHTML=d.t;if(d.b&&wb)wb.innerHTML=d.b;if(d.tag)document.getElementById('w-tag').value=d.tag;if(d.vis&&wv)wv.value=d.vis;if(d.anon&&wa){wa.checked=true;updateAnonNote();}if(d.coverUrl){coverUrl=d.coverUrl;showCoverPrev(coverUrl);}}catch(e){}updateWC();}
+function updateAnonNote(){const wa=document.getElementById('w-anon'),note=document.getElementById('anon-note');if(note)note.style.display=wa&&wa.checked?'flex':'none';}
 
-async function editPost(id){editId=id;const{data}=await sb.from('posts').select('*').eq('id',id).single();if(data){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML=data.title||'';if(wb)wb.innerHTML=data.body||'';document.getElementById('w-tag').value=data.tag||'Dreams';if(data.cover_url){coverUrl=data.cover_url;showCoverPrev(coverUrl);}const pb=document.getElementById('pub-btn');if(pb)pb.textContent='✅ Update';}}
+async function editPost(id){editId=id;const{data}=await sb.from('posts').select('*').eq('id',id).single();if(data){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if(wt)wt.innerHTML=data.title||'';if(wb)wb.innerHTML=data.body||'';document.getElementById('w-tag').value=data.tag||'Dreams';const wv=document.getElementById('w-vis');if(wv)wv.value=data.visibility||'public';const wa=document.getElementById('w-anon');if(wa){wa.checked=!!data.is_anonymous;updateAnonNote();}if(data.cover_url){coverUrl=data.cover_url;showCoverPrev(coverUrl);}const pb=document.getElementById('pub-btn');if(pb)pb.textContent='Update';}}
 
-function showCoverPrev(url){const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML=`<img src="${esc(url)}" class="wcprev"/>`;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Change cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='inline-flex';}
-function rmCover(){coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='🖼 Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';}
+function showCoverPrev(url){const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML=`<img src="${esc(url)}" class="wcprev"/>`;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Change cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='inline-flex';}
+function rmCover(){coverUrl='';const cw=document.getElementById('cover-wrap');if(cw)cw.innerHTML='';const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Add cover';const cr=document.getElementById('cover-rm-btn');if(cr)cr.style.display='none';}
 
-// Compress image before upload (fixes "exceeded maximum size" error)
 async function compressImage(file,maxW=1200,quality=0.82){return new Promise(resolve=>{const img=new Image();const url=URL.createObjectURL(file);img.onload=()=>{const scale=Math.min(1,maxW/Math.max(img.width,img.height));const w=Math.round(img.width*scale),h=Math.round(img.height*scale);const canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;canvas.getContext('2d').drawImage(img,0,0,w,h);URL.revokeObjectURL(url);canvas.toBlob(blob=>resolve(new File([blob],file.name,{type:'image/jpeg'})),'image/jpeg',quality);};img.src=url;});}
 
-async function uploadCover(input){const rawFile=input.files[0];if(!rawFile)return;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Compressing...';const file=await compressImage(rawFile,1400,0.85);if(ca)ca.textContent='Uploading...';const path=`covers/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');if(ca)ca.textContent='🖼 Add cover';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);coverUrl=data.publicUrl;showCoverPrev(coverUrl);toast('Cover uploaded! 🖼','ok');}
+async function uploadCover(input){const rawFile=input.files[0];if(!rawFile)return;const ca=document.getElementById('cover-add-btn');if(ca)ca.textContent='Compressing...';const file=await compressImage(rawFile,1400,0.85);if(ca)ca.textContent='Uploading...';const path=`covers/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');if(ca)ca.textContent='Add cover';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);coverUrl=data.publicUrl;showCoverPrev(coverUrl);toast('Cover uploaded!','ok');}
 
-// WYSIWYG toolbar actions
 function execFmt(cmd){const wb=document.getElementById('w-body');wb.focus();if(cmd==='code'){const sel=window.getSelection();if(sel.rangeCount){const range=sel.getRangeAt(0);const code=document.createElement('code');code.textContent=range.toString()||'code';range.deleteContents();range.insertNode(code);}}else{document.execCommand(cmd,false,null);}updateWC();}
 
 function execBlock(tag){const wb=document.getElementById('w-body');wb.focus();const sel=window.getSelection();if(!sel.rangeCount)return;const range=sel.getRangeAt(0);let node=range.startContainer;while(node&&node.parentNode!==wb)node=node.parentNode;if(node&&node.tagName&&node.tagName.toLowerCase()===tag){document.execCommand('formatBlock',false,'p');}else{document.execCommand('formatBlock',false,tag);}updateWC();}
 
 function execInsertLink(){const wb=document.getElementById('w-body');wb.focus();const sel=window.getSelection();const selectedText=sel.toString().trim();const url=prompt('Enter link URL:','https://');if(!url||url==='https://')return;const text=selectedText||prompt('Link text:','link')||'link';if(selectedText&&sel.rangeCount){document.execCommand('createLink',false,url);}else{const a=document.createElement('a');a.href=url;a.textContent=text;a.target='_blank';a.rel='noopener';const range=sel.getRangeAt(0);range.insertNode(a);}updateWC();}
 
-// Inline image with compression
 function triggerInlineImg(){document.getElementById('inline-img-input').click();}
-async function handleInlineImg(input){const rawFile=input.files[0];if(!rawFile)return;toast('Compressing image...');const file=await compressImage(rawFile,1200,0.82);toast('Uploading...');const path=`inline/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');input.value='';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);const wb=document.getElementById('w-body');wb.focus();const img=document.createElement('img');img.src=data.publicUrl;img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';document.execCommand('insertHTML',false,img.outerHTML);input.value='';toast('Image inserted! 🖼','ok');updateWC();}
+async function handleInlineImg(input){const rawFile=input.files[0];if(!rawFile)return;toast('Compressing image...');const file=await compressImage(rawFile,1200,0.82);toast('Uploading...');const path=`inline/${CU.id}/${Date.now()}.jpg`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true,contentType:'image/jpeg'});if(error){toast('Upload failed: '+error.message,'err');input.value='';return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);const wb=document.getElementById('w-body');wb.focus();const img=document.createElement('img');img.src=data.publicUrl;img.style.cssText='max-width:100%;border-radius:8px;margin:12px 0;display:block';document.execCommand('insertHTML',false,img.outerHTML);input.value='';toast('Image inserted!','ok');updateWC();}
 
 function titleKeyDown(e){if(e.key==='Enter'){e.preventDefault();document.getElementById('w-body').focus();}}
 function bodyKeyDown(e){if(e.key==='Enter'&&!e.shiftKey){setTimeout(()=>{const sel=window.getSelection();if(sel.rangeCount){let node=sel.getRangeAt(0).startContainer;if(node.nodeType===3)node=node.parentNode;if(node&&['BLOCKQUOTE','PRE','H2','H3'].includes(node.tagName)){document.execCommand('formatBlock',false,'p');}}},0);}}
 
 function updateWC(){const wb=document.getElementById('w-body');const txt=(wb?.innerText||'').trim();const wc=txt?txt.split(/\s+/).filter(Boolean).length:0;const el=document.getElementById('wc-disp');if(el)el.textContent=wc+' words';}
 
-function saveDraft(){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');localStorage.setItem('xp_draft',JSON.stringify({t:wt?.innerHTML||'',b:wb?.innerHTML||'',tag:document.getElementById('w-tag')?.value,coverUrl}));toast('Draft saved! 💾','ok');}
+function saveDraft(){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');localStorage.setItem('xp_draft',JSON.stringify({t:wt?.innerHTML||'',b:wb?.innerHTML||'',tag:document.getElementById('w-tag')?.value,vis:document.getElementById('w-vis')?.value,anon:document.getElementById('w-anon')?.checked,coverUrl}));toast('Draft saved!','ok');}
 
 function cancelWrite(){const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');if((wt?.innerText?.trim()||wb?.innerText?.trim())&&!editId&&confirm('Save as draft?'))saveDraft();editId=null;go('feed');}
 
@@ -1030,17 +1055,19 @@ async function publishPost(){
   const wt=document.getElementById('w-title');const wb=document.getElementById('w-body');
   const title=(wt?.innerText||'').trim();const bodyHTML=wb?.innerHTML||'';const bodyText=(wb?.innerText||'').trim();
   const tag=document.getElementById('w-tag').value;
+  const visibility=document.getElementById('w-vis')?.value||'public';
+  const isAnonymous=!!document.getElementById('w-anon')?.checked;
   if(!title){toast('Please add a title','err');return;}if(bodyText.length<30){toast('Write at least 30 characters','err');return;}
   const btn=document.getElementById('pub-btn');btn.textContent='Publishing...';btn.disabled=true;
   const excerpt=bodyText.replace(/\s+/g,' ').trim().slice(0,180)+(bodyText.length>180?'...':'');
   const isAdmin=CP?.role==='admin'||CP?.role==='moderator';
   try{
-    if(editId){const{error}=await sb.from('posts').update({title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null}).eq('id',editId);btn.textContent='✅ Update';btn.disabled=false;if(error){toast('Update failed: '+error.message,'err');return;}toast('Story updated! ✅','ok');const id=editId;editId=null;openStory(id);}
-    else{const{data,error}=await sb.from('posts').insert({author_id:CU.id,title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null,status:isAdmin?'approved':'pending',published_at:new Date().toISOString()}).select('id').single();btn.textContent='Publish →';btn.disabled=false;if(error){toast('Failed: '+error.message,'err');return;}localStorage.removeItem('xp_draft');
-      if(isAdmin){toast('Story published! 🎉','ok');openStory(data.id);notifyAdmins('post','📝 New dream published',`${CP?.full_name||'A user'} published "${title.slice(0,50)}"`,`#story/${data.id}`);}
-      else{toast("Submitted for review! You'll be notified when approved 👍",'ok');go('feed');notifyAdmins('pending_post','⏳ New dream awaiting review',`${CP?.full_name||'A user'} submitted "${title.slice(0,50)}" for approval`,'');}
+    if(editId){const{error}=await sb.from('posts').update({title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null,visibility,is_anonymous:isAnonymous}).eq('id',editId);btn.textContent='Update';btn.disabled=false;if(error){toast('Update failed: '+error.message,'err');return;}toast('Story updated!','ok');const id=editId;editId=null;openStory(id);}
+    else{const{data,error}=await sb.from('posts').insert({author_id:CU.id,title,body:bodyHTML,excerpt,tag,cover_url:coverUrl||null,visibility,is_anonymous:isAnonymous,status:isAdmin?'approved':'pending',published_at:new Date().toISOString()}).select('id').single();btn.textContent='Publish →';btn.disabled=false;if(error){toast('Failed: '+error.message,'err');return;}localStorage.removeItem('xp_draft');
+      if(isAdmin){toast('Story published!','ok');openStory(data.id);notifyAdmins('post','New dream published',`${isAnonymous?'Someone':(CP?.full_name||'A user')} published "${title.slice(0,50)}"`,`#story/${data.id}`);}
+      else{toast("Submitted for review! You'll be notified when approved.",'ok');go('feed');notifyAdmins('pending_post','New dream awaiting review',`${isAnonymous?'Someone':(CP?.full_name||'A user')} submitted "${title.slice(0,50)}" for approval`,'');}
     }
-  }catch(e){btn.textContent=editId?'✅ Update':'Publish →';btn.disabled=false;toast('Error: '+e.message,'err');}
+  }catch(e){btn.textContent=editId?'Update':'Publish →';btn.disabled=false;toast('Error: '+e.message,'err');}
 }
 async function openProfile(username){
   if(!username)return;go('profile');viewingUser=username;location.hash='u/'+username;
@@ -1049,46 +1076,56 @@ async function openProfile(username){
     const{data:profile}=await sb.from('profiles').select('*').eq('username',username).single();
     if(!profile){main.innerHTML='<div class="empty" style="margin:40px auto;max-width:700px"><h3>User not found</h3></div>';return;}
     const isOwn=CP?.username===username;
-    const{data:posts}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,comment_count,status').eq('author_id',profile.id).eq('status','approved').order('created_at',{ascending:false});
+    let{data:posts}=await sb.from('posts').select('id,title,excerpt,tag,created_at,upvotes,comment_count,status,visibility,is_anonymous').eq('author_id',profile.id).eq('status','approved').eq('is_anonymous',false).order('created_at',{ascending:false});
     const{count:fc}=await sb.from('follows').select('follower_id',{count:'exact',head:true}).eq('following_id',profile.id);
     const{count:fc2}=await sb.from('follows').select('following_id',{count:'exact',head:true}).eq('follower_id',profile.id);
     let isFollowing=false;if(CU&&!isOwn){const{data:f}=await sb.from('follows').select('follower_id').match({follower_id:CU.id,following_id:profile.id}).single();isFollowing=!!f;}
+    posts=(posts||[]).filter(p=>!p.visibility||p.visibility==='public'||isOwn||isFollowing);
     let pendPosts=[];if(isOwn||CP?.role==='admin'){const{data:pp}=await sb.from('posts').select('id,title,excerpt,tag,created_at,status').eq('author_id',profile.id).in('status',['pending','rejected','deleted']).order('created_at',{ascending:false});pendPosts=pp||[];}
     main.innerHTML=`<div class="pp">
-      <div class="phdr"><div class="pban">🌙✨🌟</div><div class="pinfo">
+      <div class="phdr"><div class="pban"></div><div class="pinfo">
         <div style="display:flex;align-items:flex-end;justify-content:space-between">
           <div style="position:relative"><div class="pav" id="p-av">${profile.avatar_url?`<img src="${esc(profile.avatar_url)}"/>`:(profile.full_name?.[0]||'U').toUpperCase()}</div>${isOwn?`<input type="file" id="av-inp" accept="image/*" style="display:none" onchange="uploadAv(this)"/><button onclick="document.getElementById('av-inp').click()" style="position:absolute;bottom:2px;right:2px;width:24px;height:24px;border-radius:50%;background:var(--ac);color:#fff;border:2px solid var(--s);cursor:pointer;font-size:.75rem;display:flex;align-items:center;justify-content:center">✎</button>`:''}</div>
-          <div style="display:flex;gap:8px">${isOwn?`<button class="btn btn-o btn-sm" onclick="openEditProfile()">✏️ Edit profile</button>`:CU?`<button class="flwb ${isFollowing?'following':''}" id="flw-btn" onclick="toggleFollow('${profile.id}','${esc(username)}')">${isFollowing?'✓ Following':'+ Follow'}</button>`:''}</div>
+          <div style="display:flex;gap:8px">${isOwn?`<button class="btn btn-o btn-sm" onclick="openEditProfile()">Edit profile</button>`:CU?`<button class="flwb ${isFollowing?'following':''}" id="flw-btn" onclick="toggleFollow('${profile.id}','${esc(username)}')">${isFollowing?'✓ Following':'+ Follow'}</button>`:''}</div>
         </div>
         <div class="pname">${esc(profile.full_name||'')}</div>
         <div class="phandle">@${esc(profile.username||'')}</div>
         ${profile.bio?`<div class="pbio">${esc(profile.bio)}</div>`:''}
-        <div class="pstats"><span><strong>${(posts||[]).length}</strong> dreams</span><span><strong>${fc||0}</strong> followers</span><span><strong>${fc2||0}</strong> following</span>${profile.role==='admin'?`<span class="badge bb">⚙️ Admin</span>`:''}</div>
+        ${profile.profile_link?`<a class="plink" href="${esc(profile.profile_link)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>${esc(profile.profile_link)}</a>`:''}
+        <div class="pstats"><span><strong>${(posts||[]).length}</strong> dreams</span><span><strong>${fc||0}</strong> followers</span><span><strong>${fc2||0}</strong> following</span>${profile.role==='admin'?`<span class="badge bb">Admin</span>`:''}</div>
       </div></div></div>
-      ${isOwn&&pendPosts.length>0?`<div class="tabs"><button class="tab active" id="t-pub" onclick="showPTab('pub')">✅ Published (${(posts||[]).length})</button><button class="tab" id="t-pend" onclick="showPTab('pend')">⏳ Pending (${pendPosts.length})</button></div>`:''}
+      ${isOwn&&pendPosts.length>0?`<div class="tabs"><button class="tab active" id="t-pub" onclick="showPTab('pub')">Published (${(posts||[]).length})</button><button class="tab" id="t-pend" onclick="showPTab('pend')">Pending (${pendPosts.length})</button></div>`:''}
       <div id="p-pub">
-        ${!(posts||[]).length?`<div class="empty"><div class="ico">✍️</div><h3>No dreams yet</h3>${isOwn?`<button class="btn btn-p" onclick="go('write')">Write now</button>`:''}</div>`:
-        (posts||[]).map(p=>`<div class="pc" style="margin-bottom:12px" onclick="openStory('${p.id}')"><div class="pb"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="tbadge">${esc(p.tag)}</span><span style="font-size:.75rem;color:var(--mu);margin-left:auto">${ago(p.created_at)}</span></div><div class="pt">${esc(p.title||'Untitled')}</div><div class="pe">${esc(p.excerpt||'')}</div><div style="display:flex;align-items:center;gap:12px;margin-top:10px;padding-top:8px;border-top:1px solid var(--br);font-size:.8rem;color:var(--mu)" onclick="event.stopPropagation()"><span>▲ ${p.upvotes||0}</span><span>💬 ${p.comment_count||0}</span>${isOwn?`<button class="btn btn-g btn-sm" style="margin-left:auto" onclick="event.stopPropagation();go('write');editPost('${p.id}')">Edit</button><button class="btn btn-d btn-sm" onclick="event.stopPropagation();delMyPost('${p.id}','${esc(username)}')">Delete</button>`:''}</div></div></div>`).join('')}
+        ${!(posts||[]).length?`<div class="empty"><h3>No dreams yet</h3>${isOwn?`<button class="btn btn-p" onclick="go('write')">Write now</button>`:''}</div>`:
+        (posts||[]).map(p=>`<div class="pc" style="margin-bottom:12px" onclick="openStory('${p.id}')"><div class="pb"><div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span class="tbadge">${esc(p.tag)}</span>${p.visibility==='followers'?`<span class="vbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Followers</span>`:''}<span style="font-size:.75rem;color:var(--mu);margin-left:auto">${ago(p.created_at)}</span></div><div class="pt">${esc(p.title||'Untitled')}</div><div class="pe">${esc(p.excerpt||'')}</div><div style="display:flex;align-items:center;gap:12px;margin-top:10px;padding-top:8px;border-top:1px solid var(--br);font-size:.8rem;color:var(--mu)" onclick="event.stopPropagation()"><span>▲ ${p.upvotes||0}</span><span>${p.comment_count||0} comments</span>${isOwn?`<button class="btn btn-g btn-sm" style="margin-left:auto" onclick="event.stopPropagation();go('write');editPost('${p.id}')">Edit</button><button class="btn btn-d btn-sm" onclick="event.stopPropagation();delMyPost('${p.id}','${esc(username)}')">Delete</button>`:''}</div></div></div>`).join('')}
       </div>
-      ${isOwn&&pendPosts.length>0?`<div id="p-pend" style="display:none">${pendPosts.map(p=>`<div class="pc" style="margin-bottom:12px"><div class="pb"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="tbadge">${esc(p.tag)}</span><span class="badge ${p.status==='pending'?'by':p.status==='rejected'?'br2':'bgr'}" style="margin-left:auto">${p.status==='pending'?'⏳ Under review':p.status==='rejected'?'❌ Rejected':'🗑 Deleted'}</span></div><div class="pt">${esc(p.title||'')}</div></div></div>`).join('')}</div>`:''}
+      ${isOwn&&pendPosts.length>0?`<div id="p-pend" style="display:none">${pendPosts.map(p=>`<div class="pc" style="margin-bottom:12px"><div class="pb"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span class="tbadge">${esc(p.tag)}</span><span class="badge ${p.status==='pending'?'by':p.status==='rejected'?'br2':'bgr'}" style="margin-left:auto">${p.status==='pending'?'Under review':p.status==='rejected'?'Rejected':'Deleted'}</span></div><div class="pt">${esc(p.title||'')}</div></div></div>`).join('')}</div>`:''}
     </div>`;
   }catch(e){main.innerHTML=`<div class="empty" style="margin:40px auto;max-width:700px"><h3>Error</h3><p>${esc(e.message)}</p></div>`;}
 }
 function showPTab(t){const pp=document.getElementById('p-pub');if(pp)pp.style.display=t==='pub'?'block':'none';const pe=document.getElementById('p-pend');if(pe)pe.style.display=t==='pend'?'block':'none';document.getElementById('t-pub')?.classList.toggle('active',t==='pub');document.getElementById('t-pend')?.classList.toggle('active',t==='pend');}
 function myProfile(){if(CP)openProfile(CP.username);else go('signin');}
-function openEditProfile(){document.getElementById('ep-name').value=CP?.full_name||'';document.getElementById('ep-bio').value=CP?.bio||'';openModal('edit-profile-modal');}
-async function saveProfile(){await sb.from('profiles').update({full_name:document.getElementById('ep-name').value.trim(),bio:document.getElementById('ep-bio').value.trim()}).eq('id',CU.id);toast('Profile updated! ✅','ok');closeModal('edit-profile-modal');await loadCP();updateNav();openProfile(viewingUser);}
-async function uploadAv(input){const file=input.files[0];if(!file)return;toast('Uploading...');const path=`avatars/${CU.id}.${file.name.split('.').pop()}`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true});if(error){toast('Upload failed','err');return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);await sb.from('profiles').update({avatar_url:data.publicUrl}).eq('id',CU.id);toast('Photo updated! 📸','ok');await loadCP();updateNav();openProfile(viewingUser);}
+function openEditProfile(){document.getElementById('ep-name').value=CP?.full_name||'';document.getElementById('ep-user').value=CP?.username||'';const eu=document.getElementById('ep-user-err');if(eu)eu.style.display='none';document.getElementById('ep-bio').value=CP?.bio||'';document.getElementById('ep-link').value=CP?.profile_link||'';openModal('edit-profile-modal');}
+async function saveProfile(){
+  const errEl=document.getElementById('ep-user-err');if(errEl)errEl.style.display='none';
+  const newUsername=document.getElementById('ep-user').value.trim().toLowerCase().replace(/[^a-z0-9_]/g,'');
+  if(newUsername.length<3){if(errEl){errEl.textContent='Username must be at least 3 characters';errEl.style.display='block';}return;}
+  const oldUsername=CP?.username;
+  const{error}=await sb.from('profiles').update({full_name:document.getElementById('ep-name').value.trim(),username:newUsername,bio:document.getElementById('ep-bio').value.trim(),profile_link:document.getElementById('ep-link').value.trim()||null}).eq('id',CU.id);
+  if(error){if(errEl){errEl.textContent=error.message.includes('duplicate')||error.message.includes('unique')?'That username is already taken':error.message;errEl.style.display='block';}return;}
+  toast('Profile updated!','ok');closeModal('edit-profile-modal');await loadCP();updateNav();openProfile(newUsername||oldUsername);
+}
+async function uploadAv(input){const file=input.files[0];if(!file)return;toast('Uploading...');const path=`avatars/${CU.id}.${file.name.split('.').pop()}`;const{error}=await sb.storage.from('xpora-images').upload(path,file,{upsert:true});if(error){toast('Upload failed','err');return;}const{data}=sb.storage.from('xpora-images').getPublicUrl(path);await sb.from('profiles').update({avatar_url:data.publicUrl}).eq('id',CU.id);toast('Photo updated!','ok');await loadCP();updateNav();openProfile(viewingUser);}
 async function toggleFollow(profileId,username){
   if(!CU){go('signin');return;}
   const btn=document.getElementById('flw-btn')||document.getElementById('sflw');const following=btn?.classList.contains('following');
   if(following){await sb.from('follows').delete().match({follower_id:CU.id,following_id:profileId});if(btn){btn.textContent='+ Follow';btn.classList.remove('following');}toast('Unfollowed');}
-  else{await sb.from('follows').insert({follower_id:CU.id,following_id:profileId});if(btn){btn.textContent='✓ Following';btn.classList.add('following');}toast('Following! ✅','ok');await sendNotif(profileId,'follow','👥 New follower!',`${CP?.full_name||'Someone'} started following you.`,'');}
+  else{await sb.from('follows').insert({follower_id:CU.id,following_id:profileId});if(btn){btn.textContent='✓ Following';btn.classList.add('following');}toast('Following!','ok');await sendNotif(profileId,'follow','New follower!',`${CP?.full_name||'Someone'} started following you.`,'');}
 }
 async function delMyPost(postId,username){if(!confirm('Delete this dream?'))return;await sb.from('posts').update({status:'deleted'}).eq('id',postId);toast('Dream deleted');openProfile(username);}
 async function adminTab(tab){
   curAT=tab;['dash','pend','posts','users','comments','reports','support','logs'].forEach(k=>{const el=document.getElementById('atab-'+k);if(el)el.classList.toggle('active',k===tab);});
-  const titles={dash:'📊 Dashboard',pend:'⏳ Pending',posts:'📝 All Stories',users:'👥 Users',comments:'💬 Comments',reports:'⚑ Reports',support:'🛟 Support',logs:'📋 Logs'};
+  const titles={dash:'Dashboard',pend:'Pending',posts:'All Stories',users:'Users',comments:'Comments',reports:'Reports',support:'Support',logs:'Logs'};
   const tel=document.getElementById('ad-title');if(tel)tel.textContent=titles[tab]||tab;
   const body=document.getElementById('ad-body');body.innerHTML='<div class="ldr"><div class="spin"></div></div>';
   if(tab==='dash'){
@@ -1096,51 +1133,51 @@ async function adminTab(tab){
     const s={posts:p1.count||0,users:p2.count||0,cmts:p3.count||0,rpts:p4.count||0,pend:p5.count||0,supp:p6.count||0};
     if(s.pend>0){const pb=document.getElementById('pend-badge');if(pb){pb.textContent=s.pend;pb.style.display='inline';}}
     if(s.supp>0){const sb2=document.getElementById('supp-badge');if(sb2){sb2.textContent=s.supp;sb2.style.display='inline';}}
-    body.innerHTML=`<div class="sgrid">${[{l:'Total Dreams',v:s.posts,c:'var(--grn)'},{l:'Users',v:s.users,c:'#60A5FA'},{l:'Comments',v:s.cmts,c:'var(--ac2)'},{l:'Pending',v:s.pend,c:'#F97316'},{l:'Reports',v:s.rpts,c:'var(--red)'},{l:'Open Tickets',v:s.supp,c:'#EAB308'}].map(x=>`<div class="sc"><div class="sv" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div>`).join('')}</div><div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px"><h3 style="font-size:.95rem;font-weight:600;margin-bottom:12px;color:var(--tx)">Quick Actions</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="adminTab('pend')">⏳ Review Pending (${s.pend})</button><button class="btn btn-o btn-sm" onclick="adminTab('reports')">⚑ Reports (${s.rpts})</button><button class="btn btn-o btn-sm" onclick="adminTab('support')">🛟 Support (${s.supp})</button><button class="btn btn-o btn-sm" onclick="adminTab('users')">👥 Users</button></div></div>`;
+    body.innerHTML=`<div class="sgrid">${[{l:'Total Dreams',v:s.posts,c:'var(--grn)'},{l:'Users',v:s.users,c:'#60A5FA'},{l:'Comments',v:s.cmts,c:'var(--ac2)'},{l:'Pending',v:s.pend,c:'#F97316'},{l:'Reports',v:s.rpts,c:'var(--red)'},{l:'Open Tickets',v:s.supp,c:'#EAB308'}].map(x=>`<div class="sc"><div class="sv" style="color:${x.c}">${x.v}</div><div class="sl">${x.l}</div></div>`).join('')}</div><div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px"><h3 style="font-size:.95rem;font-weight:600;margin-bottom:12px;color:var(--tx)">Quick Actions</h3><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-p btn-sm" onclick="adminTab('pend')">Review Pending (${s.pend})</button><button class="btn btn-o btn-sm" onclick="adminTab('reports')">Reports (${s.rpts})</button><button class="btn btn-o btn-sm" onclick="adminTab('support')">Support (${s.supp})</button><button class="btn btn-o btn-sm" onclick="adminTab('users')">Users</button></div></div>`;
   }else if(tab==='pend'){
-    const{data}=await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id').eq('status','pending').order('created_at',{ascending:false});
-    if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">🎉</div><h3>No pending posts!</h3><p>All caught up.</p></div>';return;}
+    const{data}=await sb.from('posts').select('id,title,excerpt,tag,created_at,author_id,is_anonymous').eq('status','pending').order('created_at',{ascending:false});
+    if(!data?.length){body.innerHTML='<div class="empty"><h3>No pending posts!</h3><p>All caught up.</p></div>';return;}
     const ids=[...new Set(data.map(p=>p.author_id))];const{data:profs}=await sb.from('profiles').select('id,username,full_name,avatar_url').in('id',ids);const pm={};(profs||[]).forEach(p=>{pm[p.id]=p;});
-    body.innerHTML=data.map(p=>{const prof=pm[p.author_id]||{};return`<div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">${avH(prof,32,11)}<div><div style="font-weight:600;font-size:.85rem;color:var(--tx)">@${esc(prof.username||'')}</div><div style="font-size:.75rem;color:var(--mu)">${ago(p.created_at)}</div></div><span class="badge by" style="margin-left:auto">⏳ Pending</span></div><div style="font-family:var(--fd);font-size:1.1rem;font-weight:600;margin-bottom:6px;color:var(--tx)">${esc(p.title||'')}</div><div style="font-size:.85rem;color:var(--mu);margin-bottom:14px">${esc(p.excerpt||'')}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ok btn-sm" onclick="adminApprove('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">✅ Approve</button><button class="btn btn-d btn-sm" onclick="adminReject('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">❌ Reject</button><button class="btn btn-g btn-sm" onclick="openStory('${p.id}')">👁 Preview</button></div></div>`;}).join('');
+    body.innerHTML=data.map(p=>{const prof=pm[p.author_id]||{};const authorLbl=p.is_anonymous?`${avH({},32,11)}<div><div style="font-weight:600;font-size:.85rem;color:var(--tx)">Anonymous (visible to admin only)</div><div style="font-size:.75rem;color:var(--mu)">@${esc(prof.username||'')} · ${ago(p.created_at)}</div></div>`:`${avH(prof,32,11)}<div><div style="font-weight:600;font-size:.85rem;color:var(--tx)">@${esc(prof.username||'')}</div><div style="font-size:.75rem;color:var(--mu)">${ago(p.created_at)}</div></div>`;return`<div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">${authorLbl}<span class="badge by" style="margin-left:auto">Pending</span></div><div style="font-family:var(--fd);font-size:1.1rem;font-weight:600;margin-bottom:6px;color:var(--tx)">${esc(p.title||'')}</div><div style="font-size:.85rem;color:var(--mu);margin-bottom:14px">${esc(p.excerpt||'')}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn btn-ok btn-sm" onclick="adminApprove('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">Approve</button><button class="btn btn-d btn-sm" onclick="adminReject('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">Reject</button><button class="btn btn-g btn-sm" onclick="openStory('${p.id}')">Preview</button></div></div>`;}).join('');
   }else if(tab==='posts'){
-    const{data}=await sb.from('posts').select('id,title,tag,status,created_at,upvotes,views,author_id').order('created_at',{ascending:false}).limit(60);
+    const{data}=await sb.from('posts').select('id,title,tag,status,created_at,upvotes,views,author_id,is_anonymous').order('created_at',{ascending:false}).limit(60);
     const ids=[...new Set((data||[]).map(p=>p.author_id))];const{data:profs}=await sb.from('profiles').select('id,username').in('id',ids);const pm={};(profs||[]).forEach(p=>{pm[p.id]=p;});
-    body.innerHTML=`<div class="dt"><table><thead><tr><th>Title</th><th>Author</th><th>Status</th><th>Votes</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(p=>`<tr><td style="font-weight:500;max-width:180px">${esc((p.title||'').slice(0,45))}</td><td>@${esc(pm[p.author_id]?.username||'')}</td><td><span class="badge ${p.status==='approved'?'bg':p.status==='pending'?'by':p.status==='rejected'?'br2':'bgr'}">${p.status}</span></td><td>${p.upvotes||0}</td><td style="white-space:nowrap;display:flex;gap:4px"><button class="btn btn-g btn-sm" onclick="openStory('${p.id}')">View</button>${p.status!=='approved'?`<button class="btn btn-ok btn-sm" onclick="adminApprove('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">✅</button>`:''} ${p.status==='approved'?`<button class="btn btn-d btn-sm" onclick="adminDeletePost('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">🗑</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
+    body.innerHTML=`<div class="dt"><table><thead><tr><th>Title</th><th>Author</th><th>Status</th><th>Votes</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(p=>`<tr><td style="font-weight:500;max-width:180px">${esc((p.title||'').slice(0,45))}</td><td>${p.is_anonymous?'Anonymous':'@'+esc(pm[p.author_id]?.username||'')}</td><td><span class="badge ${p.status==='approved'?'bg':p.status==='pending'?'by':p.status==='rejected'?'br2':'bgr'}">${p.status}</span></td><td>${p.upvotes||0}</td><td style="white-space:nowrap;display:flex;gap:4px"><button class="btn btn-g btn-sm" onclick="openStory('${p.id}')">View</button>${p.status!=='approved'?`<button class="btn btn-ok btn-sm" onclick="adminApprove('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">Approve</button>`:''} ${p.status==='approved'?`<button class="btn btn-d btn-sm" onclick="adminDeletePost('${p.id}','${p.author_id}','${esc(p.title||'').replace(/'/g,"\\'")}')">Delete</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
   }else if(tab==='users'){
     const{data}=await sb.from('profiles').select('*').order('created_at',{ascending:false}).limit(60);
-    body.innerHTML=`<div class="dt"><table><thead><tr><th>User</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(u=>`<tr><td><div style="display:flex;align-items:center;gap:8px">${avH(u,28,10)}<span style="font-weight:500;color:var(--tx)">${esc(u.full_name||'')}</span></div></td><td style="color:var(--mu)">@${esc(u.username||'')}</td><td><span class="badge ${u.role==='admin'?'bb':u.role==='moderator'?'by':'bgr'}">${u.role||'user'}</span></td><td>${u.is_banned?`<span class="badge br2">Banned</span>`:u.is_suspended?`<span class="badge by">Suspended</span>`:`<span class="badge bg">Active</span>`}</td><td style="white-space:nowrap;display:flex;gap:3px;flex-wrap:wrap"><button class="btn btn-g btn-sm" onclick="openProfile('${esc(u.username||'')}')">View</button><button class="btn btn-o btn-sm" onclick="adminMessageUser('${u.id}','${esc(u.username||'')}')">✉️ Message</button>${!u.is_suspended&&!u.is_banned?`<button class="btn btn-d btn-sm" onclick="adminSuspend('${u.id}','${esc(u.username||'')}')">Suspend</button>`:''}${u.is_suspended?`<button class="btn btn-ok btn-sm" onclick="adminUnsuspend('${u.id}','${esc(u.username||'')}')">Restore</button>`:''}${!u.is_banned?`<button class="btn btn-d btn-sm" onclick="adminBan('${u.id}','${esc(u.username||'')}')">Ban</button>`:`<button class="btn btn-ok btn-sm" onclick="adminUnban('${u.id}')">Unban</button>`}${u.role!=='admin'?`<button class="btn btn-g btn-sm" onclick="adminMakeAdmin('${u.id}','${esc(u.username||'')}')">→Admin</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
+    body.innerHTML=`<div class="dt"><table><thead><tr><th>User</th><th>Username</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody>${(data||[]).map(u=>`<tr><td><div style="display:flex;align-items:center;gap:8px">${avH(u,28,10)}<span style="font-weight:500;color:var(--tx)">${esc(u.full_name||'')}</span></div></td><td style="color:var(--mu)">@${esc(u.username||'')}</td><td><span class="badge ${u.role==='admin'?'bb':u.role==='moderator'?'by':'bgr'}">${u.role||'user'}</span></td><td>${u.is_banned?`<span class="badge br2">Banned</span>`:u.is_suspended?`<span class="badge by">Suspended</span>`:`<span class="badge bg">Active</span>`}</td><td style="white-space:nowrap;display:flex;gap:3px;flex-wrap:wrap"><button class="btn btn-g btn-sm" onclick="openProfile('${esc(u.username||'')}')">View</button><button class="btn btn-o btn-sm" onclick="adminMessageUser('${u.id}','${esc(u.username||'')}')">Message</button>${!u.is_suspended&&!u.is_banned?`<button class="btn btn-d btn-sm" onclick="adminSuspend('${u.id}','${esc(u.username||'')}')">Suspend</button>`:''}${u.is_suspended?`<button class="btn btn-ok btn-sm" onclick="adminUnsuspend('${u.id}','${esc(u.username||'')}')">Restore</button>`:''}${!u.is_banned?`<button class="btn btn-d btn-sm" onclick="adminBan('${u.id}','${esc(u.username||'')}')">Ban</button>`:`<button class="btn btn-ok btn-sm" onclick="adminUnban('${u.id}')">Unban</button>`}${u.role!=='admin'?`<button class="btn btn-g btn-sm" onclick="adminMakeAdmin('${u.id}','${esc(u.username||'')}')">→Admin</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
   }else if(tab==='comments'){
     const{data}=await sb.from('comments').select('*').order('created_at',{ascending:false}).limit(60);
     const aIds=[...new Set((data||[]).map(c=>c.author_id))];const{data:profs}=await sb.from('profiles').select('id,username').in('id',aIds);const pm={};(profs||[]).forEach(p=>{pm[p.id]=p;});
     body.innerHTML=`<div class="dt"><table><thead><tr><th>Comment</th><th>Author</th><th>Status</th><th>Date</th><th>Action</th></tr></thead><tbody>${(data||[]).map(c=>`<tr><td style="max-width:200px;font-size:.82rem">${esc((c.body||c.content||'').slice(0,80))}</td><td>@${esc(pm[c.author_id]?.username||'')}</td><td><span class="badge ${c.status==='approved'?'bg':'br2'}">${c.status}</span></td><td style="font-size:.75rem">${new Date(c.created_at).toLocaleDateString()}</td><td>${c.status==='approved'?`<button class="btn btn-d btn-sm" onclick="adminRemCmt('${c.id}','${c.author_id}')">Remove</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
   }else if(tab==='reports'){
     const{data}=await sb.from('reports').select('*').order('created_at',{ascending:false});
-    if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">✅</div><h3>No reports!</h3></div>';return;}
+    if(!data?.length){body.innerHTML='<div class="empty"><h3>No reports!</h3></div>';return;}
     const rIds=[...new Set((data||[]).map(r=>r.reporter_id))];const{data:profs}=await sb.from('profiles').select('id,username').in('id',rIds);const pm={};(profs||[]).forEach(p=>{pm[p.id]=p;});
     body.innerHTML=`<div class="dt"><table><thead><tr><th>Reason</th><th>Reporter</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>${data.map(r=>`<tr><td><span class="badge br2">${esc(r.reason||'')}</span></td><td>@${esc(pm[r.reporter_id]?.username||'')}</td><td><span class="badge ${r.status==='pending'?'by':r.status==='reviewed'?'bg':'bgr'}">${r.status}</span></td><td style="font-size:.75rem">${new Date(r.created_at).toLocaleDateString()}</td><td style="display:flex;gap:4px">${r.status==='pending'?`<button class="btn btn-g btn-sm" onclick="adminDismissRpt('${r.id}')">Dismiss</button>`:''}${r.post_id?`<button class="btn btn-g btn-sm" onclick="openStory('${r.post_id}')">View</button><button class="btn btn-d btn-sm" onclick="adminDeletePostByReport('${r.post_id}','${r.id}')">Delete</button>`:''}</td></tr>`).join('')}</tbody></table></div>`;
   }else if(tab==='support'){
     const{data}=await sb.from('support_tickets').select('*').order('created_at',{ascending:false}).limit(100);
-    if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">🛟</div><h3>No support messages</h3><p>Nothing here yet.</p></div>';return;}
-    body.innerHTML=data.map(t=>`<div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap"><span class="badge bb">${esc(t.category||'Other')}</span><span style="font-size:.85rem;font-weight:600;color:var(--tx)">${esc(t.name||'Anonymous')}</span><span style="font-size:.78rem;color:var(--mu)">${esc(t.email||'')}</span><span class="badge ${t.status==='open'?'by':'bg'}" style="margin-left:auto">${t.status==='open'?'⏳ Open':'✅ Resolved'}</span><span style="font-size:.72rem;color:var(--mu)">${new Date(t.created_at).toLocaleString()}</span></div><div style="font-size:.88rem;color:var(--tx);line-height:1.6;margin-bottom:12px">${esc(t.message||'')}</div><div style="display:flex;gap:8px"><a class="btn btn-o btn-sm" href="mailto:${esc(t.email||'')}?subject=Re: your Nidrno support request">✉️ Reply by email</a>${t.status==='open'?`<button class="btn btn-ok btn-sm" onclick="adminResolveTicket('${t.id}')">Mark resolved</button>`:''}</div></div>`).join('');
+    if(!data?.length){body.innerHTML='<div class="empty"><h3>No support messages</h3><p>Nothing here yet.</p></div>';return;}
+    body.innerHTML=data.map(t=>`<div style="background:var(--s);border:1px solid var(--br);border-radius:var(--r);padding:18px;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap"><span class="badge bb">${esc(t.category||'Other')}</span><span style="font-size:.85rem;font-weight:600;color:var(--tx)">${esc(t.name||'Anonymous')}</span><span style="font-size:.78rem;color:var(--mu)">${esc(t.email||'')}</span><span class="badge ${t.status==='open'?'by':'bg'}" style="margin-left:auto">${t.status==='open'?'Open':'Resolved'}</span><span style="font-size:.72rem;color:var(--mu)">${new Date(t.created_at).toLocaleString()}</span></div><div style="font-size:.88rem;color:var(--tx);line-height:1.6;margin-bottom:12px">${esc(t.message||'')}</div><div style="display:flex;gap:8px"><a class="btn btn-o btn-sm" href="mailto:${esc(t.email||'')}?subject=Re: your Nidrno support request">Reply by email</a>${t.status==='open'?`<button class="btn btn-ok btn-sm" onclick="adminResolveTicket('${t.id}')">Mark resolved</button>`:''}</div></div>`).join('');
   }else if(tab==='logs'){
     const{data}=await sb.from('moderation_logs').select('*,profiles(username)').order('created_at',{ascending:false}).limit(60);
-    if(!data?.length){body.innerHTML='<div class="empty"><div class="ico">📋</div><h3>No logs yet</h3></div>';return;}
+    if(!data?.length){body.innerHTML='<div class="empty"><h3>No logs yet</h3></div>';return;}
     body.innerHTML=`<div class="dt"><table><thead><tr><th>Action</th><th>Admin</th><th>Target</th><th>Reason</th><th>Date</th></tr></thead><tbody>${data.map(l=>`<tr><td><span class="badge bb">${esc(l.action||'')}</span></td><td>@${esc(l.profiles?.username||'system')}</td><td style="font-size:.75rem;color:var(--mu)">${esc(l.target_type||'')}:${(l.target_id||'').slice(0,8)}</td><td style="font-size:.82rem">${esc(l.reason||'—')}</td><td style="font-size:.75rem">${new Date(l.created_at).toLocaleDateString()}</td></tr>`).join('')}</tbody></table></div>`;
   }
 }
-async function adminApprove(id,aId,title){await sb.from('posts').update({status:'approved'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','🎉 Dream approved!',`Your story "${title}" is now live!`,`#story/${id}`);await adminLog('approve_post','post',id,'Approved');toast('✅ Approved!','ok');adminTab(curAT);}
-async function adminReject(id,aId,title){const reason=prompt('Reason:','Violates community guidelines');if(reason===null)return;await sb.from('posts').update({status:'rejected',moderation_reason:reason}).eq('id',id);if(aId)await sendNotif(aId,'moderation','❌ Dream not approved',`Reason: ${reason}`,'');await adminLog('reject_post','post',id,reason);toast('Post rejected');adminTab(curAT);}
-async function adminDeletePost(id,aId,title){if(!confirm(`Delete "${title}"?`))return;await sb.from('posts').update({status:'deleted'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','🗑 Story removed',`Your story "${title}" was removed.`,'');await adminLog('delete_post','post',id,'Deleted');toast('Deleted');adminTab(curAT);}
-async function adminDeletePostByReport(pId,rId){if(!confirm('Delete this post?'))return;const{data:post}=await sb.from('posts').select('author_id,title').eq('id',pId).single();await sb.from('posts').update({status:'deleted'}).eq('id',pId);await sb.from('reports').update({status:'reviewed'}).eq('id',rId);if(post)await sendNotif(post.author_id,'moderation','🗑 Story removed','Your story was removed after a report review.','');await adminLog('delete_post_report','post',pId,'Via report');toast('Deleted');adminTab(curAT);}
-async function adminSuspend(id,u){const r=prompt(`Reason for suspending @${u}:`,'Violation of guidelines');if(r===null)return;await sb.from('profiles').update({is_suspended:true,suspension_reason:r}).eq('id',id);await sendNotif(id,'system','⚠️ Account suspended',`Suspended. Reason: ${r}`,'');await adminLog('suspend_user','user',id,r);toast(`@${u} suspended`);adminTab(curAT);}
-async function adminUnsuspend(id,u){await sb.from('profiles').update({is_suspended:false,suspension_reason:null}).eq('id',id);await sendNotif(id,'system','✅ Account restored','Your suspension has been lifted. Welcome back!','');await adminLog('unsuspend_user','user',id,'Unsuspended');toast('Restored','ok');adminTab(curAT);}
+async function adminApprove(id,aId,title){await sb.from('posts').update({status:'approved'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','Dream approved!',`Your story "${title}" is now live!`,`#story/${id}`);await adminLog('approve_post','post',id,'Approved');toast('Approved!','ok');adminTab(curAT);}
+async function adminReject(id,aId,title){const reason=prompt('Reason:','Violates community guidelines');if(reason===null)return;await sb.from('posts').update({status:'rejected',moderation_reason:reason}).eq('id',id);if(aId)await sendNotif(aId,'moderation','Dream not approved',`Reason: ${reason}`,'');await adminLog('reject_post','post',id,reason);toast('Post rejected');adminTab(curAT);}
+async function adminDeletePost(id,aId,title){if(!confirm(`Delete "${title}"?`))return;await sb.from('posts').update({status:'deleted'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','Story removed',`Your story "${title}" was removed.`,'');await adminLog('delete_post','post',id,'Deleted');toast('Deleted');adminTab(curAT);}
+async function adminDeletePostByReport(pId,rId){if(!confirm('Delete this post?'))return;const{data:post}=await sb.from('posts').select('author_id,title').eq('id',pId).single();await sb.from('posts').update({status:'deleted'}).eq('id',pId);await sb.from('reports').update({status:'reviewed'}).eq('id',rId);if(post)await sendNotif(post.author_id,'moderation','Story removed','Your story was removed after a report review.','');await adminLog('delete_post_report','post',pId,'Via report');toast('Deleted');adminTab(curAT);}
+async function adminSuspend(id,u){const r=prompt(`Reason for suspending @${u}:`,'Violation of guidelines');if(r===null)return;await sb.from('profiles').update({is_suspended:true,suspension_reason:r}).eq('id',id);await sendNotif(id,'system','Account suspended',`Suspended. Reason: ${r}`,'');await adminLog('suspend_user','user',id,r);toast(`@${u} suspended`);adminTab(curAT);}
+async function adminUnsuspend(id,u){await sb.from('profiles').update({is_suspended:false,suspension_reason:null}).eq('id',id);await sendNotif(id,'system','Account restored','Your suspension has been lifted. Welcome back!','');await adminLog('unsuspend_user','user',id,'Unsuspended');toast('Restored','ok');adminTab(curAT);}
 async function adminBan(id,u){if(!confirm(`Permanently ban @${u}?`))return;await sb.from('profiles').update({is_banned:true}).eq('id',id);await adminLog('ban_user','user',id,'Banned');toast(`@${u} banned`);adminTab(curAT);}
 async function adminUnban(id){await sb.from('profiles').update({is_banned:false}).eq('id',id);toast('Unbanned','ok');adminTab(curAT);}
-async function adminMakeAdmin(id,u){if(!confirm(`Promote @${u} to admin?`))return;await sb.from('profiles').update({role:'admin'}).eq('id',id);await sendNotif(id,'system','⚙️ You are now an admin!','You have been promoted to admin on Nidrno.','');toast('Promoted ✅','ok');adminTab(curAT);}
-async function adminMessageUser(id,u){const msg=prompt(`Message to @${u}:`);if(!msg||!msg.trim())return;await sendNotif(id,'admin_message','📩 Message from the Nidrno team',msg.trim(),'');toast('Message sent ✅','ok');}
-async function adminRemCmt(id,aId){await sb.from('comments').update({status:'removed'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','💬 Comment removed','Your comment was removed by a moderator.','');await adminLog('remove_comment','comment',id,'Removed');toast('Removed');adminTab(curAT);}
+async function adminMakeAdmin(id,u){if(!confirm(`Promote @${u} to admin?`))return;await sb.from('profiles').update({role:'admin'}).eq('id',id);await sendNotif(id,'system','You are now an admin!','You have been promoted to admin on Nidrno.','');toast('Promoted','ok');adminTab(curAT);}
+async function adminMessageUser(id,u){const msg=prompt(`Message to @${u}:`);if(!msg||!msg.trim())return;await sendNotif(id,'admin_message','Message from the Nidrno team',msg.trim(),'');toast('Message sent','ok');}
+async function adminRemCmt(id,aId){await sb.from('comments').update({status:'removed'}).eq('id',id);if(aId)await sendNotif(aId,'moderation','Comment removed','Your comment was removed by a moderator.','');await adminLog('remove_comment','comment',id,'Removed');toast('Removed');adminTab(curAT);}
 async function adminDismissRpt(id){await sb.from('reports').update({status:'dismissed'}).eq('id',id);toast('Dismissed');adminTab(curAT);}
-async function adminResolveTicket(id){await sb.from('support_tickets').update({status:'resolved'}).eq('id',id);toast('Marked resolved ✅','ok');adminTab(curAT);}
+async function adminResolveTicket(id){await sb.from('support_tickets').update({status:'resolved'}).eq('id',id);toast('Marked resolved','ok');adminTab(curAT);}
 async function adminLog(action,tt,tid,reason){if(!CP)return;await sb.from('moderation_logs').insert({admin_id:CP.id,action,target_type:tt,target_id:tid,reason}).catch(()=>{});}
 let commSub=null,commProfCache={};
 async function loadCommunity(){
@@ -1149,7 +1186,7 @@ async function loadCommunity(){
   box.innerHTML='<div class="ldr"><div class="spin"></div></div>';
   try{
     const{data,error}=await sb.from('group_messages').select('*').order('created_at',{ascending:true}).limit(200);
-    if(error){box.innerHTML=`<div class="empty"><div class="ico">⚠️</div><h3>Couldn't load community</h3><p>${esc(error.message)}</p></div>`;return;}
+    if(error){box.innerHTML=`<div class="empty"><h3>Couldn't load community</h3><p>${esc(error.message)}</p></div>`;return;}
     const uids=[...new Set((data||[]).map(m=>m.user_id))];
     if(uids.length){const{data:profs}=await sb.from('profiles').select('id,username,full_name,avatar_url,role').in('id',uids);(profs||[]).forEach(p=>{commProfCache[p.id]=p;});}
     renderCommMsgs(data||[]);
@@ -1161,7 +1198,7 @@ async function loadCommunity(){
         document.getElementById('gm-'+payload.old.id)?.remove();
       }).subscribe();
     }
-  }catch(e){box.innerHTML=`<div class="empty"><div class="ico">⚠️</div><h3>Error</h3><p>${esc(e.message)}</p></div>`;}
+  }catch(e){box.innerHTML=`<div class="empty"><h3>Error</h3><p>${esc(e.message)}</p></div>`;}
 }
 function gmH(m){
   const prof=commProfCache[m.user_id]||{};
@@ -1178,7 +1215,7 @@ function gmH(m){
 }
 function renderCommMsgs(msgs){
   const box=document.getElementById('comm-msgs');if(!box)return;
-  box.innerHTML=!msgs.length?'<div class="empty"><div class="ico">💬</div><h3>No messages yet</h3><p>Be the first to say hello!</p></div>':msgs.map(gmH).join('');
+  box.innerHTML=!msgs.length?'<div class="empty"><h3>No messages yet</h3><p>Be the first to say hello!</p></div>':msgs.map(gmH).join('');
   box.scrollTop=box.scrollHeight;
 }
 function appendCommMsg(m){
@@ -1214,7 +1251,7 @@ async function markAllRead(){if(!CU)return;await sb.from('notifications').update
 let sT;
 async function onSearch(q){clearTimeout(sT);const container=document.querySelector('.nav-mid');if(q.length<2){document.getElementById('ns-dd')?.remove();return;}sT=setTimeout(async()=>{const{data}=await sb.from('posts').select('id,title,tag').ilike('title',`%${q}%`).eq('status','approved').limit(6);document.getElementById('ns-dd')?.remove();if(!data?.length)return;const dd=document.createElement('div');dd.id='ns-dd';dd.style.cssText='position:absolute;top:100%;left:0;right:0;background:var(--s2);border:1px solid var(--br);border-radius:var(--rsm);box-shadow:var(--shl);z-index:700;margin-top:4px;overflow:hidden';dd.innerHTML=data.map(r=>`<div onclick="document.getElementById('ns-inp').value='';document.getElementById('ns-dd')?.remove();openStory('${r.id}')" style="display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-size:.85rem;color:var(--tx);transition:background .1s;border-bottom:1px solid var(--br)" onmouseover="this.style.background='var(--s)'" onmouseout="this.style.background=''"><span class="tbadge">${esc(r.tag)}</span><span>${esc(r.title.slice(0,55))}</span></div>`).join('');container.appendChild(dd);},300);}
 function openReport(pid){if(!CU){go('signin');return;}document.getElementById('rpt-pid').value=pid;document.querySelectorAll('input[name="rpt-r"]').forEach(r=>r.checked=false);document.getElementById('rpt-details').value='';openModal('report-modal');}
-async function submitReport(){if(!CU)return;const pid=document.getElementById('rpt-pid').value,reason=document.querySelector('input[name="rpt-r"]:checked')?.value;if(!reason){toast('Please select a reason','err');return;}await sb.from('reports').insert({reporter_id:CU.id,post_id:pid,reason,details:document.getElementById('rpt-details').value});closeModal('report-modal');toast('Report submitted. Thank you! 🙏','ok');notifyAdmins('report','⚑ New report',`${CP?.full_name||'A user'} reported content for: ${reason}`,'');}
+async function submitReport(){if(!CU)return;const pid=document.getElementById('rpt-pid').value,reason=document.querySelector('input[name="rpt-r"]:checked')?.value;if(!reason){toast('Please select a reason','err');return;}await sb.from('reports').insert({reporter_id:CU.id,post_id:pid,reason,details:document.getElementById('rpt-details').value});closeModal('report-modal');toast('Report submitted. Thank you!','ok');notifyAdmins('report','New report',`${CP?.full_name||'A user'} reported content for: ${reason}`,'');}
 function openSupport(){
   const err=document.getElementById('supp-err');if(err)err.style.display='none';
   document.getElementById('supp-name').value=CP?.full_name||'';
@@ -1238,8 +1275,8 @@ async function submitSupport(){
     btn.textContent='Send message';btn.disabled=false;
     if(error){err.textContent='Could not send: '+error.message;err.style.display='block';return;}
     closeModal('support-modal');
-    toast("Message sent! We'll get back to you soon 🙏",'ok');
-    notifyAdmins('support','🛟 New support message',`${name||email}: ${message.slice(0,80)}`,'');
+    toast("Message sent! We'll get back to you soon.",'ok');
+    notifyAdmins('support','New support message',`${name||email}: ${message.slice(0,80)}`,'');
   }catch(e){btn.textContent='Send message';btn.disabled=false;err.textContent='Something went wrong. Please try emailing support@nidrno.com directly.';err.style.display='block';}
 }
 function openModal(id){document.getElementById(id)?.classList.add('open');}

@@ -911,9 +911,9 @@ function postCard(p){
     </div>
     <div class="abar" onclick="event.stopPropagation()">
       <div class="vg">
-        <button class="vb ${vote==='up'?'up-on':''}" onclick="castVote('${p.id}','up',this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+        <button class="vb ${vote==='up'?'up-on':''}" onclick="castVote('${p.id}','up',this)" title="Like"><svg width="14" height="14" viewBox="0 0 24 24" fill="${vote==='up'?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg></button>
         <span class="vc" id="sc-${p.id}">${score}</span>
-        <button class="vb ${vote==='down'?'dn-on':''}" onclick="castVote('${p.id}','down',this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+        <button class="vb ${vote==='down'?'dn-on':''}" onclick="castVote('${p.id}','down',this)" title="Dislike"><svg width="14" height="14" viewBox="0 0 24 24" fill="${vote==='down'?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg></button>
       </div>
       <button class="ab" onclick="openStory('${p.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>${p.comment_count||0}</button>
       <button class="ab ${bm?'bm':''}" id="bm-${p.id}" onclick="toggleBm('${p.id}',this)"><svg viewBox="0 0 24 24" fill="${bm?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>${bm?'Saved':'Save'}</button>
@@ -927,15 +927,27 @@ async function castVote(postId,type,btn){
   const grp=btn.closest('.vg'),upBtn=grp.querySelector('.vb:first-child'),dnBtn=grp.querySelector('.vb:last-child'),sc=document.getElementById('sc-'+postId),cur=UV[postId];
   if(cur===type){await sb.from('votes').delete().match({user_id:CU.id,post_id:postId});delete UV[postId];upBtn.classList.remove('up-on');dnBtn.classList.remove('dn-on');}
   else{await sb.from('votes').upsert({user_id:CU.id,post_id:postId,vote_type:type});UV[postId]=type;upBtn.classList.toggle('up-on',type==='up');dnBtn.classList.toggle('dn-on',type==='down');const{data:post}=await sb.from('posts').select('author_id,title,is_anonymous').eq('id',postId).single();if(post&&post.author_id!==CU.id&&type==='up')await sendNotif(post.author_id,'vote','Someone liked your dream',`${CP?.full_name||'Someone'} upvoted "${post.title?.slice(0,50)}"`,`#story/${postId}`);}
+  setVoteIconFill(upBtn);setVoteIconFill(dnBtn);
   const{data}=await sb.from('posts').select('upvotes,downvotes').eq('id',postId).single();
   if(sc&&data)sc.textContent=(data.upvotes||0)-(data.downvotes||0);
 }
+function setVoteIconFill(btn){const svg=btn.querySelector('svg');if(!svg)return;const active=btn.classList.contains('up-on')||btn.classList.contains('dn-on');svg.setAttribute('fill',active?'currentColor':'none');}
 async function toggleBm(postId,btn){
   if(!CU){go('signin');return;}
   if(BM.has(postId)){await sb.from('bookmarks').delete().match({user_id:CU.id,post_id:postId});BM.delete(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Save';btn.classList.remove('bm');toast('Removed');}
   else{await sb.from('bookmarks').insert({user_id:CU.id,post_id:postId});BM.add(postId);btn.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> Saved';btn.classList.add('bm');toast('Saved!','ok');}
 }
-function sharePost(id){const url=location.origin+location.pathname+'#story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Nidrno'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied!','ok'));else toast('Copied: '+url);}
+function sharePost(id){const url=location.origin+'/story/'+id;if(navigator.share)navigator.share({url,title:'Dream on Nidrno'});else if(navigator.clipboard)navigator.clipboard.writeText(url).then(()=>toast('Link copied!','ok'));else toast('Copied: '+url);}
+function getDeviceId(){let d=localStorage.getItem('nidrno_device_id');if(!d){d=(crypto.randomUUID?crypto.randomUUID():'d'+Date.now()+Math.random().toString(36).slice(2));localStorage.setItem('nidrno_device_id',d);}return d;}
+async function registerView(postId,currentViews){
+  try{
+    const deviceId=getDeviceId();
+    const row=CU?{post_id:postId,user_id:CU.id,device_id:null}:{post_id:postId,user_id:null,device_id:deviceId};
+    const{error}=await sb.from('post_views').insert(row);
+    if(!error){await sb.from('posts').update({views:currentViews+1}).eq('id',postId);}
+    // if error (duplicate view already recorded), views count stays as-is — one view per person, like major platforms.
+  }catch(e){}
+}
 async function openStory(id){
   go('story');location.hash='story/'+id;
   document.getElementById('story-hero').innerHTML='';
@@ -947,7 +959,7 @@ async function openStory(id){
     const isAnon=!!post.is_anonymous;
     let profile=null;
     if(!isAnon){const{data:pr}=await sb.from('profiles').select('id,username,full_name,avatar_url,profile_link').eq('id',post.author_id).single();profile=pr;}
-    sb.from('posts').update({views:(post.views||0)+1}).eq('id',id).then(()=>{});
+    registerView(id,post.views||0);
     let myVote=null,bm=false;
     if(CU){const{data:v}=await sb.from('votes').select('vote_type').match({user_id:CU.id,post_id:id}).single();myVote=v?.vote_type||null;const{data:bmr}=await sb.from('bookmarks').select('user_id').match({user_id:CU.id,post_id:id}).single();if(bmr){BM.add(id);bm=true;}else BM.delete(id);}
     const score=(post.upvotes||0)-(post.downvotes||0),prof=profile||{};
@@ -970,9 +982,9 @@ async function openStory(id){
       ${!CU?`<div class="scta"><h3>Join the dream community</h3><p>Sign up to like, comment, save stories and share your own dreams.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn btn-p" onclick="go('signup')">Join free</button><button class="btn btn-o" onclick="go('signin')">Sign in</button></div></div>`:''}
       <div style="display:flex;align-items:center;gap:8px;padding:14px 0;border-top:1px solid var(--br);border-bottom:1px solid var(--br);margin:28px 0;flex-wrap:wrap">
         <div class="vg">
-          <button class="vb ${myVote==='up'?'up-on':''}" onclick="${CU?`voteStory('${id}','up',this)`:`go('signin')`}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg></button>
+          <button class="vb ${myVote==='up'?'up-on':''}" onclick="${CU?`voteStory('${id}','up',this)`:`go('signin')`}" title="Like"><svg width="14" height="14" viewBox="0 0 24 24" fill="${myVote==='up'?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg></button>
           <span class="vc" id="ssc">${score}</span>
-          <button class="vb ${myVote==='down'?'dn-on':''}" onclick="${CU?`voteStory('${id}','down',this)`:`go('signin')`}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+          <button class="vb ${myVote==='down'?'dn-on':''}" onclick="${CU?`voteStory('${id}','down',this)`:`go('signin')`}" title="Dislike"><svg width="14" height="14" viewBox="0 0 24 24" fill="${myVote==='down'?'currentColor':'none'}" stroke="currentColor" stroke-width="2"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg></button>
         </div>
         <button class="ab ${bm?'bm':''}" id="sbm" onclick="${CU?`storyBm('${id}',this)`:`go('signin')`}"><svg viewBox="0 0 24 24" fill="${bm?'currentColor':'none'}" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m19 21-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>${bm?'Saved':'Save'}</button>
         <button class="ab" onclick="sharePost('${id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>
@@ -993,6 +1005,7 @@ async function voteStory(postId,type,btn){
   const grp=btn.closest('.vg'),upBtn=grp.querySelector('.vb:first-child'),dnBtn=grp.querySelector('.vb:last-child'),sc=document.getElementById('ssc'),cur=upBtn.classList.contains('up-on')?'up':dnBtn.classList.contains('dn-on')?'down':null;
   if(cur===type){await sb.from('votes').delete().match({user_id:CU.id,post_id:postId});upBtn.classList.remove('up-on');dnBtn.classList.remove('dn-on');}
   else{await sb.from('votes').upsert({user_id:CU.id,post_id:postId,vote_type:type});upBtn.classList.toggle('up-on',type==='up');dnBtn.classList.toggle('dn-on',type==='down');}
+  setVoteIconFill(upBtn);setVoteIconFill(dnBtn);
   const{data}=await sb.from('posts').select('upvotes,downvotes').eq('id',postId).single();
   if(sc&&data)sc.textContent=(data.upvotes||0)-(data.downvotes||0);
 }
